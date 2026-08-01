@@ -1,0 +1,1097 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:205 (message)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      The system is: Linux - 5.14.0-687.29.1.el9_8.x86_64 - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/bin/cc 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/3.31.8/CompilerIdC/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/c++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/3.31.8/CompilerIdCXX/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ea0XBB"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ea0XBB"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ea0XBB'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_cc1d4/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_cc1d4.dir/build.make CMakeFiles/cmTC_cc1d4.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ea0XBB'
+        Building C object CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o
+        /usr/bin/cc   -v -o CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        OFFLOAD_TARGET_NAMES=nvptx-none
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-redhat-linux
+        Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c,c++,fortran,lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_cc1d4.dir/'
+         /usr/libexec/gcc/x86_64-redhat-linux/11/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_cc1d4.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64-v2 -version -o /tmp/cc23eDqe.s
+        GNU C17 (GCC) version 11.5.0 20240719 (Red Hat 11.5.0-14) (x86_64-redhat-linux)
+        	compiled by GNU C version 11.5.0 20240719 (Red Hat 11.5.0-14), GMP version 6.2.0, MPFR version 4.1.0-p9, MPC version 1.2.1, isl version none
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/11/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/11/../../../../x86_64-redhat-linux/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/lib/gcc/x86_64-redhat-linux/11/include
+         /usr/local/include
+         /usr/include
+        End of search list.
+        GNU C17 (GCC) version 11.5.0 20240719 (Red Hat 11.5.0-14) (x86_64-redhat-linux)
+        	compiled by GNU C version 11.5.0 20240719 (Red Hat 11.5.0-14), GMP version 6.2.0, MPFR version 4.1.0-p9, MPC version 1.2.1, isl version none
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: 7c0d25a045e6c5b5ec26af49b5dac0e8
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_cc1d4.dir/'
+         as -v --64 -o CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o /tmp/cc23eDqe.s
+        GNU assembler version 2.35.2 (x86_64-redhat-linux) using BFD version version 2.35.2-72.el9
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.'
+        Linking C executable cmTC_cc1d4
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cc1d4.dir/link.txt --verbose=1
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-redhat-linux
+        Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c,c++,fortran,lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) 
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_cc1d4' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'cmTC_cc1d4.'
+         /usr/libexec/gcc/x86_64-redhat-linux/11/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccoMKJvz.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_cc1d4 /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. -v CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o
+        collect2 version 11.5.0 20240719 (Red Hat 11.5.0-14)
+        /usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccoMKJvz.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_cc1d4 /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. -v CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o
+        GNU ld version 2.35.2-72.el9
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_cc1d4' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'cmTC_cc1d4.'
+        /usr/bin/cc  -v -Wl,-v CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o -o cmTC_cc1d4
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ea0XBB'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/lib/gcc/x86_64-redhat-linux/11/include]
+          add: [/usr/local/include]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/lib/gcc/x86_64-redhat-linux/11/include] ==> [/usr/lib/gcc/x86_64-redhat-linux/11/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/lib/gcc/x86_64-redhat-linux/11/include;/usr/local/include;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ea0XBB']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_cc1d4/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_cc1d4.dir/build.make CMakeFiles/cmTC_cc1d4.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ea0XBB']
+        ignore line: [Building C object CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-redhat-linux]
+        ignore line: [Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c c++ fortran lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_cc1d4.dir/']
+        ignore line: [ /usr/libexec/gcc/x86_64-redhat-linux/11/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_cc1d4.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64-v2 -version -o /tmp/cc23eDqe.s]
+        ignore line: [GNU C17 (GCC) version 11.5.0 20240719 (Red Hat 11.5.0-14) (x86_64-redhat-linux)]
+        ignore line: [	compiled by GNU C version 11.5.0 20240719 (Red Hat 11.5.0-14)  GMP version 6.2.0  MPFR version 4.1.0-p9  MPC version 1.2.1  isl version none]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/11/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/11/../../../../x86_64-redhat-linux/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/lib/gcc/x86_64-redhat-linux/11/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [GNU C17 (GCC) version 11.5.0 20240719 (Red Hat 11.5.0-14) (x86_64-redhat-linux)]
+        ignore line: [	compiled by GNU C version 11.5.0 20240719 (Red Hat 11.5.0-14)  GMP version 6.2.0  MPFR version 4.1.0-p9  MPC version 1.2.1  isl version none]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: 7c0d25a045e6c5b5ec26af49b5dac0e8]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_cc1d4.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o /tmp/cc23eDqe.s]
+        ignore line: [GNU assembler version 2.35.2 (x86_64-redhat-linux) using BFD version version 2.35.2-72.el9]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_cc1d4]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cc1d4.dir/link.txt --verbose=1]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-redhat-linux]
+        ignore line: [Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c c++ fortran lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_cc1d4' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'cmTC_cc1d4.']
+        link line: [ /usr/libexec/gcc/x86_64-redhat-linux/11/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccoMKJvz.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_cc1d4 /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. -v CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o]
+          arg [/usr/libexec/gcc/x86_64-redhat-linux/11/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccoMKJvz.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--no-add-needed] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_cc1d4] ==> ignore
+          arg [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o]
+          arg [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o]
+          arg [/usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o]
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11]
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64]
+          arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+          arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11/../../..] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../..]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [/usr/lib/gcc/x86_64-redhat-linux/11/crtend.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/11/crtend.o]
+          arg [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o]
+        ignore line: [collect2 version 11.5.0 20240719 (Red Hat 11.5.0-14)]
+        ignore line: [/usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccoMKJvz.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_cc1d4 /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. -v CMakeFiles/cmTC_cc1d4.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o]
+        linker tool for 'C': /usr/bin/ld
+        collapse obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o] ==> [/usr/lib64/crt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o] ==> [/usr/lib64/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o] ==> [/usr/lib64/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11] ==> [/usr/lib/gcc/x86_64-redhat-linux/11]
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64] ==> [/usr/lib64]
+        collapse library dir [/lib/../lib64] ==> [/lib64]
+        collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../..] ==> [/usr/lib]
+        implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+        implicit objs: [/usr/lib64/crt1.o;/usr/lib64/crti.o;/usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o;/usr/lib/gcc/x86_64-redhat-linux/11/crtend.o;/usr/lib64/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-redhat-linux/11;/usr/lib64;/lib64;/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the C compiler's linker: "/usr/bin/ld" "-v"
+      GNU ld version 2.35.2-72.el9
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:74 (try_compile)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ZR2X09"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ZR2X09"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_CXX_SCAN_FOR_MODULES: "OFF"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ZR2X09'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_bcd91/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_bcd91.dir/build.make CMakeFiles/cmTC_bcd91.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ZR2X09'
+        Building CXX object CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/c++   -v -o CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        OFFLOAD_TARGET_NAMES=nvptx-none
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-redhat-linux
+        Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c,c++,fortran,lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_bcd91.dir/'
+         /usr/libexec/gcc/x86_64-redhat-linux/11/cc1plus -quiet -v -D_GNU_SOURCE /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_bcd91.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64-v2 -version -o /tmp/ccuTDw40.s
+        GNU C++17 (GCC) version 11.5.0 20240719 (Red Hat 11.5.0-14) (x86_64-redhat-linux)
+        	compiled by GNU C version 11.5.0 20240719 (Red Hat 11.5.0-14), GMP version 6.2.0, MPFR version 4.1.0-p9, MPC version 1.2.1, isl version none
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/11/include-fixed"
+        ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/11/../../../../x86_64-redhat-linux/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11
+         /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/x86_64-redhat-linux
+         /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/backward
+         /usr/lib/gcc/x86_64-redhat-linux/11/include
+         /usr/local/include
+         /usr/include
+        End of search list.
+        GNU C++17 (GCC) version 11.5.0 20240719 (Red Hat 11.5.0-14) (x86_64-redhat-linux)
+        	compiled by GNU C version 11.5.0 20240719 (Red Hat 11.5.0-14), GMP version 6.2.0, MPFR version 4.1.0-p9, MPC version 1.2.1, isl version none
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        Compiler executable checksum: ad718c476f79b60eb640e82789ed7ee5
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_bcd91.dir/'
+         as -v --64 -o CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccuTDw40.s
+        GNU assembler version 2.35.2 (x86_64-redhat-linux) using BFD version version 2.35.2-72.el9
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_bcd91
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bcd91.dir/link.txt --verbose=1
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-redhat-linux
+        Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c,c++,fortran,lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) 
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_bcd91' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'cmTC_bcd91.'
+         /usr/libexec/gcc/x86_64-redhat-linux/11/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccTNlPu6.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_bcd91 /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. -v CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o
+        collect2 version 11.5.0 20240719 (Red Hat 11.5.0-14)
+        /usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccTNlPu6.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_bcd91 /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. -v CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o
+        GNU ld version 2.35.2-72.el9
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_bcd91' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'cmTC_bcd91.'
+        /usr/bin/c++  -v -Wl,-v CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_bcd91
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ZR2X09'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:182 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11]
+          add: [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/x86_64-redhat-linux]
+          add: [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/backward]
+          add: [/usr/lib/gcc/x86_64-redhat-linux/11/include]
+          add: [/usr/local/include]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11] ==> [/usr/include/c++/11]
+        collapse include dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/x86_64-redhat-linux] ==> [/usr/include/c++/11/x86_64-redhat-linux]
+        collapse include dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/backward] ==> [/usr/include/c++/11/backward]
+        collapse include dir [/usr/lib/gcc/x86_64-redhat-linux/11/include] ==> [/usr/lib/gcc/x86_64-redhat-linux/11/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/include/c++/11;/usr/include/c++/11/x86_64-redhat-linux;/usr/include/c++/11/backward;/usr/lib/gcc/x86_64-redhat-linux/11/include;/usr/local/include;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:218 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        linker tool regex: [^[ 	]*(->|")?[ 	]*(([^"]*[/\\])?(ld[0-9]*(\\.[a-z]+)?))("|,| |$)]
+        ignore line: [Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ZR2X09']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_bcd91/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_bcd91.dir/build.make CMakeFiles/cmTC_bcd91.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-ZR2X09']
+        ignore line: [Building CXX object CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/c++   -v -o CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-redhat-linux]
+        ignore line: [Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c c++ fortran lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_bcd91.dir/']
+        ignore line: [ /usr/libexec/gcc/x86_64-redhat-linux/11/cc1plus -quiet -v -D_GNU_SOURCE /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_bcd91.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64-v2 -version -o /tmp/ccuTDw40.s]
+        ignore line: [GNU C++17 (GCC) version 11.5.0 20240719 (Red Hat 11.5.0-14) (x86_64-redhat-linux)]
+        ignore line: [	compiled by GNU C version 11.5.0 20240719 (Red Hat 11.5.0-14)  GMP version 6.2.0  MPFR version 4.1.0-p9  MPC version 1.2.1  isl version none]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/11/include-fixed"]
+        ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/11/../../../../x86_64-redhat-linux/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11]
+        ignore line: [ /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/x86_64-redhat-linux]
+        ignore line: [ /usr/lib/gcc/x86_64-redhat-linux/11/../../../../include/c++/11/backward]
+        ignore line: [ /usr/lib/gcc/x86_64-redhat-linux/11/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [GNU C++17 (GCC) version 11.5.0 20240719 (Red Hat 11.5.0-14) (x86_64-redhat-linux)]
+        ignore line: [	compiled by GNU C version 11.5.0 20240719 (Red Hat 11.5.0-14)  GMP version 6.2.0  MPFR version 4.1.0-p9  MPC version 1.2.1  isl version none]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [Compiler executable checksum: ad718c476f79b60eb640e82789ed7ee5]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_bcd91.dir/']
+        ignore line: [ as -v --64 -o CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o /tmp/ccuTDw40.s]
+        ignore line: [GNU assembler version 2.35.2 (x86_64-redhat-linux) using BFD version version 2.35.2-72.el9]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_bcd91]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_bcd91.dir/link.txt --verbose=1]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-redhat-linux]
+        ignore line: [Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c c++ fortran lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_bcd91' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-dumpdir' 'cmTC_bcd91.']
+        link line: [ /usr/libexec/gcc/x86_64-redhat-linux/11/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccTNlPu6.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_bcd91 /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. -v CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o]
+          arg [/usr/libexec/gcc/x86_64-redhat-linux/11/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccTNlPu6.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--no-add-needed] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_bcd91] ==> ignore
+          arg [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o]
+          arg [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o]
+          arg [/usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o]
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11]
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64]
+          arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+          arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11/../../..] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../..]
+          arg [-v] ==> ignore
+          arg [CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/usr/lib/gcc/x86_64-redhat-linux/11/crtend.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/11/crtend.o]
+          arg [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o]
+        ignore line: [collect2 version 11.5.0 20240719 (Red Hat 11.5.0-14)]
+        ignore line: [/usr/bin/ld -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccTNlPu6.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_bcd91 /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. -v CMakeFiles/cmTC_bcd91.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o]
+        linker tool for 'CXX': /usr/bin/ld
+        collapse obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o] ==> [/usr/lib64/crt1.o]
+        collapse obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o] ==> [/usr/lib64/crti.o]
+        collapse obj [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o] ==> [/usr/lib64/crtn.o]
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11] ==> [/usr/lib/gcc/x86_64-redhat-linux/11]
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64] ==> [/usr/lib64]
+        collapse library dir [/lib/../lib64] ==> [/lib64]
+        collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../..] ==> [/usr/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [/usr/lib64/crt1.o;/usr/lib64/crti.o;/usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o;/usr/lib/gcc/x86_64-redhat-linux/11/crtend.o;/usr/lib64/crtn.o]
+        implicit dirs: [/usr/lib/gcc/x86_64-redhat-linux/11;/usr/lib64;/lib64;/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CMakeDetermineLinkerId.cmake:40 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:255 (cmake_determine_linker_id)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:2 (project)"
+    message: |
+      Running the CXX compiler's linker: "/usr/bin/ld" "-v"
+      GNU ld version 2.35.2-72.el9
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:252 (try_compile)"
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:522 (_OPENMP_GET_FLAGS)"
+      - "CMakeLists.txt:13 (find_package)"
+    description: "Detecting C OpenMP compiler info"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-Y13Gzu"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-Y13Gzu"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_C_fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-Y13Gzu'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_97d96/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_97d96.dir/build.make CMakeFiles/cmTC_97d96.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-Y13Gzu'
+        Building C object CMakeFiles/cmTC_97d96.dir/OpenMPTryFlag.c.o
+        /usr/bin/cc   -fopenmp -o CMakeFiles/cmTC_97d96.dir/OpenMPTryFlag.c.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-Y13Gzu/OpenMPTryFlag.c
+        Linking C executable cmTC_97d96
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_97d96.dir/link.txt --verbose=1
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-redhat-linux
+        Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c,c++,fortran,lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) 
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/
+        Reading specs from /usr/lib/gcc/x86_64-redhat-linux/11/libgomp.spec
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_97d96' '-mtune=generic' '-march=x86-64-v2' '-pthread' '-dumpdir' 'cmTC_97d96.'
+         /usr/libexec/gcc/x86_64-redhat-linux/11/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccQtaehS.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_97d96 /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o /usr/lib/gcc/x86_64-redhat-linux/11/crtoffloadbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. CMakeFiles/cmTC_97d96.dir/OpenMPTryFlag.c.o -lgomp -lgcc --push-state --as-needed -lgcc_s --pop-state -lpthread -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o /usr/lib/gcc/x86_64-redhat-linux/11/crtoffloadend.o
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_97d96' '-mtune=generic' '-march=x86-64-v2' '-pthread' '-dumpdir' 'cmTC_97d96.'
+        /usr/bin/cc  -fopenmp -v CMakeFiles/cmTC_97d96.dir/OpenMPTryFlag.c.o -o cmTC_97d96
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-Y13Gzu'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:296 (message)"
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:522 (_OPENMP_GET_FLAGS)"
+      - "CMakeLists.txt:13 (find_package)"
+    message: |
+      Parsed C OpenMP implicit link information from above output:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-Y13Gzu']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_97d96/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_97d96.dir/build.make CMakeFiles/cmTC_97d96.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-Y13Gzu']
+        ignore line: [Building C object CMakeFiles/cmTC_97d96.dir/OpenMPTryFlag.c.o]
+        ignore line: [/usr/bin/cc   -fopenmp -o CMakeFiles/cmTC_97d96.dir/OpenMPTryFlag.c.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-Y13Gzu/OpenMPTryFlag.c]
+        ignore line: [Linking C executable cmTC_97d96]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_97d96.dir/link.txt --verbose=1]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-redhat-linux]
+        ignore line: [Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c c++ fortran lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/]
+        ignore line: [Reading specs from /usr/lib/gcc/x86_64-redhat-linux/11/libgomp.spec]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_97d96' '-mtune=generic' '-march=x86-64-v2' '-pthread' '-dumpdir' 'cmTC_97d96.']
+        link line: [ /usr/libexec/gcc/x86_64-redhat-linux/11/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccQtaehS.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_97d96 /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o /usr/lib/gcc/x86_64-redhat-linux/11/crtoffloadbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. CMakeFiles/cmTC_97d96.dir/OpenMPTryFlag.c.o -lgomp -lgcc --push-state --as-needed -lgcc_s --pop-state -lpthread -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o /usr/lib/gcc/x86_64-redhat-linux/11/crtoffloadend.o]
+          arg [/usr/libexec/gcc/x86_64-redhat-linux/11/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccQtaehS.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--no-add-needed] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_97d96] ==> ignore
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11]
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64]
+          arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+          arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11/../../..] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../..]
+          arg [CMakeFiles/cmTC_97d96.dir/OpenMPTryFlag.c.o] ==> ignore
+          arg [-lgomp] ==> lib [gomp]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lpthread] ==> lib [pthread]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11] ==> [/usr/lib/gcc/x86_64-redhat-linux/11]
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64] ==> [/usr/lib64]
+        collapse library dir [/lib/../lib64] ==> [/lib64]
+        collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../..] ==> [/usr/lib]
+        implicit libs: [gomp;gcc;gcc_s;pthread;c;gcc;gcc_s]
+        implicit objs: []
+        implicit dirs: [/usr/lib/gcc/x86_64-redhat-linux/11;/usr/lib64;/lib64;/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:252 (try_compile)"
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:522 (_OPENMP_GET_FLAGS)"
+      - "CMakeLists.txt:13 (find_package)"
+    description: "Detecting CXX OpenMP compiler info"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-v1WS53"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-v1WS53"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "OpenMP_COMPILE_RESULT_CXX_fopenmp"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-v1WS53'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_4a81c/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_4a81c.dir/build.make CMakeFiles/cmTC_4a81c.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-v1WS53'
+        Building CXX object CMakeFiles/cmTC_4a81c.dir/OpenMPTryFlag.cpp.o
+        /usr/bin/c++   -fopenmp -std=gnu++17 -o CMakeFiles/cmTC_4a81c.dir/OpenMPTryFlag.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-v1WS53/OpenMPTryFlag.cpp
+        Linking CXX executable cmTC_4a81c
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4a81c.dir/link.txt --verbose=1
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-redhat-linux
+        Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c,c++,fortran,lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) 
+        COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/
+        LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/
+        Reading specs from /usr/lib/gcc/x86_64-redhat-linux/11/libgomp.spec
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_4a81c' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-pthread' '-dumpdir' 'cmTC_4a81c.'
+         /usr/libexec/gcc/x86_64-redhat-linux/11/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccrhrMoc.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_4a81c /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o /usr/lib/gcc/x86_64-redhat-linux/11/crtoffloadbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. CMakeFiles/cmTC_4a81c.dir/OpenMPTryFlag.cpp.o -lstdc++ -lm -lgomp -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o /usr/lib/gcc/x86_64-redhat-linux/11/crtoffloadend.o
+        COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_4a81c' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-pthread' '-dumpdir' 'cmTC_4a81c.'
+        /usr/bin/c++  -fopenmp -v CMakeFiles/cmTC_4a81c.dir/OpenMPTryFlag.cpp.o -o cmTC_4a81c
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-v1WS53'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:296 (message)"
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:522 (_OPENMP_GET_FLAGS)"
+      - "CMakeLists.txt:13 (find_package)"
+    message: |
+      Parsed CXX OpenMP implicit link information from above output:
+        link line regex: [^( *|.*[/\\])(ld[0-9]*(\\.[a-z]+)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-v1WS53']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_4a81c/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_4a81c.dir/build.make CMakeFiles/cmTC_4a81c.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-v1WS53']
+        ignore line: [Building CXX object CMakeFiles/cmTC_4a81c.dir/OpenMPTryFlag.cpp.o]
+        ignore line: [/usr/bin/c++   -fopenmp -std=gnu++17 -o CMakeFiles/cmTC_4a81c.dir/OpenMPTryFlag.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-v1WS53/OpenMPTryFlag.cpp]
+        ignore line: [Linking CXX executable cmTC_4a81c]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4a81c.dir/link.txt --verbose=1]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-redhat-linux]
+        ignore line: [Configured with: ../configure --enable-bootstrap --enable-host-pie --enable-host-bind-now --enable-languages=c c++ fortran lto --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=https://bugs.rockylinux.org/ --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-gcc-major-version-only --enable-plugin --enable-initfini-array --without-isl --enable-multilib --with-linker-hash-style=gnu --enable-offload-targets=nvptx-none --without-cuda-driver --enable-gnu-indirect-function --enable-cet --with-tune=generic --with-arch_64=x86-64-v2 --with-arch_32=x86-64 --build=x86_64-redhat-linux --with-build-config=bootstrap-lto --enable-link-serialization=1]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 11.5.0 20240719 (Red Hat 11.5.0-14) (GCC) ]
+        ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/11/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/]
+        ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/11/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/11/../../../:/lib/:/usr/lib/]
+        ignore line: [Reading specs from /usr/lib/gcc/x86_64-redhat-linux/11/libgomp.spec]
+        ignore line: [COLLECT_GCC_OPTIONS='-fopenmp' '-v' '-o' 'cmTC_4a81c' '-shared-libgcc' '-mtune=generic' '-march=x86-64-v2' '-pthread' '-dumpdir' 'cmTC_4a81c.']
+        link line: [ /usr/libexec/gcc/x86_64-redhat-linux/11/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper -plugin-opt=-fresolution=/tmp/ccrhrMoc.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lpthread -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_4a81c /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/11/crtbegin.o /usr/lib/gcc/x86_64-redhat-linux/11/crtoffloadbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/11 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/11/../../.. CMakeFiles/cmTC_4a81c.dir/OpenMPTryFlag.cpp.o -lstdc++ -lm -lgomp -lgcc_s -lgcc -lpthread -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/11/crtend.o /usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64/crtn.o /usr/lib/gcc/x86_64-redhat-linux/11/crtoffloadend.o]
+          arg [/usr/libexec/gcc/x86_64-redhat-linux/11/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/libexec/gcc/x86_64-redhat-linux/11/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/11/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccrhrMoc.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lpthread] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--no-add-needed] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_4a81c] ==> ignore
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11]
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64]
+          arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+          arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+          arg [-L/usr/lib/gcc/x86_64-redhat-linux/11/../../..] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../..]
+          arg [CMakeFiles/cmTC_4a81c.dir/OpenMPTryFlag.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgomp] ==> lib [gomp]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lpthread] ==> lib [pthread]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11] ==> [/usr/lib/gcc/x86_64-redhat-linux/11]
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../../../lib64] ==> [/usr/lib64]
+        collapse library dir [/lib/../lib64] ==> [/lib64]
+        collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+        collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/11/../../..] ==> [/usr/lib]
+        implicit libs: [stdc++;m;gomp;gcc_s;gcc;pthread;c;gcc_s;gcc]
+        implicit objs: []
+        implicit dirs: [/usr/lib/gcc/x86_64-redhat-linux/11;/usr/lib64;/lib64;/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:456 (try_compile)"
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:596 (_OPENMP_GET_SPEC_DATE)"
+      - "CMakeLists.txt:13 (find_package)"
+    description: "Detecting C OpenMP version"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-OaJAjY"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-OaJAjY"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "OpenMP_SPECTEST_C_"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-OaJAjY'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_98021/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_98021.dir/build.make CMakeFiles/cmTC_98021.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-OaJAjY'
+        Building C object CMakeFiles/cmTC_98021.dir/OpenMPCheckVersion.c.o
+        /usr/bin/cc   -fopenmp -o CMakeFiles/cmTC_98021.dir/OpenMPCheckVersion.c.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-OaJAjY/OpenMPCheckVersion.c
+        Linking C executable cmTC_98021
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_98021.dir/link.txt --verbose=1
+        /usr/bin/cc  -fopenmp CMakeFiles/cmTC_98021.dir/OpenMPCheckVersion.c.o -o cmTC_98021
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-OaJAjY'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:456 (try_compile)"
+      - "/usr/share/cmake/Modules/FindOpenMP.cmake:596 (_OPENMP_GET_SPEC_DATE)"
+      - "CMakeLists.txt:13 (find_package)"
+    description: "Detecting CXX OpenMP version"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-3E9Rgq"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-3E9Rgq"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "OpenMP_SPECTEST_CXX_"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-3E9Rgq'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_5e887/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_5e887.dir/build.make CMakeFiles/cmTC_5e887.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-3E9Rgq'
+        Building CXX object CMakeFiles/cmTC_5e887.dir/OpenMPCheckVersion.cpp.o
+        /usr/bin/c++   -fopenmp -std=gnu++17 -o CMakeFiles/cmTC_5e887.dir/OpenMPCheckVersion.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-3E9Rgq/OpenMPCheckVersion.cpp
+        Linking CXX executable cmTC_5e887
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5e887.dir/link.txt --verbose=1
+        /usr/bin/c++  -fopenmp CMakeFiles/cmTC_5e887.dir/OpenMPCheckVersion.cpp.o -o cmTC_5e887
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-3E9Rgq'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:241 (try_compile)"
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:611 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:21 (find_package)"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-3jPAAW"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-3jPAAW"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-3jPAAW'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_8fb5d/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_8fb5d.dir/build.make CMakeFiles/cmTC_8fb5d.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-3jPAAW'
+        Building C object CMakeFiles/cmTC_8fb5d.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_8fb5d.dir/cmake_hdf5_test.c.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        Linking C executable cmTC_8fb5d
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8fb5d.dir/link.txt --verbose=1
+        /usr/bin/ld: CMakeFiles/cmTC_8fb5d.dir/cmake_hdf5_test.c.o: in function `main':
+        cmake_hdf5_test.c:(.text+0x3e): undefined reference to `H5check_version'
+        /usr/bin/ld: cmake_hdf5_test.c:(.text+0x43): undefined reference to `H5open'
+        /usr/bin/ld: cmake_hdf5_test.c:(.text+0x5c): undefined reference to `H5Fcreate'
+        collect2: error: ld returned 1 exit status
+        /usr/bin/cc CMakeFiles/cmTC_8fb5d.dir/cmake_hdf5_test.c.o -o cmTC_8fb5d
+        gmake[1]: *** [CMakeFiles/cmTC_8fb5d.dir/build.make:102: cmTC_8fb5d] Error 1
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-3jPAAW'
+        gmake: *** [Makefile:134: cmTC_8fb5d/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:287 (try_compile)"
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:617 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:21 (find_package)"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-rFJlCZ"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-rFJlCZ"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-rFJlCZ'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ecf68/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_ecf68.dir/build.make CMakeFiles/cmTC_ecf68.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-rFJlCZ'
+        Building CXX object CMakeFiles/cmTC_ecf68.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++   -std=gnu++17 -o CMakeFiles/cmTC_ecf68.dir/cmake_hdf5_test.cxx.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        Linking CXX executable cmTC_ecf68
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ecf68.dir/link.txt --verbose=1
+        /usr/bin/ld: CMakeFiles/cmTC_ecf68.dir/cmake_hdf5_test.cxx.o: in function `main':
+        cmake_hdf5_test.cxx:(.text+0x34): undefined reference to `H5::FileAccPropList::DEFAULT'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x3b): undefined reference to `H5::FileCreatPropList::DEFAULT'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x4f): undefined reference to `H5check_version'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x54): undefined reference to `H5open'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x70): undefined reference to `H5::H5File::H5File(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&)'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x81): undefined reference to `H5::H5File::~H5File()'
+        collect2: error: ld returned 1 exit status
+        /usr/bin/c++ CMakeFiles/cmTC_ecf68.dir/cmake_hdf5_test.cxx.o -o cmTC_ecf68
+        gmake[1]: *** [CMakeFiles/cmTC_ecf68.dir/build.make:102: cmTC_ecf68] Error 1
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-rFJlCZ'
+        gmake: *** [Makefile:134: cmTC_ecf68/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:241 (try_compile)"
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:611 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:21 (find_package)"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-4Asn42"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-4Asn42"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-4Asn42'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_dddf3/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_dddf3.dir/build.make CMakeFiles/cmTC_dddf3.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-4Asn42'
+        Building C object CMakeFiles/cmTC_dddf3.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_dddf3.dir/cmake_hdf5_test.c.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        Linking C executable cmTC_dddf3
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_dddf3.dir/link.txt --verbose=1
+        /usr/bin/ld: CMakeFiles/cmTC_dddf3.dir/cmake_hdf5_test.c.o: in function `main':
+        cmake_hdf5_test.c:(.text+0x3e): undefined reference to `H5check_version'
+        /usr/bin/ld: cmake_hdf5_test.c:(.text+0x43): undefined reference to `H5open'
+        /usr/bin/ld: cmake_hdf5_test.c:(.text+0x5c): undefined reference to `H5Fcreate'
+        collect2: error: ld returned 1 exit status
+        /usr/bin/cc CMakeFiles/cmTC_dddf3.dir/cmake_hdf5_test.c.o -o cmTC_dddf3
+        gmake[1]: *** [CMakeFiles/cmTC_dddf3.dir/build.make:102: cmTC_dddf3] Error 1
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-4Asn42'
+        gmake: *** [Makefile:134: cmTC_dddf3/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:287 (try_compile)"
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:617 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:21 (find_package)"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-6RJCUO"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-6RJCUO"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-6RJCUO'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b903d/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_b903d.dir/build.make CMakeFiles/cmTC_b903d.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-6RJCUO'
+        Building CXX object CMakeFiles/cmTC_b903d.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++   -std=gnu++17 -o CMakeFiles/cmTC_b903d.dir/cmake_hdf5_test.cxx.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        Linking CXX executable cmTC_b903d
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b903d.dir/link.txt --verbose=1
+        /usr/bin/ld: CMakeFiles/cmTC_b903d.dir/cmake_hdf5_test.cxx.o: in function `main':
+        cmake_hdf5_test.cxx:(.text+0x34): undefined reference to `H5::FileAccPropList::DEFAULT'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x3b): undefined reference to `H5::FileCreatPropList::DEFAULT'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x4f): undefined reference to `H5check_version'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x54): undefined reference to `H5open'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x70): undefined reference to `H5::H5File::H5File(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&)'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x81): undefined reference to `H5::H5File::~H5File()'
+        collect2: error: ld returned 1 exit status
+        /usr/bin/c++ CMakeFiles/cmTC_b903d.dir/cmake_hdf5_test.cxx.o -o cmTC_b903d
+        gmake[1]: *** [CMakeFiles/cmTC_b903d.dir/build.make:102: cmTC_b903d] Error 1
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-6RJCUO'
+        gmake: *** [Makefile:134: cmTC_b903d/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:241 (try_compile)"
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:611 (_HDF5_test_regular_compiler_C)"
+      - "CMakeLists.txt:21 (find_package)"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-2COw3n"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-2COw3n"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_C_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-2COw3n'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_c2ed5/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_c2ed5.dir/build.make CMakeFiles/cmTC_c2ed5.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-2COw3n'
+        Building C object CMakeFiles/cmTC_c2ed5.dir/cmake_hdf5_test.c.o
+        /usr/bin/cc    -o CMakeFiles/cmTC_c2ed5.dir/cmake_hdf5_test.c.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/hdf5/cmake_hdf5_test.c
+        Linking C executable cmTC_c2ed5
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c2ed5.dir/link.txt --verbose=1
+        /usr/bin/ld: CMakeFiles/cmTC_c2ed5.dir/cmake_hdf5_test.c.o: in function `main':
+        cmake_hdf5_test.c:(.text+0x3e): undefined reference to `H5check_version'
+        /usr/bin/ld: cmake_hdf5_test.c:(.text+0x43): undefined reference to `H5open'
+        /usr/bin/ld: cmake_hdf5_test.c:(.text+0x5c): undefined reference to `H5Fcreate'
+        collect2: error: ld returned 1 exit status
+        /usr/bin/cc CMakeFiles/cmTC_c2ed5.dir/cmake_hdf5_test.c.o -o cmTC_c2ed5
+        gmake[1]: *** [CMakeFiles/cmTC_c2ed5.dir/build.make:102: cmTC_c2ed5] Error 1
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-2COw3n'
+        gmake: *** [Makefile:134: cmTC_c2ed5/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:287 (try_compile)"
+      - "/usr/share/cmake/Modules/FindHDF5.cmake:617 (_HDF5_test_regular_compiler_CXX)"
+      - "CMakeLists.txt:21 (find_package)"
+    directories:
+      source: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-l35bbR"
+      binary: "/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-l35bbR"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "HDF5_CXX_COMPILER_NO_INTERROGATE"
+      cached: true
+      stdout: |
+        Change Dir: '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-l35bbR'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_62660/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_62660.dir/build.make CMakeFiles/cmTC_62660.dir/build
+        gmake[1]: Entering directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-l35bbR'
+        Building CXX object CMakeFiles/cmTC_62660.dir/cmake_hdf5_test.cxx.o
+        /usr/bin/c++   -std=gnu++17 -o CMakeFiles/cmTC_62660.dir/cmake_hdf5_test.cxx.o -c /home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/hdf5/cmake_hdf5_test.cxx
+        Linking CXX executable cmTC_62660
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_62660.dir/link.txt --verbose=1
+        /usr/bin/ld: CMakeFiles/cmTC_62660.dir/cmake_hdf5_test.cxx.o: in function `main':
+        cmake_hdf5_test.cxx:(.text+0x34): undefined reference to `H5::FileAccPropList::DEFAULT'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x3b): undefined reference to `H5::FileCreatPropList::DEFAULT'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x4f): undefined reference to `H5check_version'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x54): undefined reference to `H5open'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x70): undefined reference to `H5::H5File::H5File(char const*, unsigned int, H5::FileCreatPropList const&, H5::FileAccPropList const&)'
+        /usr/bin/ld: cmake_hdf5_test.cxx:(.text+0x81): undefined reference to `H5::H5File::~H5File()'
+        collect2: error: ld returned 1 exit status
+        /usr/bin/c++ CMakeFiles/cmTC_62660.dir/cmake_hdf5_test.cxx.o -o cmTC_62660
+        gmake[1]: *** [CMakeFiles/cmTC_62660.dir/build.make:102: cmTC_62660] Error 1
+        gmake[1]: Leaving directory '/home/research/w.yanwang/Telescope-Searching-Overlap/build/CMakeFiles/CMakeScratch/TryCompile-l35bbR'
+        gmake: *** [Makefile:134: cmTC_62660/fast] Error 2
+        
+      exitCode: 2
+...
