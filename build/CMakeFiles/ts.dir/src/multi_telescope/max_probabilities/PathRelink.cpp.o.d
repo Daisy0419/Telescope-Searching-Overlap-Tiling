@@ -1,7 +1,7 @@
 CMakeFiles/ts.dir/src/multi_telescope/max_probabilities/PathRelink.cpp.o: \
- /home/research/w.yanwang/Telescope-Searching-Overlap/src/multi_telescope/max_probabilities/PathRelink.cpp \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/multi_telescope/max_probabilities/PathRelink.cpp \
  /usr/include/stdc-predef.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/common/LocalSearch.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/common/LocalSearch.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
@@ -171,7 +171,7 @@ CMakeFiles/ts.dir/src/multi_telescope/max_probabilities/PathRelink.cpp.o: \
  /usr/include/c++/11/bits/exception_ptr.h \
  /usr/include/c++/11/bits/cxxabi_init_exception.h \
  /usr/include/c++/11/bits/nested_exception.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/common/PathOperations.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/common/PathOperations.h \
  /usr/include/c++/11/unordered_set \
  /usr/include/c++/11/bits/unordered_set.h /usr/include/c++/11/cassert \
  /usr/include/assert.h /usr/include/c++/11/iostream \

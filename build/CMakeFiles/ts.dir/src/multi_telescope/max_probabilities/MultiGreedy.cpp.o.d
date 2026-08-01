@@ -1,5 +1,5 @@
 CMakeFiles/ts.dir/src/multi_telescope/max_probabilities/MultiGreedy.cpp.o: \
- /home/research/w.yanwang/Telescope-Searching-Overlap/src/multi_telescope/max_probabilities/MultiGreedy.cpp \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/multi_telescope/max_probabilities/MultiGreedy.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/queue \
  /usr/include/c++/11/deque /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \

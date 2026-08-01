@@ -1,7 +1,7 @@
 CMakeFiles/ts.dir/src/multi_telescope/max_probabilities/PathSplitter.cpp.o: \
- /home/research/w.yanwang/Telescope-Searching-Overlap/src/multi_telescope/max_probabilities/PathSplitter.cpp \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/multi_telescope/max_probabilities/PathSplitter.cpp \
  /usr/include/stdc-predef.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/common/ReadData.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/common/ReadData.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
@@ -116,8 +116,8 @@ CMakeFiles/ts.dir/src/multi_telescope/max_probabilities/PathSplitter.cpp.o: \
  /usr/include/asm-generic/errno-base.h /usr/include/bits/types/error_t.h \
  /usr/include/c++/11/bits/charconv.h \
  /usr/include/c++/11/bits/basic_string.tcc /usr/include/c++/11/limits \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/multi_telescope/max_probabilities/PathSplitter.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/common/PathOperations.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/multi_telescope/max_probabilities/PathSplitter.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/common/PathOperations.h \
  /usr/include/c++/11/tuple /usr/include/c++/11/utility \
  /usr/include/c++/11/bits/stl_relops.h /usr/include/c++/11/array \
  /usr/include/c++/11/bits/uses_allocator.h \

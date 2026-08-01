@@ -1,7 +1,7 @@
 CMakeFiles/ts.dir/src/common/PathOperations.cpp.o: \
- /home/research/w.yanwang/Telescope-Searching-Overlap/src/common/PathOperations.cpp \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/common/PathOperations.cpp \
  /usr/include/stdc-predef.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/common/PathOperations.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/common/PathOperations.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \

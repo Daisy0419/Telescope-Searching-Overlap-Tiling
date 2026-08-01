@@ -1,8 +1,8 @@
 CMakeFiles/ts.dir/src/single_telescope/no_overlap/Greedy.cpp.o: \
- /home/research/w.yanwang/Telescope-Searching-Overlap/src/single_telescope/no_overlap/Greedy.cpp \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/no_overlap/Greedy.cpp \
  /usr/include/stdc-predef.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/common/helplers.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/common/ReadData.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/common/helplers.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/common/ReadData.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \

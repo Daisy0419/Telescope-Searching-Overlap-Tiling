@@ -1,5 +1,5 @@
 CMakeFiles/ts.dir/src/multi_telescope/max_probabilities/naivePrune.cpp.o: \
- /home/research/w.yanwang/Telescope-Searching-Overlap/src/multi_telescope/max_probabilities/naivePrune.cpp \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/multi_telescope/max_probabilities/naivePrune.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/vector \
  /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \

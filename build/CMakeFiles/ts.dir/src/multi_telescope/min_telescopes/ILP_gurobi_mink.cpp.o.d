@@ -1,7 +1,7 @@
 CMakeFiles/ts.dir/src/multi_telescope/min_telescopes/ILP_gurobi_mink.cpp.o: \
- /home/research/w.yanwang/Telescope-Searching-Overlap/src/multi_telescope/min_telescopes/ILP_gurobi_mink.cpp \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/multi_telescope/min_telescopes/ILP_gurobi_mink.cpp \
  /usr/include/stdc-predef.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/multi_telescope/min_telescopes/ILP_gurobi_mink.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/multi_telescope/min_telescopes/ILP_gurobi_mink.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \

@@ -1,7 +1,7 @@
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o: \
- /home/research/w.yanwang/Telescope-Searching-Overlap/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp \
  /usr/include/stdc-predef.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/single_telescope/pixel_overlap/GreedyPixelOverlap.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/single_telescope/pixel_overlap/GreedyPixelOverlap.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
@@ -42,7 +42,7 @@ CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o: \
  /usr/include/c++/11/bits/hash_bytes.h \
  /usr/include/c++/11/bits/range_access.h \
  /usr/include/c++/11/bits/vector.tcc \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/common/PathOperations.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/common/PathOperations.h \
  /usr/include/c++/11/tuple /usr/include/c++/11/utility \
  /usr/include/c++/11/bits/stl_relops.h /usr/include/c++/11/array \
  /usr/include/c++/11/bits/uses_allocator.h \

@@ -1,7 +1,7 @@
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.o: \
- /home/research/w.yanwang/Telescope-Searching-Overlap/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp \
  /usr/include/stdc-predef.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/single_telescope/pixel_overlap/ILP_gurobi_path_cover.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/single_telescope/pixel_overlap/ILP_gurobi_path_cover.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \

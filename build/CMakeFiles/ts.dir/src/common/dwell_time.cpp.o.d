@@ -1,7 +1,7 @@
 CMakeFiles/ts.dir/src/common/dwell_time.cpp.o: \
- /home/research/w.yanwang/Telescope-Searching-Overlap/src/common/dwell_time.cpp \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/common/dwell_time.cpp \
  /usr/include/stdc-predef.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/common/dwell_time.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/common/dwell_time.h \
  /usr/include/c++/11/cmath \
  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \

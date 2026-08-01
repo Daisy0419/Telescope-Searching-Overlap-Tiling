@@ -1,7 +1,7 @@
 CMakeFiles/ts.dir/src/multi_telescope/min_telescopes/greedy_mink_unrooted.cpp.o: \
- /home/research/w.yanwang/Telescope-Searching-Overlap/src/multi_telescope/min_telescopes/greedy_mink_unrooted.cpp \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/multi_telescope/min_telescopes/greedy_mink_unrooted.cpp \
  /usr/include/stdc-predef.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/single_telescope/no_overlap/GCP.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/single_telescope/no_overlap/GCP.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/c++/11/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
@@ -204,9 +204,9 @@ CMakeFiles/ts.dir/src/multi_telescope/min_telescopes/greedy_mink_unrooted.cpp.o:
  /home/research/w.yanwang/lemon-1.3.1/lemon/bin_heap.h \
  /home/research/w.yanwang/lemon-1.3.1/lemon/fractional_matching.h \
  /home/research/w.yanwang/lemon-1.3.1/lemon/elevator.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/common/PathOperations.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/common/PathOperations.h \
  /usr/include/c++/11/cstddef \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/common/LocalSearch.h \
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/common/LocalSearch.h \
  /usr/include/c++/11/random /usr/include/c++/11/cmath /usr/include/math.h \
  /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
@@ -238,4 +238,4 @@ CMakeFiles/ts.dir/src/multi_telescope/min_telescopes/greedy_mink_unrooted.cpp.o:
  /usr/include/c++/11/bits/random.tcc /usr/include/c++/11/numeric \
  /usr/include/c++/11/bits/stl_numeric.h \
  /usr/include/c++/11/pstl/glue_numeric_defs.h \
- /home/research/w.yanwang/Telescope-Searching-Overlap/include/multi_telescope/min_telescopes/greedy_mink.h
+ /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/include/multi_telescope/min_telescopes/greedy_mink.h
