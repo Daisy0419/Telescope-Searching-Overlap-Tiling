@@ -1306,6 +1306,9 @@ static void compactCoveredPixels(
     }
 }
 
+
+
+// used by ILP with
 int buildGraphwithPixelsOriginal(const std::string& tilefile, 
                 const std::string& pro_map_file,
                std::vector<std::vector<double>>& slew_times, 
@@ -1382,9 +1385,8 @@ int buildGraphwithPixelsOriginal(const std::string& tilefile,
 }
 
 
-
+// used by algorithms with overlaps that reduce the graph tp OP
 // Build the s-t graph consumed by the pixel-aware gurobiPathCover.
-//
 // On return, all node-indexed outputs have the same size. The last two nodes
 // are the zero-prize dummy start and dummy end. costs already contains slew,
 // settle, dwell, and terminal padding exactly as buildGraphOrienteering does.
@@ -1474,7 +1476,7 @@ std::tuple<int, int, double> buildGraphwithPixelsOP(const std::string& tilefile,
     std::cout << "init_pos: " << init_pos
               << ", rank: " << init_rank << "\n";
 
-    // Compact only after tile trimming so the ILP contains no pixel that is
+    // Compact only after tile trimming so the ILP contains no pixel that is 
     // uncovered by every retained tile.
     std::vector<int> new2old, old2new;
     compactCoveredPixels(
@@ -1528,3 +1530,5 @@ std::tuple<int, int, double> buildGraphwithPixelsOP(const std::string& tilefile,
 
     return {start_pos, end_pos, padding_value};
 }
+
+

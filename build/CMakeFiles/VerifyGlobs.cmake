@@ -38,11 +38,15 @@ set(OLD_GLOB
   "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/no_overlap/ILP_gurobi_op_time.cpp"
   "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/no_overlap/SimulatedAnnealing.cpp"
   "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/AntColonyPixelOverlap.cpp"
+  "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GCP_overlap.cpp"
   "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp"
   "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp"
   "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp"
   "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp"
+  "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp"
   "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp"
+  "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/SubmodularSelection.cpp"
+  "/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")
   message("-- GLOB mismatch!")

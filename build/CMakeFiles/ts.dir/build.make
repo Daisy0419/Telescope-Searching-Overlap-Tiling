@@ -534,10 +534,24 @@ CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/AntColonyPixelOverlap.cpp.s
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/AntColonyPixelOverlap.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/AntColonyPixelOverlap.cpp -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/AntColonyPixelOverlap.cpp.s
 
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.o: CMakeFiles/ts.dir/flags.make
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.o: /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GCP_overlap.cpp
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.o: CMakeFiles/ts.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.o -MF CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.o.d -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GCP_overlap.cpp
+
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GCP_overlap.cpp > CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.i
+
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GCP_overlap.cpp -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.s
+
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.o: CMakeFiles/ts.dir/flags.make
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.o: /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.o: CMakeFiles/ts.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.o -MF CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.o.d -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp
 
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.i: cmake_force
@@ -551,7 +565,7 @@ CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.s: 
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o: CMakeFiles/ts.dir/flags.make
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o: /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o: CMakeFiles/ts.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o -MF CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o.d -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp
 
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.i: cmake_force
@@ -565,7 +579,7 @@ CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.s: c
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp.o: CMakeFiles/ts.dir/flags.make
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp.o: /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp.o: CMakeFiles/ts.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp.o -MF CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp.o.d -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp
 
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp.i: cmake_force
@@ -579,7 +593,7 @@ CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cp
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.o: CMakeFiles/ts.dir/flags.make
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.o: /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.o: CMakeFiles/ts.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.o -MF CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.o.d -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp
 
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.i: cmake_force
@@ -590,10 +604,24 @@ CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_origi
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.s
 
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o: CMakeFiles/ts.dir/flags.make
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o: /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o: CMakeFiles/ts.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o -MF CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o.d -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp
+
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp > CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.i
+
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.s
+
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o: CMakeFiles/ts.dir/flags.make
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o: /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o: CMakeFiles/ts.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o -MF CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o.d -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp
 
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.i: cmake_force
@@ -603,6 +631,34 @@ CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOver
 CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.s
+
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o: CMakeFiles/ts.dir/flags.make
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o: /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/SubmodularSelection.cpp
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o: CMakeFiles/ts.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_41) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o -MF CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o.d -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/SubmodularSelection.cpp
+
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/SubmodularSelection.cpp > CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.i
+
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/SubmodularSelection.cpp -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.s
+
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o: CMakeFiles/ts.dir/flags.make
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o: /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o: CMakeFiles/ts.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_42) "Building CXX object CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o -MF CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o.d -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o -c /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp
+
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp > CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.i
+
+CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp -o CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.s
 
 # Object files for target ts
 ts_OBJECTS = \
@@ -639,11 +695,15 @@ ts_OBJECTS = \
 "CMakeFiles/ts.dir/src/single_telescope/no_overlap/ILP_gurobi_op_time.cpp.o" \
 "CMakeFiles/ts.dir/src/single_telescope/no_overlap/SimulatedAnnealing.cpp.o" \
 "CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/AntColonyPixelOverlap.cpp.o" \
+"CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.o" \
 "CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.o" \
 "CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o" \
 "CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp.o" \
 "CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.o" \
-"CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o"
+"CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o" \
+"CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o" \
+"CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o" \
+"CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o"
 
 # External object files for target ts
 ts_EXTERNAL_OBJECTS =
@@ -681,11 +741,15 @@ ts: CMakeFiles/ts.dir/src/single_telescope/no_overlap/ILP_gurobi_op_2axes.cpp.o
 ts: CMakeFiles/ts.dir/src/single_telescope/no_overlap/ILP_gurobi_op_time.cpp.o
 ts: CMakeFiles/ts.dir/src/single_telescope/no_overlap/SimulatedAnnealing.cpp.o
 ts: CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/AntColonyPixelOverlap.cpp.o
+ts: CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.o
 ts: CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.o
 ts: CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GreedyPixelOverlap.cpp.o
 ts: CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_op.cpp.o
 ts: CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.o
+ts: CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o
 ts: CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o
+ts: CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o
+ts: CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o
 ts: CMakeFiles/ts.dir/build.make
 ts: /home/research/w.yanwang/Gurobi/gurobi1201/linux64/lib/libgurobi120.so
 ts: /home/research/w.yanwang/Gurobi/gurobi1201/linux64/lib/libgurobi_g++8.5.a
@@ -699,7 +763,7 @@ ts: /usr/lib/gcc/x86_64-redhat-linux/11/libgomp.so
 ts: /usr/lib64/libpthread.a
 ts: /usr/lib64/libhdf5_cpp.so
 ts: CMakeFiles/ts.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Linking CXX executable ts"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/research/w.yanwang/Telescope-Searching-Overlap-Tiling/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_43) "Linking CXX executable ts"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ts.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

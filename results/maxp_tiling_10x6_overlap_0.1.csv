@@ -1,2 +1,0 @@
-Method,TilingData,LikelihoodData,Budget,SlewRate,NumTiles,SumProb,BestBound,TotalCost,TimeSec,Path
-overlap+path+cover+continuous-time,tiling_10x6_overlap_0.1.csv,GW191103_012549_pixels.txt,100,10,30,0.619727,0.619991,99.9306,5.94373,357 397 438 477 518 557 596 632 667 699 730 758 783 804 823 838 850 837 849 857 862 856 847 833 817 797 774 748 720 688

@@ -1,143 +1,141 @@
-// Pixel-overlap-aware s-t greedy implementation.
 #include "GreedyPixelOverlap.h"
-#include "PathOperations.h"
+#include "PixelOverlapPath.h"
+#include "SubmodularSelection.h"
 
+#include <algorithm>
 #include <cmath>
 #include <limits>
-#include <stdexcept>
 #include <vector>
 
-namespace {
-
-std::vector<int> greedyPathTwoFixedPixelOverlapImpl(
+// Shared implementation for the marginal and marginal/cost variants.
+static std::vector<int> greedyPixelOverlapPath(
     const std::vector<std::vector<double>>& costs,
-    const std::vector<double>& pixel_probs,
+    const std::vector<double>& pixel_probabilities,
     const std::vector<std::vector<int>>& member_pixels,
     double budget,
-    int start_tile,
-    int end_tile,
-    bool use_ratio
-) {
-    const int node_count = static_cast<int>(costs.size());
-    if (node_count < 2 || start_tile < 0 || start_tile >= node_count ||
-        end_tile < 0 || end_tile >= node_count || start_tile == end_tile) {
-        throw std::invalid_argument(
-            "pixel greedy: invalid graph or start/end node.");
-    }
-    if (!std::isfinite(budget) || budget < 0.0) {
-        throw std::invalid_argument(
-            "pixel greedy: budget must be finite and nonnegative.");
-    }
-    for (const auto& row : costs) {
-        if (static_cast<int>(row.size()) != node_count) {
-            throw std::invalid_argument(
-                "pixel greedy: cost matrix must be square.");
-        }
-    }
-    validatePixelCoverageData(
-        costs.size(), pixel_probs, member_pixels);
-    if (!member_pixels[start_tile].empty() ||
-        !member_pixels[end_tile].empty()) {
-        throw std::invalid_argument(
-            "pixel greedy: dummy start/end pixel lists must be empty.");
-    }
+    int start_node,
+    int end_node,
+    bool divide_by_added_cost) {
 
-    constexpr double tolerance = 1e-12;
-    if (costs[start_tile][end_tile] > budget + tolerance) {
+    CoverageOracle oracle(pixel_probabilities, member_pixels);
+    validatePixelOverlapProblem(
+        costs, member_pixels, oracle, budget, start_node, end_node);
+
+    if (costs[start_node][end_node] > budget + 1.0e-12) {
         return {};
     }
 
-    std::vector<int> path{start_tile, end_tile};
-    std::vector<char> visited(node_count, 0);
-    visited[start_tile] = 1;
-    visited[end_tile] = 1;
-    auto cover_counts = pixelCoverCounts(
-        path, member_pixels, pixel_probs.size());
+    const int node_count = static_cast<int>(costs.size());
+    std::vector<int> path{start_node, end_node};
+    std::vector<char> used(static_cast<std::size_t>(node_count), 0);
+    used[start_node] = 1;
+    used[end_node] = 1;
+    double current_cost = costs[start_node][end_node];
 
-    int current = start_tile;
-    double total_cost = costs[start_tile][end_tile];
+    oracle.reset();
+    oracle.commitAll(path);
 
     while (true) {
-        int best_tile = -1;
-        double best_score = -std::numeric_limits<double>::infinity();
-        double best_gain = 0.0;
-        double best_delta = 0.0;
+        std::vector<char> eligible(static_cast<std::size_t>(node_count), 0);
+        std::vector<int> positions(static_cast<std::size_t>(node_count), -1);
+        std::vector<double> gains(static_cast<std::size_t>(node_count), 0.0);
+        std::vector<double> added_costs(
+            static_cast<std::size_t>(node_count), 0.0);
+        std::vector<double> scores(
+            static_cast<std::size_t>(node_count),
+            -std::numeric_limits<double>::infinity());
 
-        for (int tile = 0; tile < node_count; ++tile) {
-            if (visited[tile]) {
+        for (int node = 0; node < node_count; ++node) {
+            if (used[node] != 0) {
                 continue;
             }
 
-            const double delta =
-                costs[current][tile] + costs[tile][end_tile] -
-                costs[current][end_tile];
-            if (total_cost + delta > budget + tolerance) {
+            const double gain = oracle.marginal(node);
+            if (gain <= 1.0e-15) {
                 continue;
             }
 
-            const double gain = marginalPixelPrize(
-                tile, pixel_probs, member_pixels, cover_counts);
-            if (gain <= tolerance) {
+            const std::pair<int, double> insertion =
+                pixelOverlapCheapestInsertion(costs, path, node);
+            if (insertion.first < 0 ||
+                current_cost + insertion.second > budget + 1.0e-12) {
                 continue;
             }
 
-            const double score = use_ratio
-                ? (delta <= tolerance
-                       ? std::numeric_limits<double>::infinity()
-                       : gain / delta)
+            eligible[node] = 1;
+            positions[node] = insertion.first;
+            gains[node] = gain;
+            added_costs[node] = insertion.second;
+            scores[node] = divide_by_added_cost
+                ? gain / std::max(insertion.second, 1.0e-12)
                 : gain;
-            const bool better =
-                score > best_score + tolerance ||
-                (std::abs(score - best_score) <= tolerance &&
-                 (gain > best_gain + tolerance ||
-                  (std::abs(gain - best_gain) <= tolerance &&
-                   (delta < best_delta - tolerance || best_tile < 0))));
+        }
+
+        int best_node = -1;
+        for (int node = 0; node < node_count; ++node) {
+            if (eligible[node] == 0) {
+                continue;
+            }
+
+            bool better = best_node < 0;
+            if (!better && scores[node] > scores[best_node] + 1.0e-12) {
+                better = true;
+            } else if (!better &&
+                       std::abs(scores[node] - scores[best_node]) <= 1.0e-12) {
+                if (gains[node] > gains[best_node] + 1.0e-12) {
+                    better = true;
+                } else if (std::abs(gains[node] - gains[best_node]) <= 1.0e-12 &&
+                           added_costs[node] <
+                               added_costs[best_node] - 1.0e-12) {
+                    better = true;
+                }
+            }
+
             if (better) {
-                best_tile = tile;
-                best_score = score;
-                best_gain = gain;
-                best_delta = delta;
+                best_node = node;
             }
         }
 
-        if (best_tile < 0) {
+        if (best_node < 0) {
             break;
         }
-        path.insert(path.end() - 1, best_tile);
-        visited[best_tile] = 1;
-        total_cost += best_delta;
-        current = best_tile;
-        updatePixelCoverCounts(
-            best_tile, 1, member_pixels, cover_counts);
+
+        path.insert(path.begin() + positions[best_node], best_node);
+        current_cost += added_costs[best_node];
+        used[best_node] = 1;
+        oracle.commit(best_node);
     }
 
+    // pixelOverlapTwoOpt(costs, path);
+    if (!pixelOverlapIsFeasibleSTPath(
+            costs, path, budget, start_node, end_node)) {
+        return {};
+    }
     return path;
 }
 
-}  // namespace
-
 std::vector<int> prizeRatioGreedyPathTwoFixedPixelOverlap(
     const std::vector<std::vector<double>>& costs,
-    const std::vector<double>& pixel_probs,
+    const std::vector<double>& pixel_probabilities,
     const std::vector<std::vector<int>>& member_pixels,
     double budget,
-    int start_tile,
-    int end_tile
-) {
-    return greedyPathTwoFixedPixelOverlapImpl(
-        costs, pixel_probs, member_pixels,
-        budget, start_tile, end_tile, true);
+    int start_node,
+    int end_node) {
+
+    return greedyPixelOverlapPath(
+        costs, pixel_probabilities, member_pixels,
+        budget, start_node, end_node, true);
 }
 
 std::vector<int> prizeGreedyPathTwoFixedPixelOverlap(
     const std::vector<std::vector<double>>& costs,
-    const std::vector<double>& pixel_probs,
+    const std::vector<double>& pixel_probabilities,
     const std::vector<std::vector<int>>& member_pixels,
     double budget,
-    int start_tile,
-    int end_tile
-) {
-    return greedyPathTwoFixedPixelOverlapImpl(
-        costs, pixel_probs, member_pixels,
-        budget, start_tile, end_tile, false);
+    int start_node,
+    int end_node) {
+
+    return greedyPixelOverlapPath(
+        costs, pixel_probabilities, member_pixels,
+        budget, start_node, end_node, false);
 }

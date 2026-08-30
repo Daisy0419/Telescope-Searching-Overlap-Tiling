@@ -922,6 +922,30 @@ src/single_telescope/pixel_overlap/AntColonyPixelOverlap.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/AntColonyPixelOverlap.cpp.s
 .PHONY : src/single_telescope/pixel_overlap/AntColonyPixelOverlap.cpp.s
 
+src/single_telescope/pixel_overlap/GCP_overlap.o: src/single_telescope/pixel_overlap/GCP_overlap.cpp.o
+.PHONY : src/single_telescope/pixel_overlap/GCP_overlap.o
+
+# target to build an object file
+src/single_telescope/pixel_overlap/GCP_overlap.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.o
+.PHONY : src/single_telescope/pixel_overlap/GCP_overlap.cpp.o
+
+src/single_telescope/pixel_overlap/GCP_overlap.i: src/single_telescope/pixel_overlap/GCP_overlap.cpp.i
+.PHONY : src/single_telescope/pixel_overlap/GCP_overlap.i
+
+# target to preprocess a source file
+src/single_telescope/pixel_overlap/GCP_overlap.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.i
+.PHONY : src/single_telescope/pixel_overlap/GCP_overlap.cpp.i
+
+src/single_telescope/pixel_overlap/GCP_overlap.s: src/single_telescope/pixel_overlap/GCP_overlap.cpp.s
+.PHONY : src/single_telescope/pixel_overlap/GCP_overlap.s
+
+# target to generate assembly for a file
+src/single_telescope/pixel_overlap/GCP_overlap.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/GCP_overlap.cpp.s
+.PHONY : src/single_telescope/pixel_overlap/GCP_overlap.cpp.s
+
 src/single_telescope/pixel_overlap/GeneticPixelOverlap.o: src/single_telescope/pixel_overlap/GeneticPixelOverlap.cpp.o
 .PHONY : src/single_telescope/pixel_overlap/GeneticPixelOverlap.o
 
@@ -1018,6 +1042,30 @@ src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.s
 .PHONY : src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.cpp.s
 
+src/single_telescope/pixel_overlap/PixelOverlapPath.o: src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o
+.PHONY : src/single_telescope/pixel_overlap/PixelOverlapPath.o
+
+# target to build an object file
+src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o
+.PHONY : src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.o
+
+src/single_telescope/pixel_overlap/PixelOverlapPath.i: src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.i
+.PHONY : src/single_telescope/pixel_overlap/PixelOverlapPath.i
+
+# target to preprocess a source file
+src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.i
+.PHONY : src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.i
+
+src/single_telescope/pixel_overlap/PixelOverlapPath.s: src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.s
+.PHONY : src/single_telescope/pixel_overlap/PixelOverlapPath.s
+
+# target to generate assembly for a file
+src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.s
+.PHONY : src/single_telescope/pixel_overlap/PixelOverlapPath.cpp.s
+
 src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.o: src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.o
 .PHONY : src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.o
 
@@ -1041,6 +1089,54 @@ src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.s: src/single_
 src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.s
 .PHONY : src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.cpp.s
+
+src/single_telescope/pixel_overlap/SubmodularSelection.o: src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o
+.PHONY : src/single_telescope/pixel_overlap/SubmodularSelection.o
+
+# target to build an object file
+src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o
+.PHONY : src/single_telescope/pixel_overlap/SubmodularSelection.cpp.o
+
+src/single_telescope/pixel_overlap/SubmodularSelection.i: src/single_telescope/pixel_overlap/SubmodularSelection.cpp.i
+.PHONY : src/single_telescope/pixel_overlap/SubmodularSelection.i
+
+# target to preprocess a source file
+src/single_telescope/pixel_overlap/SubmodularSelection.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.i
+.PHONY : src/single_telescope/pixel_overlap/SubmodularSelection.cpp.i
+
+src/single_telescope/pixel_overlap/SubmodularSelection.s: src/single_telescope/pixel_overlap/SubmodularSelection.cpp.s
+.PHONY : src/single_telescope/pixel_overlap/SubmodularSelection.s
+
+# target to generate assembly for a file
+src/single_telescope/pixel_overlap/SubmodularSelection.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/SubmodularSelection.cpp.s
+.PHONY : src/single_telescope/pixel_overlap/SubmodularSelection.cpp.s
+
+src/single_telescope/pixel_overlap/recursive_greedy_op.o: src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o
+.PHONY : src/single_telescope/pixel_overlap/recursive_greedy_op.o
+
+# target to build an object file
+src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o
+.PHONY : src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.o
+
+src/single_telescope/pixel_overlap/recursive_greedy_op.i: src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.i
+.PHONY : src/single_telescope/pixel_overlap/recursive_greedy_op.i
+
+# target to preprocess a source file
+src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.i
+.PHONY : src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.i
+
+src/single_telescope/pixel_overlap/recursive_greedy_op.s: src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.s
+.PHONY : src/single_telescope/pixel_overlap/recursive_greedy_op.s
+
+# target to generate assembly for a file
+src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ts.dir/build.make CMakeFiles/ts.dir/src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.s
+.PHONY : src/single_telescope/pixel_overlap/recursive_greedy_op.cpp.s
 
 # Help Target
 help:
@@ -1150,6 +1246,9 @@ help:
 	@echo "... src/single_telescope/pixel_overlap/AntColonyPixelOverlap.o"
 	@echo "... src/single_telescope/pixel_overlap/AntColonyPixelOverlap.i"
 	@echo "... src/single_telescope/pixel_overlap/AntColonyPixelOverlap.s"
+	@echo "... src/single_telescope/pixel_overlap/GCP_overlap.o"
+	@echo "... src/single_telescope/pixel_overlap/GCP_overlap.i"
+	@echo "... src/single_telescope/pixel_overlap/GCP_overlap.s"
 	@echo "... src/single_telescope/pixel_overlap/GeneticPixelOverlap.o"
 	@echo "... src/single_telescope/pixel_overlap/GeneticPixelOverlap.i"
 	@echo "... src/single_telescope/pixel_overlap/GeneticPixelOverlap.s"
@@ -1162,9 +1261,18 @@ help:
 	@echo "... src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.o"
 	@echo "... src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.i"
 	@echo "... src/single_telescope/pixel_overlap/ILP_gurobi_path_cover_original_graph.s"
+	@echo "... src/single_telescope/pixel_overlap/PixelOverlapPath.o"
+	@echo "... src/single_telescope/pixel_overlap/PixelOverlapPath.i"
+	@echo "... src/single_telescope/pixel_overlap/PixelOverlapPath.s"
 	@echo "... src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.o"
 	@echo "... src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.i"
 	@echo "... src/single_telescope/pixel_overlap/SimulatedAnnealingPixelOverlap.s"
+	@echo "... src/single_telescope/pixel_overlap/SubmodularSelection.o"
+	@echo "... src/single_telescope/pixel_overlap/SubmodularSelection.i"
+	@echo "... src/single_telescope/pixel_overlap/SubmodularSelection.s"
+	@echo "... src/single_telescope/pixel_overlap/recursive_greedy_op.o"
+	@echo "... src/single_telescope/pixel_overlap/recursive_greedy_op.i"
+	@echo "... src/single_telescope/pixel_overlap/recursive_greedy_op.s"
 .PHONY : help
 
 

@@ -1,517 +1,242 @@
-// Simulated annealing with exact union-of-HEALPixels scoring.
-#include <vector>
-#include <random>
+#include "SimulatedAnnealingPixelOverlap.h"
+
+#include "PixelOverlapOpenMP.h"
+#include "PixelOverlapPath.h"
+#include "SubmodularSelection.h"
+
 #include <algorithm>
-#include <numeric>
 #include <cmath>
 #include <limits>
+#include <random>
 #include <stdexcept>
-#include <omp.h>
-#include <iostream>
+#include <utility>
 
-#include "SimulatedAnnealingPixelOverlap.h"
-#include "helplers.h"
-#include "LocalSearch.h"
-#include "PathOperations.h"
+static bool annealingCandidateIsBetter(double first_reward,
+                                       double first_cost,
+                                       double second_reward,
+                                       double second_cost) {
+    if (first_reward > second_reward + 1.0e-12) {
+        return true;
+    }
+    return std::abs(first_reward - second_reward) <= 1.0e-12 &&
+           first_cost < second_cost - 1.0e-12;
+}
 
-namespace {
-
-void validateAnnealingInputs(
+static std::vector<int> runParallelAnnealingRestarts(
     const std::vector<std::vector<double>>& costs,
-    const std::vector<double>& pixel_probs,
+    const std::vector<double>& pixel_probabilities,
     const std::vector<std::vector<int>>& member_pixels,
     double budget,
-    int start_tile,
-    int end_tile
-) {
-    if (costs.size() < 2 || !std::isfinite(budget) || budget < 0.0) {
-        throw std::invalid_argument(
-            "simulated annealing: invalid graph size or budget.");
-    }
-    for (const auto& row : costs) {
-        if (row.size() != costs.size()) {
-            throw std::invalid_argument(
-                "simulated annealing: cost matrix must be square.");
-        }
-    }
-    validatePixelCoverageData(costs.size(), pixel_probs, member_pixels);
-    if (start_tile < 0 || end_tile < 0 ||
-        start_tile >= static_cast<int>(costs.size()) ||
-        end_tile >= static_cast<int>(costs.size()) ||
-        start_tile == end_tile) {
-        throw std::invalid_argument(
-            "simulated annealing: invalid start/end node.");
-    }
-    if (!member_pixels[start_tile].empty() ||
-        !member_pixels[end_tile].empty()) {
-        throw std::invalid_argument(
-            "simulated annealing: dummy start/end pixel lists must be empty.");
-    }
-}
+    int start_node,
+    int end_node,
+    std::vector<std::vector<int>> initial_paths,
+    int iteration_count,
+    double initial_temperature,
+    double cooling_rate,
+    int restart_count,
+    std::uint64_t random_seed,
+    int thread_count) {
 
-}  // namespace
+    CoverageOracle oracle(pixel_probabilities, member_pixels);
+    validatePixelOverlapProblem(
+        costs, member_pixels, oracle, budget, start_node, end_node);
 
-double sa_path_cost_pixel_overlap(
-    const std::vector<std::vector<double>>& costs,
-    const std::vector<int>& path) {
-    double cost_sum = 0.0;
-    for (size_t i = 1; i < path.size(); ++i)
-        cost_sum += costs[path[i - 1]][path[i]];
-    return cost_sum;
-}
-
-double sa_path_prize_pixel_overlap(
-    const std::vector<double>& pixel_probs,
-    const std::vector<std::vector<int>>& member_pixels,
-    const std::vector<int>& path) {
-    return pathPixelPrize(pixel_probs, member_pixels, path);
-}
-
-std::vector<int> sa_initial_solution_pixel_overlap(
-    const std::vector<std::vector<double>>& costs,
-    double budget, int start_tile, int end_tile) {
-
-    if (costs[start_tile][end_tile] > budget)
-        return {};
-    int N = costs.size();     
-
-    std::vector<int> tiles;
-    tiles.reserve(N - 2);   
-
-    for (int i = 0; i < N; ++i)
-        if (i != start_tile && i != end_tile)
-            tiles.push_back(i);
-
-    std::shuffle(tiles.begin(), tiles.end(), rng);
-    
-    std::vector<int> solution = {start_tile};
-    double spent = 0.0;
-
-    for (int tile : tiles) {
-        double cost_to_tile = costs[solution.back()][tile];
-        double cost_tile_to_end = costs[tile][end_tile];
-        if (spent + cost_to_tile + cost_tile_to_end <= budget) {
-            solution.push_back(tile);
-            spent += cost_to_tile;
-        }
-    }
-    solution.push_back(end_tile);
-    // spent += costs[path[path.size() - 2]][end_tile]; 
-    return solution;
-}
-
-
-namespace {
-
-inline std::vector<int> construct_path(const std::vector<std::vector<double>>& costs,
-               const std::vector<double>& pixel_probs,
-               const std::vector<std::vector<int>>& member_pixels,
-               int start, int end,
-               double budget, double greediness) {
-    const double EPS = 1e-12;
-    const int n = static_cast<int>(costs.size());
-
-    if (costs[start][end] > budget + EPS) {
-        return {};
-    }
-
-    static thread_local std::mt19937_64 rng{std::random_device{}()};
-    std::uniform_real_distribution<double> U01(0.0, 1.0);
-    const double alpha = (greediness < 0.0 ? U01(rng) : std::clamp(greediness, 0.0, 1.0));
-
-    // Route init: [s, t], cost = c(s,t)
-    std::vector<int> path{start, end};
-    double pathCost = costs[start][end];
-
-    // Node usage to prevent duplicates; mark s,t as taken
-    std::vector<char> used(n, 0);
-    used[start] = 1; used[end] = 1;
-    auto coverCounts = pixelCoverCounts(
-        path, member_pixels, pixel_probs.size());
-
-    struct Cand { int v, pos; double dt, h; };
-
-    auto buildCandidates = [&](std::vector<Cand>& C){
-        C.clear();
-        for (int v = 0; v < n; ++v) {
-            if (used[v]) continue;  
-            auto [pos, dt] = cheapestInsertionOnePath(costs, path, v);
-            if (pos == -1) continue; 
-            if (pathCost + dt <= budget + EPS) {
-                const double denom = std::max(dt, EPS);
-                const double gain = marginalPixelPrize(
-                    v, pixel_probs, member_pixels, coverCounts);
-                if (gain > EPS) {
-                    const double h = gain / denom;
-                    C.push_back({v, pos, dt, h});
-                }
-            }
-        }
-    };
-
-    int steps = 0;
-    while (steps++ < 1000) {
-        std::vector<Cand> C; buildCandidates(C);
-        if (C.empty()) break;
-
-        // Value-based RCL: threshold = minH + alpha * (maxH - minH)
-        double minH = C.front().h, maxH = C.front().h;
-        for (const auto& c : C) {
-            if (c.h < minH) minH = c.h;
-            if (c.h > maxH) maxH = c.h;
-        }
-        const double thr = minH + alpha * (maxH - minH);
-
-        std::vector<int> RCL; RCL.reserve(C.size());
-        for (int i = 0; i < static_cast<int>(C.size()); ++i)
-            if (C[i].h + EPS >= thr) RCL.push_back(i);
-        if (RCL.empty()) break;
-
-        std::uniform_int_distribution<int> pick(0, static_cast<int>(RCL.size()) - 1);
-        const Cand& mv = C[RCL[pick(rng)]];
-
-        // Apply insertion (keeps route within budget and doesn't touch endpoints)
-        path.insert(path.begin() + mv.pos, mv.v);
-        pathCost += mv.dt;
-        used[mv.v] = 1;
-        updatePixelCoverCounts(
-            mv.v, 1, member_pixels, coverCounts);
-        // assert(path.front() == start && path.back() == end);
-        // assert(pathCost <= budgetT + 1e-9);
-    }
-    // assert(path.front() == start && path.back() == end);
-    // assert(pathCost <= budgetT + 1e-9);
-
-    return path;
-}
-
-
-}  // namespace
-
-std::vector<int> sa_neighbor_pixel_overlap(const std::vector<int>& path,
-                          const std::vector<std::vector<double>>& costs,
-                          const std::vector<double>& pixel_probs,
-                          const std::vector<std::vector<int>>& member_pixels,
-                          double budget,
-                          std::vector<bool>& visited) {
-    std::uniform_real_distribution<double> method_selector(0.0, 1.0);
-    double method = method_selector(rng);
-    // std::cout << "method: " << method << "\n";
-    std::vector<int> new_path;
-    if (method < 0.2) {
-        new_path = swap_by_ratio(
-            path, costs, pixel_probs, member_pixels, budget, visited);
-    }
-    else if (method < 0.4) {
-        new_path = change_tile(
-            path, costs, pixel_probs, member_pixels, budget, visited);
-    }
-    else if (method < 0.5) {
-        new_path = std::move(shift_segment(path));
-    }
-    else if (method < 0.6) {
-        new_path = std::move(shuffle_segment(path));
-    }
-    else {
-        new_path = std::move(three_opt_one_step(path));
-    }
-
-    two_opt_st(new_path, costs);
-    repairPath(
-        costs, pixel_probs, member_pixels, new_path, budget, visited);
-    return new_path;
-}
-
-
-std::vector<int> simulated_annealing_pixel_overlap(
-                                     const std::vector<std::vector<double>>& costs,
-                                     const std::vector<double>& pixel_probs,
-                                     const std::vector<std::vector<int>>& member_pixels,
-                                     double budget, int start_tile, int end_tile,
-                                     std::vector<int> init_path,
-                                     int iterations,
-                                     double initial_temp,
-                                     double cooling_rate) {
-    validateAnnealingInputs(
-        costs, pixel_probs, member_pixels, budget, start_tile, end_tile);
-    if (costs[start_tile][end_tile] > budget + 1e-12) {
-        return {};
-    }
-    if (iterations < 0 || !std::isfinite(initial_temp) ||
-        initial_temp <= 0.0 || !std::isfinite(cooling_rate) ||
+    if (iteration_count < 0 ||
+        !std::isfinite(initial_temperature) || initial_temperature <= 0.0 ||
+        !std::isfinite(cooling_rate) ||
         cooling_rate <= 0.0 || cooling_rate > 1.0) {
         throw std::invalid_argument(
-            "simulated annealing: invalid schedule parameters.");
+            "Simulated annealing: invalid temperature schedule.");
     }
-    if (init_path.empty() || init_path[0] != start_tile || init_path.back() != end_tile) {
-        init_path = sa_initial_solution_pixel_overlap(
-            costs, budget, start_tile, end_tile);
-    }
-    repairPath(
-        costs, pixel_probs, member_pixels, init_path, budget);
-    if (init_path.empty() || init_path.front() != start_tile ||
-        init_path.back() != end_tile ||
-        sa_path_cost_pixel_overlap(costs, init_path) > budget + 1e-12) {
-        return {};
-    }
-
-    auto current_path = init_path;
-    auto best_path = current_path;
-    double current_prize = sa_path_prize_pixel_overlap(
-        pixel_probs, member_pixels, current_path);
-    double best_prize = current_prize;
-
-    std::vector<bool> visited(costs.size(), false);
-    for (int tile : current_path) {
-        visited[tile] = true;
-    }
-
-    double temp = initial_temp;
-    for (int iter = 0; iter < iterations; iter++) {
-        auto local_visited = visited;
-        auto candidate_path = sa_neighbor_pixel_overlap(
-            current_path, costs, pixel_probs, member_pixels,
-            budget, local_visited);
-        if (candidate_path.size() < 2 ||
-            candidate_path.front() != start_tile ||
-            candidate_path.back() != end_tile) {
-            // std::cout << "wrong new_path! \n";
-            continue;
-        }
-
-        double candidate_cost = sa_path_cost_pixel_overlap(
-            costs, candidate_path);
-        if (candidate_cost > budget) {
-            continue;
-        }
-
-        double candidate_prize = sa_path_prize_pixel_overlap(
-            pixel_probs, member_pixels, candidate_path);
-        double delta = candidate_prize - current_prize;
-
-        if (delta >= 0 || exp(delta / temp) > std::uniform_real_distribution<>(0.0, 1.0)(rng)) {
-            current_path = candidate_path;
-            current_prize = candidate_prize;
-            visited = local_visited;
-
-            if (candidate_prize > best_prize) {
-                best_path = candidate_path;
-                best_prize = candidate_prize;
-                // no_improvement_itr = 0;
-                // std::cout << "current_best_prize: " << best_prize << "/n";
-            } 
-            // else{
-            //     no_improvement_itr += 1;
-            // }
-
-            // if(no_improvement_itr > MAX_NO_IMPROVEMENT) {
-            //     break;
-            // }
-        }
-
-        temp *= cooling_rate;
-        if (temp < 1e-6) break;
-    }
-
-    two_opt_st(best_path, costs);
-    repairPath(
-        costs, pixel_probs, member_pixels, best_path, budget, visited);
-
-    return best_path;
-}
-
-std::vector<int> simulated_annealing_parallel2_pixel_overlap(
-                                     const std::vector<std::vector<double>>& costs,
-                                     const std::vector<double>& pixel_probs,
-                                     const std::vector<std::vector<int>>& member_pixels,
-                                     double budget, int start_tile, int end_tile,
-                                     std::vector<int> init_path,
-                                     int iterations,
-                                     double initial_temp,
-                                     double cooling_rate,
-                                     int num_threads) {
-    validateAnnealingInputs(
-        costs, pixel_probs, member_pixels, budget, start_tile, end_tile);
-    if (num_threads <= 0) {
+    if (thread_count < 0) {
         throw std::invalid_argument(
-            "simulated annealing: num_threads must be positive.");
+            "Simulated annealing: thread count cannot be negative.");
     }
-    if (costs[start_tile][end_tile] > budget + 1e-12) {
+    if (costs[start_node][end_node] > budget + 1.0e-12) {
         return {};
     }
-    if (init_path.empty() || init_path[0] != start_tile || init_path.back() != end_tile) {
-        init_path = sa_initial_solution_pixel_overlap(
-            costs, budget, start_tile, end_tile);
-    }
-    repairPath(
-        costs, pixel_probs, member_pixels, init_path, budget);
-
-    auto current_path = init_path;
-    auto best_path = current_path;
-    double current_prize = sa_path_prize_pixel_overlap(
-        pixel_probs, member_pixels, current_path);
-    double best_prize = current_prize;
-
-    std::vector<bool> visited(costs.size(), false);
-    for (int tile : current_path) {
-        visited[tile] = true;
+    if (restart_count <= 0) {
+        restart_count = 1;
     }
 
-    double temp = initial_temp;
-    int no_improvement_itr = 0;
-    int MAX_NO_IMPROVEMENT = 300;
-    std::vector<std::vector<int>> candidate_paths(num_threads);
-    std::vector<std::vector<bool>> local_visited(num_threads);
-    std::vector<double> candidate_costs(num_threads);
-    std::vector<double> candidate_prizes(num_threads);
+    std::vector<std::vector<int>> valid_initial_paths;
+    for (std::vector<int>& path : initial_paths) {
+        if (pixelOverlapIsFeasibleSTPath(
+                costs, path, budget, start_node, end_node)) {
+            pixelOverlapRepairPath(
+                costs, oracle, path, budget, start_node, end_node);
+            valid_initial_paths.push_back(std::move(path));
+        }
+    }
 
+    const int worker_count = pixelOverlapWorkerCount(
+        thread_count, restart_count);
 
+    // Restarts run independently, including their coverage-oracle state.
+    std::vector<CoverageOracle> worker_oracles;
+    worker_oracles.reserve(static_cast<std::size_t>(worker_count));
+    for (int worker = 0; worker < worker_count; ++worker) {
+        worker_oracles.push_back(oracle);
+    }
 
-    for (int iter = 0; iter < iterations; iter++) {
-        std::fill(
-            candidate_prizes.begin(), candidate_prizes.end(),
-            -std::numeric_limits<double>::infinity());
-        #pragma omp parallel for
-        for (int thread = 0; thread < num_threads; thread++) {
-            local_visited[thread] = visited;
-            candidate_paths[thread] = sa_neighbor_pixel_overlap(
-                current_path, costs, pixel_probs, member_pixels,
-                budget, local_visited[thread]);
+    std::vector<std::vector<int>> restart_best_paths(
+        static_cast<std::size_t>(restart_count));
+    std::vector<double> restart_best_rewards(
+        static_cast<std::size_t>(restart_count),
+        -std::numeric_limits<double>::infinity());
+    std::vector<double> restart_best_costs(
+        static_cast<std::size_t>(restart_count),
+        std::numeric_limits<double>::infinity());
 
-            if (candidate_paths[thread].size() < 2 ||
-                candidate_paths[thread].front() != start_tile ||
-                candidate_paths[thread].back() != end_tile) {
+#ifdef _OPENMP
+#pragma omp parallel for schedule(static) num_threads(worker_count)
+#endif
+    for (int restart = 0; restart < restart_count; ++restart) {
+        CoverageOracle& worker_oracle =
+            worker_oracles[pixelOverlapThreadNumber()];
+        std::mt19937_64 engine = makePixelOverlapEngine(
+            random_seed, static_cast<std::uint64_t>(restart));
+        std::uniform_real_distribution<double> unit_random(0.0, 1.0);
+
+        std::vector<int> current_path;
+        if (!valid_initial_paths.empty() && restart % 5 != 4) {
+            const std::size_t path_index =
+                static_cast<std::size_t>(restart) %
+                valid_initial_paths.size();
+            current_path = valid_initial_paths[path_index];
+        } else {
+            current_path = pixelOverlapRandomizedGreedyPath(
+                costs, worker_oracle, budget, start_node, end_node,
+                unit_random(engine), engine);
+            pixelOverlapRepairPath(
+                costs, worker_oracle, current_path,
+                budget, start_node, end_node);
+        }
+        if (!pixelOverlapIsFeasibleSTPath(
+                costs, current_path, budget, start_node, end_node)) {
+            current_path = {start_node, end_node};
+        }
+
+        double current_reward = worker_oracle.rewardOf(current_path);
+        double current_cost = pixelOverlapPathCost(costs, current_path);
+        std::vector<int> best_path = current_path;
+        double best_reward = current_reward;
+        double best_cost = current_cost;
+
+        // Slightly different starting temperatures improve restart diversity.
+        const double temperature_factor =
+            0.9 + 0.2 *
+                (static_cast<double>(restart) /
+                 static_cast<double>(std::max(1, restart_count - 1)));
+        double temperature = initial_temperature * temperature_factor;
+
+        for (int iteration = 0; iteration < iteration_count; ++iteration) {
+            const std::vector<int> candidate = pixelOverlapRandomNeighbor(
+                costs, worker_oracle, current_path, budget,
+                start_node, end_node, engine);
+            if (candidate.empty()) {
                 continue;
             }
 
-            candidate_costs[thread] = pathCost(costs, candidate_paths[thread]);
-            if (candidate_costs[thread] > budget) {
-                candidate_prizes[thread] = -std::numeric_limits<double>::infinity();
-            } else {
-                candidate_prizes[thread] = sa_path_prize_pixel_overlap(
-                    pixel_probs, member_pixels, candidate_paths[thread]);
-            }
-        }
+            const double candidate_reward = worker_oracle.rewardOf(candidate);
+            const double candidate_cost = pixelOverlapPathCost(costs, candidate);
+            const double reward_change = candidate_reward - current_reward;
+            const bool accept = reward_change >= 0.0 ||
+                std::exp(reward_change / temperature) > unit_random(engine);
 
-        auto best_prize_itr = std::max_element(candidate_prizes.begin(), candidate_prizes.end());
-        auto best_idx =  best_prize_itr - candidate_prizes.begin();
-        if (!std::isfinite(*best_prize_itr)) {
-            break;
-        }
-        
-        double delta = *best_prize_itr - current_prize;
-        
+            if (accept) {
+                current_path = candidate;
+                current_reward = candidate_reward;
+                current_cost = candidate_cost;
 
-        if (delta >= 0 || exp(delta / temp) > std::uniform_real_distribution<>(0.0, 1.0)(rng)) {
-            current_path = candidate_paths[best_idx];
-            current_prize = *best_prize_itr;
-            visited = local_visited[best_idx];
-
-            if (*best_prize_itr  > best_prize) {
-                best_path = current_path;
-                best_prize = *best_prize_itr;
-                no_improvement_itr = 0;
-                // std::cout << "current_best_prize: " << best_prize << "/n";
-            } else{
-                no_improvement_itr += 1;
+                if (annealingCandidateIsBetter(
+                        current_reward, current_cost,
+                        best_reward, best_cost)) {
+                    best_path = current_path;
+                    best_reward = current_reward;
+                    best_cost = current_cost;
+                }
             }
 
-            if(no_improvement_itr > MAX_NO_IMPROVEMENT) {
+            temperature *= cooling_rate;
+            if (temperature < 1.0e-9) {
                 break;
             }
         }
 
-        temp *= cooling_rate;
-        if (temp < 1e-6) break;
+        restart_best_paths[restart] = std::move(best_path);
+        restart_best_rewards[restart] = best_reward;
+        restart_best_costs[restart] = best_cost;
     }
 
-    bool has_improve = true;
-    while(has_improve) {
-        has_improve = two_opt_st(best_path, costs);
+    int best_restart = 0;
+    for (int restart = 1; restart < restart_count; ++restart) {
+        if (annealingCandidateIsBetter(
+                restart_best_rewards[restart], restart_best_costs[restart],
+                restart_best_rewards[best_restart],
+                restart_best_costs[best_restart])) {
+            best_restart = restart;
+        }
     }
-    repairPath(
-        costs, pixel_probs, member_pixels, best_path, budget, visited);
-    return best_path;
-}
 
-
-std::vector<int> simulated_annealing_parallel_pixel_overlap(
-                                              const std::vector<std::vector<double>>& costs,
-                                              const std::vector<double>& pixel_probs,
-                                              const std::vector<std::vector<int>>& member_pixels,
-                                              double budget, int start_tile, int end_tile,
-                                              std::vector<std::vector<int>> init_paths,
-                                              int iterations, double initial_temp,
-                                              double cooling_rate, int num_threads) {
-    validateAnnealingInputs(
-        costs, pixel_probs, member_pixels, budget, start_tile, end_tile);
-    if (num_threads <= 0 ||
-        init_paths.size() < static_cast<std::size_t>(num_threads)) {
-        throw std::invalid_argument(
-            "simulated annealing: insufficient initial paths for workers.");
-    }
-    if (costs[start_tile][end_tile] > budget + 1e-12) {
+    if (!pixelOverlapIsFeasibleSTPath(
+            costs, restart_best_paths[best_restart], budget,
+            start_node, end_node)) {
         return {};
     }
-    std::vector<std::vector<int>> paths(num_threads);
-    std::vector<double> prizes_found(num_threads, 0.0);
-
-    #pragma omp parallel for num_threads(num_threads)
-    for (int thread = 0; thread < num_threads; thread++) {
-        double thread_temp = initial_temp * (0.9 + 0.2 * (thread / double(num_threads)));
-        // std::cout << "thread_temp: " << thread_temp << "\n";
-
-        paths[thread] = simulated_annealing_pixel_overlap(
-            costs, pixel_probs, member_pixels,
-            budget, start_tile, end_tile,
-            init_paths[thread], iterations, thread_temp, cooling_rate);
-            
-        prizes_found[thread] = sa_path_prize_pixel_overlap(
-            pixel_probs, member_pixels, paths[thread]);
-    }
-
-    auto best_it = std::max_element(prizes_found.begin(), prizes_found.end());
-    int best_idx = std::distance(prizes_found.begin(), best_it);
-
-    return paths[best_idx];
+    return restart_best_paths[best_restart];
 }
 
 std::vector<int> simulated_annealing_optimization_pixel_overlap(
-                                                 const std::vector<std::vector<double>>& costs,
-                                                 const std::vector<double>& pixel_probs,
-                                                 const std::vector<std::vector<int>>& member_pixels,
-                                                 double budget, int start_tile,
-                                                 int end_tile, std::vector<int> init_path) {
-    validateAnnealingInputs(
-        costs, pixel_probs, member_pixels, budget, start_tile, end_tile);
-    if (costs[start_tile][end_tile] > budget + 1e-12) {
-        return {};
+    const std::vector<std::vector<double>>& costs,
+    const std::vector<double>& pixel_probabilities,
+    const std::vector<std::vector<int>>& member_pixels,
+    double budget,
+    int start_node,
+    int end_node,
+    std::vector<int> initial_path,
+    int iteration_count,
+    double initial_temperature,
+    double cooling_rate,
+    int restart_count,
+    std::uint64_t random_seed,
+    int thread_count) {
+
+    std::vector<std::vector<int>> initial_paths;
+    if (!initial_path.empty()) {
+        initial_paths.push_back(std::move(initial_path));
     }
-    int iterations = 2000;
-    double initial_temp = 100.0;
-    double cooling_rate = 0.99;
-    int num_threads = 40;
+    return runParallelAnnealingRestarts(
+        costs, pixel_probabilities, member_pixels,
+        budget, start_node, end_node, std::move(initial_paths),
+        iteration_count, initial_temperature, cooling_rate,
+        restart_count, random_seed, thread_count);
+}
 
-    std::vector<std::vector<int>> init_paths(num_threads);
+std::vector<int> simulated_annealing_parallel_pixel_overlap(
+    const std::vector<std::vector<double>>& costs,
+    const std::vector<double>& pixel_probabilities,
+    const std::vector<std::vector<int>>& member_pixels,
+    double budget,
+    int start_node,
+    int end_node,
+    std::vector<std::vector<int>> initial_paths,
+    int iteration_count,
+    double initial_temperature,
+    double cooling_rate,
+    int num_threads) {
 
-    if (init_path.empty()) {
-        for (int i = 0; i < num_threads; ++i) {
-            init_paths[i] = sa_initial_solution_pixel_overlap(
-                costs, budget, start_tile, end_tile);
-        }
-    } else {
-        for (int i = 0; i < static_cast<int>(num_threads * 0.8); ++i) {
-            init_paths[i] = init_path;
-        }
-        for (int i = static_cast<int>(num_threads * 0.8); i < num_threads; ++i) {
-            init_paths[i] = sa_initial_solution_pixel_overlap(
-                costs, budget, start_tile, end_tile);
-        }
+    if (num_threads < 0) {
+        throw std::invalid_argument(
+            "Simulated annealing: thread count cannot be negative.");
     }
-    
-    return simulated_annealing_parallel_pixel_overlap(
-        costs, pixel_probs, member_pixels,
-        budget, start_tile, end_tile, init_paths,
-        iterations, initial_temp, cooling_rate, num_threads);
+    int restart_count = std::max(1, num_threads);
+    restart_count = std::max(
+        restart_count, static_cast<int>(initial_paths.size()));
 
+    return runParallelAnnealingRestarts(
+        costs, pixel_probabilities, member_pixels,
+        budget, start_node, end_node, std::move(initial_paths),
+        iteration_count, initial_temperature, cooling_rate,
+        restart_count, 5489U, num_threads);
 }
