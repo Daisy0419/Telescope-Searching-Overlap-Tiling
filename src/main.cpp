@@ -181,7 +181,7 @@ static std::string csvField(const std::string& value) {
 }
 
 // Convert a validated path to the original tile ranks used in output files.
-// Invalid solver paths are intentionally left blank instead of being indexed.
+// Invalid solver paths are left blank instead of being indexed.
 static std::string outputPath(const BenchInstance& instance,
                               const SolverResult& result) {
     if (result.status != "ok" || result.path.size() < 2) {
@@ -331,9 +331,12 @@ int main(int argc, char** argv) {
     double maximum_slew_acceleration = 10.0;
     double zenith_dwell = 2.0;
     bool is_deep_slow = false;
-    double ilp_time_limit = 300.0;
+    double ilp_time_limit = 1800.0;
 
     const double settle_time = 0.0;
+    // The initial telescope pointing is independent of the zenith direction.
+    // A negative value keeps the graph builder's deterministic random choice.
+    // If the real initial pointing is a retained tile, pass that tile's index.
     const int source_tile = -1;
     const double mip_gap = 0.001;
 
@@ -372,204 +375,398 @@ int main(int argc, char** argv) {
                 output_path.parent_path());
         }
 
-        // Build the instance once. Every solver receives these same arrays.
-        BenchInstance instance;
-        const std::tuple<int, int, double> graph = buildGraphwithPixelsOP(
-            tiling_file,
-            probability_file,
-            instance.costs,
-            instance.dwell_times,
-            instance.tile_probabilities,
-            instance.ranks,
-            instance.member_pixels,
-            instance.pixel_probabilities,
-            zenith_dwell,
-            maximum_slew_rate,
-            maximum_slew_acceleration,
-            settle_time,
-            is_deep_slow,
-            instance.tile_count,
-            source_tile);
+        // // Build the instance once. Every solver receives these same arrays.
+        // BenchInstance instance;
+        // const std::tuple<int, int, double> graph = buildGraphwithPixelsOP(
+        //                                                     tiling_file,
+        //                                                     probability_file,
+        //                                                     instance.costs,
+        //                                                     instance.dwell_times,
+        //                                                     instance.tile_probabilities,
+        //                                                     instance.ranks,
+        //                                                     instance.member_pixels,
+        //                                                     instance.pixel_probabilities,
+        //                                                     zenith_dwell,
+        //                                                     maximum_slew_rate,
+        //                                                     maximum_slew_acceleration,
+        //                                                     settle_time,
+        //                                                     is_deep_slow,
+        //                                                     instance.tile_count,
+        //                                                     source_tile);
 
-        instance.start_node = std::get<0>(graph);
-        instance.end_node = std::get<1>(graph);
-        instance.padding = std::get<2>(graph);
-        instance.observing_budget = observing_budget;
-        instance.solver_budget = observing_budget + instance.padding;
+        // instance.start_node = std::get<0>(graph);
+        // instance.end_node = std::get<1>(graph);
+        // instance.padding = std::get<2>(graph);
+        // instance.observing_budget = observing_budget;
+        // instance.solver_budget = observing_budget + instance.padding;
 
-        if (instance.costs.size() < 2 ||
-            instance.member_pixels.size() != instance.costs.size()) {
+        // if (instance.costs.size() < 2 ||
+        //     instance.member_pixels.size() != instance.costs.size()) {
+        //     throw std::invalid_argument(
+        //         "graph and member_pixels have inconsistent node counts");
+        // }
+        // for (const std::vector<double>& row : instance.costs) {
+        //     if (row.size() != instance.costs.size()) {
+        //         throw std::invalid_argument("cost matrix is not square");
+        //     }
+        // }
+        // if (instance.start_node < 0 ||
+        //     instance.start_node >= static_cast<int>(instance.costs.size()) ||
+        //     instance.end_node < 0 ||
+        //     instance.end_node >= static_cast<int>(instance.costs.size()) ||
+        //     instance.start_node == instance.end_node) {
+        //     throw std::invalid_argument("graph returned invalid endpoints");
+        // }
+        // if (!instance.member_pixels[instance.start_node].empty() ||
+        //     !instance.member_pixels[instance.end_node].empty()) {
+        //     throw std::invalid_argument(
+        //         "dummy start and end nodes must cover no pixels");
+        // }
+        // if (instance.costs[instance.start_node][instance.end_node] >
+        //     instance.solver_budget + 1.0e-9) {
+        //     throw std::runtime_error(
+        //         "budget is smaller than the direct start-to-end cost");
+        // }
+
+        // const CoverageOracle oracle(
+        //     instance.pixel_probabilities, instance.member_pixels);
+        // if (oracle.nodeCount() !=
+        //     static_cast<int>(instance.costs.size())) {
+        //     throw std::invalid_argument(
+        //         "member_pixels must have one list per graph node");
+        // }
+
+        // double retained_probability = 0.0;
+        // for (double probability : instance.pixel_probabilities) {
+        //     retained_probability += probability;
+        // }
+
+        // std::cout << "start " << instance.start_node
+        //           << ", end " << instance.end_node
+        //           << ", retained tiles " << instance.tile_count
+        //           << ", retained pixels "
+        //           << instance.pixel_probabilities.size()
+        //           << ", retained pixel probability "
+        //           << std::fixed << std::setprecision(6)
+        //           << retained_probability << "\n";
+
+        // double solver_budget = instance.solver_budget;
+        // std::vector<SolverResult> results;
+
+        // // The two deterministic greedy routes also seed GA and SA.
+        // results.push_back(runSolver(
+        //     instance, oracle, "greedy-marginal", [&]() {
+        //         return prizeGreedyPathTwoFixedPixelOverlap(
+        //             instance.costs,
+        //             instance.pixel_probabilities,
+        //             instance.member_pixels,
+        //             solver_budget,
+        //             instance.start_node,
+        //             instance.end_node);
+        //     }));
+
+        // results.push_back(runSolver(
+        //     instance, oracle, "greedy-ratio", [&]() {
+        //         return prizeRatioGreedyPathTwoFixedPixelOverlap(
+        //             instance.costs,
+        //             instance.pixel_probabilities,
+        //             instance.member_pixels,
+        //             solver_budget,
+        //             instance.start_node,
+        //             instance.end_node);
+        //     }));
+
+        // std::vector<std::vector<int>> genetic_seeds;
+        // std::vector<int> annealing_seed;
+        // double seed_coverage = -1.0;
+        // double seed_cost = std::numeric_limits<double>::infinity();
+
+        // for (std::size_t index = 0;
+        //      index < 2 && index < results.size(); ++index) {
+        //     if (results[index].status == "ok") {
+        //         genetic_seeds.push_back(results[index].path);
+        //         if (resultIsBetter(
+        //                 results[index], seed_coverage, seed_cost)) {
+        //             annealing_seed = results[index].path;
+        //             seed_coverage = results[index].coverage;
+        //             seed_cost = results[index].padded_cost;
+        //         }
+        //     }
+        // }
+
+
+        // results.push_back(runSolver(
+        //     instance, oracle, "GCP", [&]() {
+        //         return GCP_Coverage(
+        //             instance.costs,
+        //             instance.pixel_probabilities,
+        //             instance.member_pixels,
+        //             solver_budget,
+        //             instance.start_node,
+        //             instance.end_node);
+        //     }));
+
+
+        // results.push_back(runSolver(
+        //     instance, oracle, "simulated-annealing", [&]() {
+        //         return simulated_annealing_optimization_pixel_overlap(
+        //             instance.costs,
+        //             instance.pixel_probabilities,
+        //             instance.member_pixels,
+        //             solver_budget,
+        //             instance.start_node,
+        //             instance.end_node,
+        //             annealing_seed);
+        //     }));
+
+        // results.push_back(runSolver(
+        //     instance, oracle, "genetic", [&]() {
+        //         return genetic_optimization_st_pixel_overlap(
+        //             instance.costs,
+        //             instance.pixel_probabilities,
+        //             instance.member_pixels,
+        //             solver_budget,
+        //             instance.start_node,
+        //             instance.end_node,
+        //             genetic_seeds);
+        //     }));
+
+        // // results.push_back(runSolver(
+        // //     instance, oracle, "ant-colony", [&]() {
+        // //         AntColonyPixelOverlap ant_colony(
+        // //             instance.costs,
+        // //             instance.pixel_probabilities,
+        // //             instance.member_pixels);
+        // //         return ant_colony.ant_colony_optimization_pixel_overlap(
+        // //             solver_budget,
+        // //             instance.start_node,
+        // //             instance.end_node);
+        // //     }));
+
+
+        // // results.push_back(runSolver(
+        // //     instance, oracle, "RG-QP", [&]() {
+        // //         RecursiveGreedyParams parameters;
+        // //         const int relevant_arc_bound =
+        // //             std::max(1, instance.tile_count + 1);
+        // //         parameters.max_depth = std::min(
+        // //             50,
+        // //             static_cast<int>(std::ceil(
+        // //                 1.0 + std::log2(
+        // //                     static_cast<double>(relevant_arc_bound)))));
+        // //         parameters.reward_levels = 10000;
+        // //         parameters.time_quantum = 0.001;
+        // //         parameters.time_limit = 0;
+        // //         parameters.iterative_deepening = true;
+        // //         parameters.candidate_limit = 0;
+        // //         parameters.verbose = false;
+
+        // //         const RecursiveGreedyResult rg_result =
+        // //             recursiveGreedyOrienteering(
+        // //                 instance.costs,
+        // //                 instance.pixel_probabilities,
+        // //                 instance.member_pixels,
+        // //                 instance.start_node,
+        // //                 instance.end_node,
+        // //                 solver_budget,
+        // //                 instance.padding,
+        // //                 parameters);
+        // //         return rg_result.path;
+        // //     }));
+
+
+        // // // Select the best feasible heuristic route for both ILP warm starts.
+        // // std::vector<int> warm_start;
+        // // double warm_coverage = -1.0;
+        // // double warm_cost = std::numeric_limits<double>::infinity();
+        // // for (const SolverResult& result : results) {
+        // //     if (resultIsBetter(result, warm_coverage, warm_cost)) {
+        // //         warm_start = result.path;
+        // //         warm_coverage = result.coverage;
+        // //         warm_cost = result.padded_cost;
+        // //     }
+        // // }
+
+        // // if (warm_start.empty()) {
+        // //     std::cout << "warm start: none\n";
+        // // } else {
+        // //     std::cout << "warm start: " << warm_start.size() - 2
+        // //               << " tiles, coverage " << warm_coverage
+        // //               << ", padded cost " << warm_cost << "\n";
+        // // }
+
+        // // double mtz_bound = std::numeric_limits<double>::quiet_NaN();
+        // // SolverResult mtz = runSolver(
+        // //     instance, oracle, "ILP MTZ", [&]() {
+        // //         const std::pair<std::vector<std::vector<int>>, double> output =
+        // //             gurobiPathCoverPixelOverlapMTZ(
+        // //                 instance.costs,
+        // //                 instance.pixel_probabilities,
+        // //                 instance.member_pixels,
+        // //                 instance.start_node,
+        // //                 instance.end_node,
+        // //                 solver_budget,
+        // //                 mip_gap,
+        // //                 ilp_time_limit,
+        // //                 warm_start);
+        // //         mtz_bound = output.second;
+        // //         return firstPathOf(output);
+        // //     });
+        // // mtz.bound = mtz_bound;
+        // // results.push_back(std::move(mtz));
+
+        // // double continuous_bound =
+        // //     std::numeric_limits<double>::quiet_NaN();
+        // // SolverResult continuous_time = runSolver(
+        // //     instance, oracle, "ILP continuous-time", [&]() {
+        // //         const std::pair<std::vector<std::vector<int>>, double> output =
+        // //             gurobiPathCoverPixelOverlapContinuousTime(
+        // //                 instance.costs,
+        // //                 instance.pixel_probabilities,
+        // //                 instance.member_pixels,
+        // //                 instance.start_node,
+        // //                 instance.end_node,
+        // //                 solver_budget,
+        // //                 mip_gap,
+        // //                 ilp_time_limit,
+        // //                 warm_start);
+        // //         continuous_bound = output.second;
+        // //         return firstPathOf(output);
+        // //     });
+        // // continuous_time.bound = continuous_bound;
+        // // results.push_back(std::move(continuous_time));
+
+
+        // // Save the full-instance results before constructing the
+        // // reduced instance. Otherwise they would later be interpreted using
+        // // the reduced graph's node indices and ranks.
+        // printTable(instance, results);
+        // appendCsv(
+        //     output_file,
+        //     instance,
+        //     tiling_file,
+        //     probability_file,
+        //     maximum_slew_rate,
+        //     results);
+
+        // Build a separate top-N instance. In particular, all vectors passed
+        // as output parameters are empty when readTiles() is called again.
+        const int maximum_tiles = 50;
+        BenchInstance reduced_instance;
+        const std::tuple<int, int, double> graph2 = buildGraphwithPixelsOP(
+                                                            tiling_file,
+                                                            probability_file,
+                                                            reduced_instance.costs,
+                                                            reduced_instance.dwell_times,
+                                                            reduced_instance.tile_probabilities,
+                                                            reduced_instance.ranks,
+                                                            reduced_instance.member_pixels,
+                                                            reduced_instance.pixel_probabilities,
+                                                            zenith_dwell,
+                                                            maximum_slew_rate,
+                                                            maximum_slew_acceleration,
+                                                            settle_time,
+                                                            is_deep_slow,
+                                                            maximum_tiles,
+                                                            reduced_instance.tile_count,
+                                                            source_tile);
+
+        reduced_instance.start_node = std::get<0>(graph2);
+        reduced_instance.end_node = std::get<1>(graph2);
+        reduced_instance.padding = std::get<2>(graph2);
+        reduced_instance.observing_budget = observing_budget;
+        reduced_instance.solver_budget =
+            observing_budget + reduced_instance.padding;
+
+        if (reduced_instance.costs.size() < 2 ||
+            reduced_instance.member_pixels.size() !=
+                reduced_instance.costs.size()) {
             throw std::invalid_argument(
                 "graph and member_pixels have inconsistent node counts");
         }
-        for (const std::vector<double>& row : instance.costs) {
-            if (row.size() != instance.costs.size()) {
+        for (const std::vector<double>& row : reduced_instance.costs) {
+            if (row.size() != reduced_instance.costs.size()) {
                 throw std::invalid_argument("cost matrix is not square");
             }
         }
-        if (instance.start_node < 0 ||
-            instance.start_node >= static_cast<int>(instance.costs.size()) ||
-            instance.end_node < 0 ||
-            instance.end_node >= static_cast<int>(instance.costs.size()) ||
-            instance.start_node == instance.end_node) {
+        if (reduced_instance.start_node < 0 ||
+            reduced_instance.start_node >=
+                static_cast<int>(reduced_instance.costs.size()) ||
+            reduced_instance.end_node < 0 ||
+            reduced_instance.end_node >=
+                static_cast<int>(reduced_instance.costs.size()) ||
+            reduced_instance.start_node == reduced_instance.end_node) {
             throw std::invalid_argument("graph returned invalid endpoints");
         }
-        if (!instance.member_pixels[instance.start_node].empty() ||
-            !instance.member_pixels[instance.end_node].empty()) {
+        if (!reduced_instance.member_pixels[reduced_instance.start_node].empty() ||
+            !reduced_instance.member_pixels[reduced_instance.end_node].empty()) {
             throw std::invalid_argument(
                 "dummy start and end nodes must cover no pixels");
         }
-        if (instance.costs[instance.start_node][instance.end_node] >
-            instance.solver_budget + 1.0e-9) {
+        if (reduced_instance.costs[reduced_instance.start_node]
+                                  [reduced_instance.end_node] >
+            reduced_instance.solver_budget + 1.0e-9) {
             throw std::runtime_error(
                 "budget is smaller than the direct start-to-end cost");
         }
 
-        const CoverageOracle oracle(
-            instance.pixel_probabilities, instance.member_pixels);
-        if (oracle.nodeCount() !=
-            static_cast<int>(instance.costs.size())) {
+        const CoverageOracle reduced_oracle(
+            reduced_instance.pixel_probabilities,
+            reduced_instance.member_pixels);
+        if (reduced_oracle.nodeCount() !=
+            static_cast<int>(reduced_instance.costs.size())) {
             throw std::invalid_argument(
                 "member_pixels must have one list per graph node");
         }
 
-        double retained_probability = 0.0;
-        for (double probability : instance.pixel_probabilities) {
-            retained_probability += probability;
+        double reduced_retained_probability = 0.0;
+        for (double probability : reduced_instance.pixel_probabilities) {
+            reduced_retained_probability += probability;
         }
 
-        std::cout << "start " << instance.start_node
-                  << ", end " << instance.end_node
-                  << ", retained tiles " << instance.tile_count
+        std::cout << "start " << reduced_instance.start_node
+                  << ", end " << reduced_instance.end_node
+                  << ", retained tiles " << reduced_instance.tile_count
                   << ", retained pixels "
-                  << instance.pixel_probabilities.size()
+                  << reduced_instance.pixel_probabilities.size()
                   << ", retained pixel probability "
                   << std::fixed << std::setprecision(6)
-                  << retained_probability << "\n";
+                  << reduced_retained_probability << "\n";
 
-        const double solver_budget = instance.solver_budget;
-        std::vector<SolverResult> results;
+        const double reduced_solver_budget = reduced_instance.solver_budget;
 
-        // The two deterministic greedy routes also seed GA and SA.
-        results.push_back(runSolver(
-            instance, oracle, "greedy-marginal", [&]() {
-                return prizeGreedyPathTwoFixedPixelOverlap(
-                    instance.costs,
-                    instance.pixel_probabilities,
-                    instance.member_pixels,
-                    solver_budget,
-                    instance.start_node,
-                    instance.end_node);
+        std::vector<SolverResult> reduced_results;
+
+
+        reduced_results.push_back(runSolver(
+            reduced_instance, reduced_oracle, "RG-QP", [&]() {
+                RecursiveGreedyParams parameters;
+                const int relevant_arc_bound =
+                    std::max(1, reduced_instance.tile_count + 1);
+                parameters.max_depth = std::min(
+                    4,
+                    static_cast<int>(std::ceil(
+                        1.0 + std::log2(
+                            static_cast<double>(relevant_arc_bound)))));
+                parameters.reward_levels = 100;
+                parameters.time_quantum = 0.01;
+                parameters.time_limit = 7200;
+                parameters.iterative_deepening = true;
+                parameters.candidate_limit = 0;
+                parameters.verbose = false;
+
+                const RecursiveGreedyResult rg_result =
+                    recursiveGreedyOrienteering(
+                        reduced_instance.costs,
+                        reduced_instance.pixel_probabilities,
+                        reduced_instance.member_pixels,
+                        reduced_instance.start_node,
+                        reduced_instance.end_node,
+                        reduced_solver_budget,
+                        reduced_instance.padding,
+                        parameters);
+                return rg_result.path;
             }));
-
-        results.push_back(runSolver(
-            instance, oracle, "greedy-ratio", [&]() {
-                return prizeRatioGreedyPathTwoFixedPixelOverlap(
-                    instance.costs,
-                    instance.pixel_probabilities,
-                    instance.member_pixels,
-                    solver_budget,
-                    instance.start_node,
-                    instance.end_node);
-            }));
-
-        std::vector<std::vector<int>> genetic_seeds;
-        std::vector<int> annealing_seed;
-        double seed_coverage = -1.0;
-        double seed_cost = std::numeric_limits<double>::infinity();
-
-        for (std::size_t index = 0;
-             index < 2 && index < results.size(); ++index) {
-            if (results[index].status == "ok") {
-                genetic_seeds.push_back(results[index].path);
-                if (resultIsBetter(
-                        results[index], seed_coverage, seed_cost)) {
-                    annealing_seed = results[index].path;
-                    seed_coverage = results[index].coverage;
-                    seed_cost = results[index].padded_cost;
-                }
-            }
-        }
-
-
-        results.push_back(runSolver(
-            instance, oracle, "GCP", [&]() {
-                return GCP_Coverage(
-                    instance.costs,
-                    instance.pixel_probabilities,
-                    instance.member_pixels,
-                    solver_budget,
-                    instance.start_node,
-                    instance.end_node);
-            }));
-
-
-        results.push_back(runSolver(
-            instance, oracle, "simulated-annealing", [&]() {
-                return simulated_annealing_optimization_pixel_overlap(
-                    instance.costs,
-                    instance.pixel_probabilities,
-                    instance.member_pixels,
-                    solver_budget,
-                    instance.start_node,
-                    instance.end_node,
-                    annealing_seed);
-            }));
-
-        results.push_back(runSolver(
-            instance, oracle, "genetic", [&]() {
-                return genetic_optimization_st_pixel_overlap(
-                    instance.costs,
-                    instance.pixel_probabilities,
-                    instance.member_pixels,
-                    solver_budget,
-                    instance.start_node,
-                    instance.end_node,
-                    genetic_seeds);
-            }));
-
-        results.push_back(runSolver(
-            instance, oracle, "ant-colony", [&]() {
-                AntColonyPixelOverlap ant_colony(
-                    instance.costs,
-                    instance.pixel_probabilities,
-                    instance.member_pixels);
-                return ant_colony.ant_colony_optimization_pixel_overlap(
-                    solver_budget,
-                    instance.start_node,
-                    instance.end_node);
-            }));
-
-
-        // results.push_back(runSolver(
-        //     instance, oracle, "RG-QP", [&]() {
-        //         RecursiveGreedyParams parameters;
-        //         const int relevant_arc_bound =
-        //             std::max(1, instance.tile_count + 1);
-        //         parameters.max_depth = std::min(
-        //             50,
-        //             static_cast<int>(std::ceil(
-        //                 1.0 + std::log2(
-        //                     static_cast<double>(relevant_arc_bound)))));
-        //         parameters.reward_levels = 10000;
-        //         parameters.time_quantum = 0.001;
-        //         parameters.time_limit = 0;
-        //         parameters.iterative_deepening = true;
-        //         parameters.candidate_limit = 0;
-        //         parameters.verbose = false;
-
-        //         const RecursiveGreedyResult rg_result =
-        //             recursiveGreedyOrienteering(
-        //                 instance.costs,
-        //                 instance.pixel_probabilities,
-        //                 instance.member_pixels,
-        //                 instance.start_node,
-        //                 instance.end_node,
-        //                 solver_budget,
-        //                 instance.padding,
-        //                 parameters);
-        //         return rg_result.path;
-        //     }));
 
 
         // // Select the best feasible heuristic route for both ILP warm starts.
@@ -612,18 +809,22 @@ int main(int argc, char** argv) {
         // mtz.bound = mtz_bound;
         // results.push_back(std::move(mtz));
 
+        // std::vector<int> warm_start = {};
         // double continuous_bound =
         //     std::numeric_limits<double>::quiet_NaN();
         // SolverResult continuous_time = runSolver(
-        //     instance, oracle, "ILP continuous-time", [&]() {
+        //     reduced_instance,
+        //     reduced_oracle,
+        //     "ILP continuous-time",
+        //     [&]() {
         //         const std::pair<std::vector<std::vector<int>>, double> output =
         //             gurobiPathCoverPixelOverlapContinuousTime(
-        //                 instance.costs,
-        //                 instance.pixel_probabilities,
-        //                 instance.member_pixels,
-        //                 instance.start_node,
-        //                 instance.end_node,
-        //                 solver_budget,
+        //                 reduced_instance.costs,
+        //                 reduced_instance.pixel_probabilities,
+        //                 reduced_instance.member_pixels,
+        //                 reduced_instance.start_node,
+        //                 reduced_instance.end_node,
+        //                 reduced_solver_budget,
         //                 mip_gap,
         //                 ilp_time_limit,
         //                 warm_start);
@@ -631,16 +832,17 @@ int main(int argc, char** argv) {
         //         return firstPathOf(output);
         //     });
         // continuous_time.bound = continuous_bound;
-        // results.push_back(std::move(continuous_time));
+        // reduced_results.push_back(std::move(continuous_time));
 
-        printTable(instance, results);
+
+        printTable(reduced_instance, reduced_results);
         appendCsv(
             output_file,
-            instance,
+            reduced_instance,
             tiling_file,
             probability_file,
             maximum_slew_rate,
-            results);
+            reduced_results);
 
         const double total_seconds = std::chrono::duration<double>(
             std::chrono::high_resolution_clock::now() - total_started).count();
@@ -654,6 +856,520 @@ int main(int argc, char** argv) {
 
     return 0;
 }
+
+
+// int main(int argc, char** argv) {
+//     const std::chrono::high_resolution_clock::time_point total_started =
+//         std::chrono::high_resolution_clock::now();
+
+//     std::string output_file = "../results/out.csv";
+//     std::string tiling_file = "../data/tilings_small/6.9x6.9_tiling.csv";
+//     std::string probability_file =
+//         "../data/test_maps/GW200316_215756_50.txt";
+
+//     double observing_budget = 60.0;
+//     double maximum_slew_rate = 10.0;
+//     double maximum_slew_acceleration = 10.0;
+//     double zenith_dwell = 2.0;
+//     bool is_deep_slow = false;
+//     double ilp_time_limit = 14400.0;
+
+//     const double settle_time = 0.0;
+//     const int source_tile = -1;
+//     const double mip_gap = 0.001;
+
+//     if (argc > 10) {
+//         std::cerr
+//             << "Usage: " << argv[0]
+//             << " [MAP TILES D W_MAX W_ACC DWELL_ZENITH IS_DEEPSLOW "
+//                "OUT_CSV ILP_TIME_LIMIT]\n";
+//         return 2;
+//     }
+
+//     try {
+//         if (argc > 1) probability_file = argv[1];
+//         if (argc > 2) tiling_file = argv[2];
+//         if (argc > 3) observing_budget = std::stod(argv[3]);
+//         if (argc > 4) maximum_slew_rate = std::stod(argv[4]);
+//         if (argc > 5) maximum_slew_acceleration = std::stod(argv[5]);
+//         if (argc > 6) zenith_dwell = std::stod(argv[6]);
+//         if (argc > 7) is_deep_slow = std::stoi(argv[7]) != 0;
+//         if (argc > 8) output_file = argv[8];
+//         if (argc > 9) ilp_time_limit = std::stod(argv[9]);
+
+//         if (!std::isfinite(observing_budget) || observing_budget < 0.0 ||
+//             !std::isfinite(maximum_slew_rate) || maximum_slew_rate <= 0.0 ||
+//             !std::isfinite(maximum_slew_acceleration) ||
+//                 maximum_slew_acceleration <= 0.0 ||
+//             !std::isfinite(zenith_dwell) || zenith_dwell < 0.0 ||
+//             !std::isfinite(ilp_time_limit) || ilp_time_limit < 0.0) {
+//             throw std::invalid_argument(
+//                 "invalid budget, motion, dwell, or time-limit parameter");
+//         }
+
+//         const std::filesystem::path output_path(output_file);
+//         if (!output_path.parent_path().empty()) {
+//             std::filesystem::create_directories(
+//                 output_path.parent_path());
+//         }
+
+//         // Build the instance once. Every solver receives these same arrays.
+//         BenchInstance instance;
+//         const std::tuple<int, int, double> graph = buildGraphwithPixelsOP(
+//                                                             tiling_file,
+//                                                             probability_file,
+//                                                             instance.costs,
+//                                                             instance.dwell_times,
+//                                                             instance.tile_probabilities,
+//                                                             instance.ranks,
+//                                                             instance.member_pixels,
+//                                                             instance.pixel_probabilities,
+//                                                             zenith_dwell,
+//                                                             maximum_slew_rate,
+//                                                             maximum_slew_acceleration,
+//                                                             settle_time,
+//                                                             is_deep_slow,
+//                                                             instance.tile_count,
+//                                                             source_tile);
+
+//         instance.start_node = std::get<0>(graph);
+//         instance.end_node = std::get<1>(graph);
+//         instance.padding = std::get<2>(graph);
+//         instance.observing_budget = observing_budget;
+//         instance.solver_budget = observing_budget + instance.padding;
+
+//         if (instance.costs.size() < 2 ||
+//             instance.member_pixels.size() != instance.costs.size()) {
+//             throw std::invalid_argument(
+//                 "graph and member_pixels have inconsistent node counts");
+//         }
+//         for (const std::vector<double>& row : instance.costs) {
+//             if (row.size() != instance.costs.size()) {
+//                 throw std::invalid_argument("cost matrix is not square");
+//             }
+//         }
+//         if (instance.start_node < 0 ||
+//             instance.start_node >= static_cast<int>(instance.costs.size()) ||
+//             instance.end_node < 0 ||
+//             instance.end_node >= static_cast<int>(instance.costs.size()) ||
+//             instance.start_node == instance.end_node) {
+//             throw std::invalid_argument("graph returned invalid endpoints");
+//         }
+//         if (!instance.member_pixels[instance.start_node].empty() ||
+//             !instance.member_pixels[instance.end_node].empty()) {
+//             throw std::invalid_argument(
+//                 "dummy start and end nodes must cover no pixels");
+//         }
+//         if (instance.costs[instance.start_node][instance.end_node] >
+//             instance.solver_budget + 1.0e-9) {
+//             throw std::runtime_error(
+//                 "budget is smaller than the direct start-to-end cost");
+//         }
+
+//         const CoverageOracle oracle(
+//             instance.pixel_probabilities, instance.member_pixels);
+//         if (oracle.nodeCount() !=
+//             static_cast<int>(instance.costs.size())) {
+//             throw std::invalid_argument(
+//                 "member_pixels must have one list per graph node");
+//         }
+
+//         double retained_probability = 0.0;
+//         for (double probability : instance.pixel_probabilities) {
+//             retained_probability += probability;
+//         }
+
+//         std::cout << "start " << instance.start_node
+//                   << ", end " << instance.end_node
+//                   << ", retained tiles " << instance.tile_count
+//                   << ", retained pixels "
+//                   << instance.pixel_probabilities.size()
+//                   << ", retained pixel probability "
+//                   << std::fixed << std::setprecision(6)
+//                   << retained_probability << "\n";
+
+//         double solver_budget = instance.solver_budget;
+//         std::vector<SolverResult> results;
+
+//         // The two deterministic greedy routes also seed GA and SA.
+//         results.push_back(runSolver(
+//             instance, oracle, "greedy-marginal", [&]() {
+//                 return prizeGreedyPathTwoFixedPixelOverlap(
+//                     instance.costs,
+//                     instance.pixel_probabilities,
+//                     instance.member_pixels,
+//                     solver_budget,
+//                     instance.start_node,
+//                     instance.end_node);
+//             }));
+
+//         results.push_back(runSolver(
+//             instance, oracle, "greedy-ratio", [&]() {
+//                 return prizeRatioGreedyPathTwoFixedPixelOverlap(
+//                     instance.costs,
+//                     instance.pixel_probabilities,
+//                     instance.member_pixels,
+//                     solver_budget,
+//                     instance.start_node,
+//                     instance.end_node);
+//             }));
+
+//         std::vector<std::vector<int>> genetic_seeds;
+//         std::vector<int> annealing_seed;
+//         double seed_coverage = -1.0;
+//         double seed_cost = std::numeric_limits<double>::infinity();
+
+//         for (std::size_t index = 0;
+//              index < 2 && index < results.size(); ++index) {
+//             if (results[index].status == "ok") {
+//                 genetic_seeds.push_back(results[index].path);
+//                 if (resultIsBetter(
+//                         results[index], seed_coverage, seed_cost)) {
+//                     annealing_seed = results[index].path;
+//                     seed_coverage = results[index].coverage;
+//                     seed_cost = results[index].padded_cost;
+//                 }
+//             }
+//         }
+
+
+//         results.push_back(runSolver(
+//             instance, oracle, "GCP", [&]() {
+//                 return GCP_Coverage(
+//                     instance.costs,
+//                     instance.pixel_probabilities,
+//                     instance.member_pixels,
+//                     solver_budget,
+//                     instance.start_node,
+//                     instance.end_node);
+//             }));
+
+
+//         results.push_back(runSolver(
+//             instance, oracle, "simulated-annealing", [&]() {
+//                 return simulated_annealing_optimization_pixel_overlap(
+//                     instance.costs,
+//                     instance.pixel_probabilities,
+//                     instance.member_pixels,
+//                     solver_budget,
+//                     instance.start_node,
+//                     instance.end_node,
+//                     annealing_seed);
+//             }));
+
+//         results.push_back(runSolver(
+//             instance, oracle, "genetic", [&]() {
+//                 return genetic_optimization_st_pixel_overlap(
+//                     instance.costs,
+//                     instance.pixel_probabilities,
+//                     instance.member_pixels,
+//                     solver_budget,
+//                     instance.start_node,
+//                     instance.end_node,
+//                     genetic_seeds);
+//             }));
+
+//         // results.push_back(runSolver(
+//         //     instance, oracle, "ant-colony", [&]() {
+//         //         AntColonyPixelOverlap ant_colony(
+//         //             instance.costs,
+//         //             instance.pixel_probabilities,
+//         //             instance.member_pixels);
+//         //         return ant_colony.ant_colony_optimization_pixel_overlap(
+//         //             solver_budget,
+//         //             instance.start_node,
+//         //             instance.end_node);
+//         //     }));
+
+
+//         // results.push_back(runSolver(
+//         //     instance, oracle, "RG-QP", [&]() {
+//         //         RecursiveGreedyParams parameters;
+//         //         const int relevant_arc_bound =
+//         //             std::max(1, instance.tile_count + 1);
+//         //         parameters.max_depth = std::min(
+//         //             50,
+//         //             static_cast<int>(std::ceil(
+//         //                 1.0 + std::log2(
+//         //                     static_cast<double>(relevant_arc_bound)))));
+//         //         parameters.reward_levels = 10000;
+//         //         parameters.time_quantum = 0.001;
+//         //         parameters.time_limit = 0;
+//         //         parameters.iterative_deepening = true;
+//         //         parameters.candidate_limit = 0;
+//         //         parameters.verbose = false;
+
+//         //         const RecursiveGreedyResult rg_result =
+//         //             recursiveGreedyOrienteering(
+//         //                 instance.costs,
+//         //                 instance.pixel_probabilities,
+//         //                 instance.member_pixels,
+//         //                 instance.start_node,
+//         //                 instance.end_node,
+//         //                 solver_budget,
+//         //                 instance.padding,
+//         //                 parameters);
+//         //         return rg_result.path;
+//         //     }));
+
+
+//         // // Select the best feasible heuristic route for both ILP warm starts.
+//         // std::vector<int> warm_start;
+//         // double warm_coverage = -1.0;
+//         // double warm_cost = std::numeric_limits<double>::infinity();
+//         // for (const SolverResult& result : results) {
+//         //     if (resultIsBetter(result, warm_coverage, warm_cost)) {
+//         //         warm_start = result.path;
+//         //         warm_coverage = result.coverage;
+//         //         warm_cost = result.padded_cost;
+//         //     }
+//         // }
+
+//         // if (warm_start.empty()) {
+//         //     std::cout << "warm start: none\n";
+//         // } else {
+//         //     std::cout << "warm start: " << warm_start.size() - 2
+//         //               << " tiles, coverage " << warm_coverage
+//         //               << ", padded cost " << warm_cost << "\n";
+//         // }
+
+//         // double mtz_bound = std::numeric_limits<double>::quiet_NaN();
+//         // SolverResult mtz = runSolver(
+//         //     instance, oracle, "ILP MTZ", [&]() {
+//         //         const std::pair<std::vector<std::vector<int>>, double> output =
+//         //             gurobiPathCoverPixelOverlapMTZ(
+//         //                 instance.costs,
+//         //                 instance.pixel_probabilities,
+//         //                 instance.member_pixels,
+//         //                 instance.start_node,
+//         //                 instance.end_node,
+//         //                 solver_budget,
+//         //                 mip_gap,
+//         //                 ilp_time_limit,
+//         //                 warm_start);
+//         //         mtz_bound = output.second;
+//         //         return firstPathOf(output);
+//         //     });
+//         // mtz.bound = mtz_bound;
+//         // results.push_back(std::move(mtz));
+
+//         // double continuous_bound =
+//         //     std::numeric_limits<double>::quiet_NaN();
+//         // SolverResult continuous_time = runSolver(
+//         //     instance, oracle, "ILP continuous-time", [&]() {
+//         //         const std::pair<std::vector<std::vector<int>>, double> output =
+//         //             gurobiPathCoverPixelOverlapContinuousTime(
+//         //                 instance.costs,
+//         //                 instance.pixel_probabilities,
+//         //                 instance.member_pixels,
+//         //                 instance.start_node,
+//         //                 instance.end_node,
+//         //                 solver_budget,
+//         //                 mip_gap,
+//         //                 ilp_time_limit,
+//         //                 warm_start);
+//         //         continuous_bound = output.second;
+//         //         return firstPathOf(output);
+//         //     });
+//         // continuous_time.bound = continuous_bound;
+//         // results.push_back(std::move(continuous_time));
+
+
+//         // Modify the instance to retain top N tiles:
+//         const int maximum_tiles = 50;
+//         const std::tuple<int, int, double> graph2 = buildGraphwithPixelsOP(
+//                                                             tiling_file,
+//                                                             probability_file,
+//                                                             instance.costs,
+//                                                             instance.dwell_times,
+//                                                             instance.tile_probabilities,
+//                                                             instance.ranks,
+//                                                             instance.member_pixels,
+//                                                             instance.pixel_probabilities,
+//                                                             zenith_dwell,
+//                                                             maximum_slew_rate,
+//                                                             maximum_slew_acceleration,
+//                                                             settle_time,
+//                                                             is_deep_slow,
+//                                                             maximum_tiles,
+//                                                             instance.tile_count,
+//                                                             source_tile);
+
+//         instance.start_node = std::get<0>(graph2);
+//         instance.end_node = std::get<1>(graph2);
+//         instance.padding = std::get<2>(graph2);
+//         instance.observing_budget = observing_budget;
+//         instance.solver_budget = observing_budget + instance.padding;
+
+//         if (instance.costs.size() < 2 ||
+//             instance.member_pixels.size() != instance.costs.size()) {
+//             throw std::invalid_argument(
+//                 "graph and member_pixels have inconsistent node counts");
+//         }
+//         for (const std::vector<double>& row : instance.costs) {
+//             if (row.size() != instance.costs.size()) {
+//                 throw std::invalid_argument("cost matrix is not square");
+//             }
+//         }
+//         if (instance.start_node < 0 ||
+//             instance.start_node >= static_cast<int>(instance.costs.size()) ||
+//             instance.end_node < 0 ||
+//             instance.end_node >= static_cast<int>(instance.costs.size()) ||
+//             instance.start_node == instance.end_node) {
+//             throw std::invalid_argument("graph returned invalid endpoints");
+//         }
+//         if (!instance.member_pixels[instance.start_node].empty() ||
+//             !instance.member_pixels[instance.end_node].empty()) {
+//             throw std::invalid_argument(
+//                 "dummy start and end nodes must cover no pixels");
+//         }
+//         if (instance.costs[instance.start_node][instance.end_node] >
+//             instance.solver_budget + 1.0e-9) {
+//             throw std::runtime_error(
+//                 "budget is smaller than the direct start-to-end cost");
+//         }
+
+//         // const CoverageOracle oracle(
+//         //     instance.pixel_probabilities, instance.member_pixels);
+//         // if (oracle.nodeCount() !=
+//         //     static_cast<int>(instance.costs.size())) {
+//         //     throw std::invalid_argument(
+//         //         "member_pixels must have one list per graph node");
+//         // }
+
+//         retained_probability = 0.0;
+//         for (double probability : instance.pixel_probabilities) {
+//             retained_probability += probability;
+//         }
+
+//         std::cout << "start " << instance.start_node
+//                   << ", end " << instance.end_node
+//                   << ", retained tiles " << instance.tile_count
+//                   << ", retained pixels "
+//                   << instance.pixel_probabilities.size()
+//                   << ", retained pixel probability "
+//                   << std::fixed << std::setprecision(6)
+//                   << retained_probability << "\n";
+
+//         solver_budget = instance.solver_budget;
+//         // std::vector<SolverResult> results;
+
+
+//         results.push_back(runSolver(
+//             instance, oracle, "RG-QP", [&]() {
+//                 RecursiveGreedyParams parameters;
+//                 const int relevant_arc_bound =
+//                     std::max(1, instance.tile_count + 1);
+//                 parameters.max_depth = std::min(
+//                     50,
+//                     static_cast<int>(std::ceil(
+//                         1.0 + std::log2(
+//                             static_cast<double>(relevant_arc_bound)))));
+//                 parameters.reward_levels = 100;
+//                 parameters.time_quantum = 0.01;
+//                 parameters.time_limit = 0;
+//                 parameters.iterative_deepening = true;
+//                 parameters.candidate_limit = 0;
+//                 parameters.verbose = false;
+
+//                 const RecursiveGreedyResult rg_result =
+//                     recursiveGreedyOrienteering(
+//                         instance.costs,
+//                         instance.pixel_probabilities,
+//                         instance.member_pixels,
+//                         instance.start_node,
+//                         instance.end_node,
+//                         solver_budget,
+//                         instance.padding,
+//                         parameters);
+//                 return rg_result.path;
+//             }));
+
+
+//         // // Select the best feasible heuristic route for both ILP warm starts.
+//         // std::vector<int> warm_start;
+//         // double warm_coverage = -1.0;
+//         // double warm_cost = std::numeric_limits<double>::infinity();
+//         // for (const SolverResult& result : results) {
+//         //     if (resultIsBetter(result, warm_coverage, warm_cost)) {
+//         //         warm_start = result.path;
+//         //         warm_coverage = result.coverage;
+//         //         warm_cost = result.padded_cost;
+//         //     }
+//         // }
+
+//         // if (warm_start.empty()) {
+//         //     std::cout << "warm start: none\n";
+//         // } else {
+//         //     std::cout << "warm start: " << warm_start.size() - 2
+//         //               << " tiles, coverage " << warm_coverage
+//         //               << ", padded cost " << warm_cost << "\n";
+//         // }
+
+//         // double mtz_bound = std::numeric_limits<double>::quiet_NaN();
+//         // SolverResult mtz = runSolver(
+//         //     instance, oracle, "ILP MTZ", [&]() {
+//         //         const std::pair<std::vector<std::vector<int>>, double> output =
+//         //             gurobiPathCoverPixelOverlapMTZ(
+//         //                 instance.costs,
+//         //                 instance.pixel_probabilities,
+//         //                 instance.member_pixels,
+//         //                 instance.start_node,
+//         //                 instance.end_node,
+//         //                 solver_budget,
+//         //                 mip_gap,
+//         //                 ilp_time_limit,
+//         //                 warm_start);
+//         //         mtz_bound = output.second;
+//         //         return firstPathOf(output);
+//         //     });
+//         // mtz.bound = mtz_bound;
+//         // results.push_back(std::move(mtz));
+
+//         std::vector<int> warm_start = {};
+//         double continuous_bound =
+//             std::numeric_limits<double>::quiet_NaN();
+//         SolverResult continuous_time = runSolver(
+//             instance, oracle, "ILP continuous-time", [&]() {
+//                 const std::pair<std::vector<std::vector<int>>, double> output =
+//                     gurobiPathCoverPixelOverlapContinuousTime(
+//                         instance.costs,
+//                         instance.pixel_probabilities,
+//                         instance.member_pixels,
+//                         instance.start_node,
+//                         instance.end_node,
+//                         solver_budget,
+//                         mip_gap,
+//                         ilp_time_limit,
+//                         warm_start);
+//                 continuous_bound = output.second;
+//                 return firstPathOf(output);
+//             });
+//         continuous_time.bound = continuous_bound;
+//         results.push_back(std::move(continuous_time));
+
+
+//         printTable(instance, results);
+//         appendCsv(
+//             output_file,
+//             instance,
+//             tiling_file,
+//             probability_file,
+//             maximum_slew_rate,
+//             results);
+
+//         const double total_seconds = std::chrono::duration<double>(
+//             std::chrono::high_resolution_clock::now() - total_started).count();
+//         std::cout << "\nTotal running time: " << std::setprecision(2)
+//                   << total_seconds << " seconds\n";
+//     } catch (const std::exception& error) {
+//         std::cerr << "Pixel-overlap benchmark failed: "
+//                   << error.what() << "\n";
+//         return 1;
+//     }
+
+//     return 0;
+// }
 
 
 

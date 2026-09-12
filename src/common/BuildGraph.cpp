@@ -328,6 +328,23 @@ std::tuple<int, int, double> buildGraphOrienteering(const std::string& tilefile,
     // std::vector<double> probability;
     computeTileProbs(member_pixels, pixel_probs, probability);
 
+    // use highest probability tile as zenith
+    const std::vector<double>::const_iterator best_iterator =
+    std::max_element(probability.begin(), probability.end());
+
+    if (best_iterator == probability.end()) {
+        throw std::runtime_error(
+            "buildGraph: could not determine highest-probability tile.");
+    }
+
+    const int highest_probability_tile =
+        static_cast<int>(
+            std::distance(probability.cbegin(), best_iterator));
+
+    const double ra_zenith = ra[highest_probability_tile];
+    const double dec_zenith = dec[highest_probability_tile];
+    // const int zenith_rank = ranks[highest_probability_tile];
+
     // double init_ra, init_dec;
     // int n = (int)ra.size();
     // if (init_pos >= 0 && init_pos < n) {
@@ -369,7 +386,7 @@ std::tuple<int, int, double> buildGraphOrienteering(const std::string& tilefile,
 
     dwell_times.resize(probability.size());
     double dwelltime_ref = dwell_zenith;
-    double ra_zenith = ra[0], dec_zenith = dec[0];
+    // double ra_zenith = ra[0], dec_zenith = dec[0];
 
     std::vector<size_t> valid_indices;
     for (size_t i = 0; i < probability.size(); ++i) {
@@ -1025,67 +1042,6 @@ std::vector<int> buildGraphMultiStarts(const std::string& tilefile,
 }
 
 
-// void compactCoveredPixels(
-//     const std::vector<std::vector<int>>& member_pixels, 
-//     const std::vector<double>& pixel_probs,           
-//     std::vector<std::vector<int>>& member_pixels_remapped,  
-//     std::vector<double>& pixel_probs_compact,  
-//     std::vector<int>& new2old, 
-//     std::vector<int>& old2new) {
-//     const int m_old = static_cast<int>(pixel_probs.size());
-//     if (m_old <= 0) throw std::runtime_error("compactCoveredPixels: pixel_probs is empty.");
-
-//     // Mark used pixels
-//     std::vector<char> used(m_old, 0);
-//     for (const auto& pixlist : member_pixels) {
-//         for (int p : pixlist) {
-//             if (p < 0 || p >= m_old) continue; 
-//             used[p] = 1;
-//         }
-//     }
-
-//     // Build deterministic new2old list (sorted by old id)
-//     new2old.clear();
-//     new2old.reserve(m_old);
-//     for (int p = 0; p < m_old; ++p) {
-//         if (used[p]) new2old.push_back(p);
-//     }
-//     if (new2old.empty()) {
-//         throw std::runtime_error("compactCoveredPixels: No pixels are coverable by remaining tiles.");
-//     }
-
-//     // old2new mapping
-//     old2new.assign(m_old, -1);
-//     for (int new_id = 0; new_id < (int)new2old.size(); ++new_id) {
-//         old2new[new2old[new_id]] = new_id;
-//     }
-
-//     // compact prizes
-//     pixel_probs_compact.resize(new2old.size());
-//     for (int new_id = 0; new_id < (int)new2old.size(); ++new_id) {
-//         pixel_probs_compact[new_id] = pixel_probs[new2old[new_id]];
-//     }
-
-//     // remap coverage lists into member_pixels_out (and dedup)
-//     member_pixels_remapped.clear();
-//     member_pixels_remapped.resize(member_pixels.size());
-
-//     for (size_t i = 0; i < member_pixels.size(); ++i) {
-//         const auto& in = member_pixels[i];
-//         auto& out = member_pixels_remapped[i];
-//         out.reserve(in.size());
-
-//         for (int p : in) {
-//             if (p < 0 || p >= m_old) continue;
-//             int np = old2new[p];
-//             if (np >= 0) out.push_back(np);
-//         }
-
-//         std::sort(out.begin(), out.end());
-//         out.erase(std::unique(out.begin(), out.end()), out.end());
-//     }
-// }
-
 // Build a target HEALPixel set by scanning tiles in descending standalone
 // probability and counting each HEALPixel only once. Then retain every tile
 // that covers at least one target pixel, including tiles beyond the initial
@@ -1236,6 +1192,82 @@ static int retainTilesCoveringTargetPixels(
               << retained_union_probability << "\n";
 
     return static_cast<int>(retained_indices.size());
+}
+
+// Retain the maximum_tiles tiles having the largest standalone probabilities.
+// The returned arrays are sorted from highest to lowest standalone tile probability.
+static void retainTopTilesByProbability(
+    int maximum_tiles,
+    std::vector<double>& tile_probs,
+    std::vector<int>& ranks,
+    std::vector<double>& ra,
+    std::vector<double>& dec,
+    std::vector<std::vector<int>>& member_pixels) {
+
+    const std::size_t tile_count = ra.size();
+
+    if (maximum_tiles <= 0) {
+        throw std::invalid_argument(
+            "retainTopTilesByProbability: maximum_tiles must be positive.");
+    }
+
+    if (dec.size() != tile_count ||
+        tile_probs.size() != tile_count ||
+        ranks.size() != tile_count ||
+        member_pixels.size() != tile_count) {
+        throw std::invalid_argument(
+            "retainTopTilesByProbability: inconsistent tile arrays.");
+    }
+
+    const std::size_t keep_count = std::min(
+        tile_count, static_cast<std::size_t>(maximum_tiles));
+
+    // Initially, order contains 0, 1, 2, ..., tile_count - 1.
+    std::vector<int> order(tile_count);
+    std::iota(order.begin(), order.end(), 0);
+
+    // Place the keep_count highest-probability tile indices first.
+    std::partial_sort(
+        order.begin(),
+        order.begin() + keep_count,
+        order.end(),
+        [&tile_probs](int first, int second) {
+            if (tile_probs[first] != tile_probs[second]) {
+                return tile_probs[first] > tile_probs[second];
+            }
+
+            // Deterministic tie-breaking.
+            return first < second;
+        });
+
+    std::vector<double> retained_ra;
+    std::vector<double> retained_dec;
+    std::vector<double> retained_tile_probs;
+    std::vector<int> retained_ranks;
+    std::vector<std::vector<int>> retained_member_pixels;
+
+    retained_ra.reserve(keep_count);
+    retained_dec.reserve(keep_count);
+    retained_tile_probs.reserve(keep_count);
+    retained_ranks.reserve(keep_count);
+    retained_member_pixels.reserve(keep_count);
+
+    for (std::size_t position = 0; position < keep_count; ++position) {
+        const int old_tile = order[position];
+
+        retained_ra.push_back(ra[old_tile]);
+        retained_dec.push_back(dec[old_tile]);
+        retained_tile_probs.push_back(tile_probs[old_tile]);
+        retained_ranks.push_back(ranks[old_tile]);
+        retained_member_pixels.push_back(
+            std::move(member_pixels[old_tile]));
+    }
+
+    ra.swap(retained_ra);
+    dec.swap(retained_dec);
+    tile_probs.swap(retained_tile_probs);
+    ranks.swap(retained_ranks);
+    member_pixels.swap(retained_member_pixels);
 }
 
 
@@ -1389,7 +1421,7 @@ int buildGraphwithPixelsOriginal(const std::string& tilefile,
 // Build the s-t graph consumed by the pixel-aware gurobiPathCover.
 // On return, all node-indexed outputs have the same size. The last two nodes
 // are the zero-prize dummy start and dummy end. costs already contains slew,
-// settle, dwell, and terminal padding exactly as buildGraphOrienteering does.
+// settle, dwell, and terminal padding.
 std::tuple<int, int, double> buildGraphwithPixelsOP(const std::string& tilefile,
                const std::string& pro_map_file,
                std::vector<std::vector<double>>& costs,
@@ -1442,9 +1474,20 @@ std::tuple<int, int, double> buildGraphwithPixelsOP(const std::string& tilefile,
 
     computeTileProbs(member_pixels, pixel_probs, tile_probs);
 
+    // use highest probability as zenith
+    const std::vector<double>::const_iterator best_iterator =
+    std::max_element(tile_probs.begin(), tile_probs.end());
+    if (best_iterator == tile_probs.end()) {
+        throw std::runtime_error(
+            "buildGraph: could not determine highest-probability tile.");
+    }
+    const int highest_probability_tile =
+        static_cast<int>(std::distance(tile_probs.cbegin(), best_iterator));
+    const double ra_zenith = ra[highest_probability_tile];
+    const double dec_zenith = dec[highest_probability_tile];
+
     // First determine a unique target-pixel set up to the requested absolute
-    // coverage, then retain every tile that can cover any target pixel. The
-    // ILP will decide which overlapping tiles to select.
+    // coverage, then retain every tile that can cover any target pixel. 
     const double coverage = 0.99;
     num_tiles = retainTilesCoveringTargetPixels(
         tile_probs, ranks, ra, dec,
@@ -1485,8 +1528,8 @@ std::tuple<int, int, double> buildGraphwithPixelsOP(const std::string& tilefile,
         new2old, old2new);
 
     dwell_times.resize(num_tiles);
-    const double ra_zenith = ra[0];
-    const double dec_zenith = dec[0];
+    // const double ra_zenith = ra[0];
+    // const double dec_zenith = dec[0];
     for (int tile = 0; tile < num_tiles; ++tile) {
         double zenith_angle = angularDistance(
             ra[tile], dec[tile], ra_zenith, dec_zenith);
@@ -1532,3 +1575,162 @@ std::tuple<int, int, double> buildGraphwithPixelsOP(const std::string& tilefile,
 }
 
 
+
+//overload: choose top N tiles
+// used by algorithms with overlaps that reduce the graph tp OP
+// Build the s-t graph consumed by the pixel-aware gurobiPathCover.
+// On return, all node-indexed outputs have the same size. The last two nodes
+// are the zero-prize dummy start and dummy end. costs already contains slew,
+// settle, dwell, and terminal padding.
+std::tuple<int, int, double> buildGraphwithPixelsOP( const std::string& tilefile,
+                                const std::string& pro_map_file,
+                                std::vector<std::vector<double>>& costs,
+                                std::vector<double>& dwell_times,
+                                std::vector<double>& tile_probs,
+                                std::vector<int>& ranks,
+                                std::vector<std::vector<int>>& member_pixels_trimmed,
+                                std::vector<double>& pixel_probs_trimmed,
+                                double dwell_zenith,
+                                double w_max,
+                                double w_acc,
+                                double settle_time,
+                                bool is_SlowDeep,
+                                int maximum_tiles,       // top N tiles to retain
+                                int& num_tiles,
+                                int init_pos) {
+
+    std::vector<double> ra, dec;
+    std::vector<std::vector<int>> member_pixels;
+    readTiles(tilefile, ranks, ra, dec, member_pixels);
+
+    if (ra.empty() || dec.size() != ra.size() ||
+        ranks.size() != ra.size() || member_pixels.size() != ra.size()) {
+        throw std::runtime_error(
+            "buildGraph: tile file produced empty or inconsistent tile arrays.");
+    }
+
+    std::vector<double> pixel_probs;
+    readHEALPixels(pro_map_file, pixel_probs, 64);
+    if (pixel_probs.empty()) {
+        throw std::runtime_error("buildGraph: probability map is empty.");
+    }
+
+    // Normalize each tile's pixel list before computing its scalar diagnostic
+    // probability. Pixels may legitimately be shared by different tiles.
+    for (std::size_t tile = 0; tile < member_pixels.size(); ++tile) {
+        auto& pixels = member_pixels[tile];
+        std::sort(pixels.begin(), pixels.end());
+        pixels.erase(std::unique(pixels.begin(), pixels.end()), pixels.end());
+
+        for (int pixel : pixels) {
+            if (pixel < 0 ||
+                static_cast<std::size_t>(pixel) >= pixel_probs.size()) {
+                throw std::out_of_range(
+                    "buildGraph: tile " + std::to_string(tile) +
+                    " contains out-of-range pixel " +
+                    std::to_string(pixel) + ".");
+            }
+        }
+    }
+
+    computeTileProbs(member_pixels, pixel_probs, tile_probs);
+
+
+    // use highest probability as zenith
+    const std::vector<double>::const_iterator best_iterator =
+    std::max_element(tile_probs.begin(), tile_probs.end());
+    if (best_iterator == tile_probs.end()) {
+        throw std::runtime_error(
+            "buildGraph: could not determine highest-probability tile.");
+    }
+    const int highest_probability_tile =
+        static_cast<int>(std::distance(tile_probs.cbegin(), best_iterator));
+    const double ra_zenith = ra[highest_probability_tile];
+    const double dec_zenith = dec[highest_probability_tile];
+
+    // retain top maximum_tiles
+    retainTopTilesByProbability(maximum_tiles, tile_probs, ranks,
+                                ra, dec, member_pixels);
+
+    num_tiles = static_cast<int>(ra.size());
+
+    if (ra.empty() || tile_probs.size() != ra.size() ||
+        dec.size() != ra.size() || ranks.size() != ra.size() ||
+        member_pixels.size() != ra.size()) {
+        throw std::runtime_error(
+            "buildGraph: tile trimming produced empty or inconsistent arrays.");
+    }
+    num_tiles = static_cast<int>(ra.size());
+    std::cout << "num tiles after trim: " << num_tiles << "\n";
+
+    // As in buildGraphOrienteering, init_pos is interpreted in the trimmed
+    // tile arrays. A negative value chooses a deterministic random tile.
+    if (init_pos < 0) {
+        std::mt19937 generator(1130);
+        std::uniform_int_distribution<int> distribution(0, num_tiles - 1);
+        init_pos = distribution(generator);
+    } else if (init_pos >= num_tiles) {
+        throw std::invalid_argument(
+            "buildGraph: init_pos is outside the trimmed tile range.");
+    }
+
+    const double init_ra = ra[init_pos];
+    const double init_dec = dec[init_pos];
+    const int init_rank = ranks[init_pos];
+    std::cout << "init_pos: " << init_pos
+              << ", rank: " << init_rank << "\n";
+
+    // Compact only after tile trimming so the ILP contains no pixel that is 
+    // uncovered by every retained tile.
+    std::vector<int> new2old, old2new;
+    compactCoveredPixels(
+        member_pixels, pixel_probs,
+        member_pixels_trimmed, pixel_probs_trimmed,
+        new2old, old2new);
+
+    dwell_times.resize(num_tiles);
+    // const double ra_zenith = ra[0];
+    // const double dec_zenith = dec[0];
+    for (int tile = 0; tile < num_tiles; ++tile) {
+        double zenith_angle = angularDistance(
+            ra[tile], dec[tile], ra_zenith, dec_zenith);
+        zenith_angle = std::min(zenith_angle, 85.0);
+        dwell_times[tile] = dwell_time_airmass(zenith_angle, dwell_zenith);
+    }
+
+    const int start_pos = num_tiles;
+    ra.push_back(init_ra);
+    dec.push_back(init_dec);
+    tile_probs.push_back(0.0);
+    ranks.push_back(init_rank);
+    dwell_times.push_back(0.0);
+    member_pixels_trimmed.emplace_back();
+
+    const int end_pos = static_cast<int>(tile_probs.size());
+    tile_probs.push_back(0.0);
+    ranks.push_back(-1);
+    dwell_times.push_back(0.0);
+    member_pixels_trimmed.emplace_back();
+
+    double padding_value = 0.0;
+    compute_costs_orienteering(
+        ra, dec, dwell_times, costs,
+        w_max, w_acc, settle_time,
+        end_pos, padding_value, is_SlowDeep);
+
+    const std::size_t node_count = tile_probs.size();
+    if (ranks.size() != node_count || dwell_times.size() != node_count ||
+        member_pixels_trimmed.size() != node_count ||
+        costs.size() != node_count) {
+        throw std::runtime_error(
+            "buildGraph: inconsistent s-t graph output sizes.");
+    }
+    for (const auto& row : costs) {
+        if (row.size() != node_count) {
+            throw std::runtime_error(
+                "buildGraph: s-t cost matrix is not square.");
+        }
+    }
+
+    return {start_pos, end_pos, padding_value};
+}

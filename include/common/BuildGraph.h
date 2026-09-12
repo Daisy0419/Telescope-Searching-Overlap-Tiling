@@ -119,6 +119,23 @@ std::tuple<int, int, double> buildGraphwithPixelsOP(const std::string& tilefile,
                                         int& num_tiles,
                                         int init_pos); 
                                         
+std::tuple<int, int, double> buildGraphwithPixelsOP( const std::string& tilefile,
+                                        const std::string& pro_map_file,
+                                        std::vector<std::vector<double>>& costs,
+                                        std::vector<double>& dwell_times,
+                                        std::vector<double>& tile_probs,
+                                        std::vector<int>& ranks,
+                                        std::vector<std::vector<int>>& member_pixels_trimmed,
+                                        std::vector<double>& pixel_probs_trimmed,
+                                        double dwell_zenith,
+                                        double w_max,
+                                        double w_acc,
+                                        double settle_time,
+                                        bool is_SlowDeep,
+                                        int maximum_tiles,       // top N tiles to retain
+                                        int& num_tiles,
+                                        int init_pos);
+                                       
                                         
 int buildGraphwithPixelsOriginal(const std::string& tilefile, 
                                 const std::string& pro_map_file,
