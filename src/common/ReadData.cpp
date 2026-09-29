@@ -11,9 +11,9 @@
 #include <numeric>
 #include <stdexcept>
 
-#include <highfive/H5File.hpp>
-#include <highfive/H5DataSet.hpp>
-#include <highfive/H5DataSpace.hpp>
+// #include <highfive/H5File.hpp>
+// #include <highfive/H5DataSet.hpp>
+// #include <highfive/H5DataSpace.hpp>
 
 
 //Read Tiling Data
@@ -261,154 +261,154 @@ bool readHEALPixelsTXT(const std::string& filename,
 }
 
 
-bool readHEALPixelsHDF5_Compound(const std::string& filename,
-                                  std::vector<double>& pixel_probs,
-                                  int nside,
-                                  const std::string& dataset_name = "likelihood_map") {
-    int pixel_count = 12 * nside * nside;
-    pixel_probs.assign(pixel_count, 0.0);
-    try {
-        HighFive::File file(filename, HighFive::File::ReadOnly);
+// bool readHEALPixelsHDF5_Compound(const std::string& filename,
+//                                   std::vector<double>& pixel_probs,
+//                                   int nside,
+//                                   const std::string& dataset_name = "likelihood_map") {
+//     int pixel_count = 12 * nside * nside;
+//     pixel_probs.assign(pixel_count, 0.0);
+//     try {
+//         HighFive::File file(filename, HighFive::File::ReadOnly);
 
-        struct MapEntry {
-            int64_t pixel;
-            double lat;
-            double lon;
-            double probability;
-        };
+//         struct MapEntry {
+//             int64_t pixel;
+//             double lat;
+//             double lon;
+//             double probability;
+//         };
 
-        auto dataset = file.getDataSet(dataset_name);
-        size_t n = dataset.getSpace().getDimensions()[0];
-        std::vector<MapEntry> entries(n);
+//         auto dataset = file.getDataSet(dataset_name);
+//         size_t n = dataset.getSpace().getDimensions()[0];
+//         std::vector<MapEntry> entries(n);
 
-        hid_t memtype = H5Tcreate(H5T_COMPOUND, sizeof(MapEntry));
-        H5Tinsert(memtype, "pixel",       offsetof(MapEntry, pixel),       H5T_NATIVE_INT64);
-        H5Tinsert(memtype, "lat",         offsetof(MapEntry, lat),         H5T_NATIVE_DOUBLE);
-        H5Tinsert(memtype, "lon",         offsetof(MapEntry, lon),         H5T_NATIVE_DOUBLE);
-        H5Tinsert(memtype, "probability", offsetof(MapEntry, probability), H5T_NATIVE_DOUBLE);
+//         hid_t memtype = H5Tcreate(H5T_COMPOUND, sizeof(MapEntry));
+//         H5Tinsert(memtype, "pixel",       offsetof(MapEntry, pixel),       H5T_NATIVE_INT64);
+//         H5Tinsert(memtype, "lat",         offsetof(MapEntry, lat),         H5T_NATIVE_DOUBLE);
+//         H5Tinsert(memtype, "lon",         offsetof(MapEntry, lon),         H5T_NATIVE_DOUBLE);
+//         H5Tinsert(memtype, "probability", offsetof(MapEntry, probability), H5T_NATIVE_DOUBLE);
 
-        herr_t status = H5Dread(dataset.getId(), memtype, H5S_ALL, H5S_ALL, H5P_DEFAULT, entries.data());
-        H5Tclose(memtype);
+//         herr_t status = H5Dread(dataset.getId(), memtype, H5S_ALL, H5S_ALL, H5P_DEFAULT, entries.data());
+//         H5Tclose(memtype);
 
-        if (status < 0) {
-            std::cerr << "H5Dread failed for dataset " << dataset_name << " in " << filename << "\n";
-            return false;
-        }
+//         if (status < 0) {
+//             std::cerr << "H5Dread failed for dataset " << dataset_name << " in " << filename << "\n";
+//             return false;
+//         }
 
-        std::vector<unsigned char> seen(pixel_count, 0);
-        size_t loaded = 0, dup = 0, oob = 0, nan_inf = 0;
+//         std::vector<unsigned char> seen(pixel_count, 0);
+//         size_t loaded = 0, dup = 0, oob = 0, nan_inf = 0;
 
-        for (size_t i = 0; i < entries.size(); ++i) {
-            int pix_id = static_cast<int>(entries[i].pixel);
-            double prob = entries[i].probability;
+//         for (size_t i = 0; i < entries.size(); ++i) {
+//             int pix_id = static_cast<int>(entries[i].pixel);
+//             double prob = entries[i].probability;
 
-            if (pix_id < 0 || pix_id >= pixel_count) {
-                std::cerr << "Out-of-bounds pix_id " << pix_id
-                          << " at index " << i << " (pixel_count=" << pixel_count << ")\n";
-                ++oob;
-                continue;
-            }
-            if (!std::isfinite(prob)) {
-                std::cerr << "Non-finite prob for pix_id " << pix_id
-                          << " at index " << i << " -> skipped\n";
-                ++nan_inf;
-                continue;
-            }
-            if (seen[pix_id]) ++dup;
-            seen[pix_id] = 1;
-            pixel_probs[pix_id] = prob;
-            ++loaded;
-        }
+//             if (pix_id < 0 || pix_id >= pixel_count) {
+//                 std::cerr << "Out-of-bounds pix_id " << pix_id
+//                           << " at index " << i << " (pixel_count=" << pixel_count << ")\n";
+//                 ++oob;
+//                 continue;
+//             }
+//             if (!std::isfinite(prob)) {
+//                 std::cerr << "Non-finite prob for pix_id " << pix_id
+//                           << " at index " << i << " -> skipped\n";
+//                 ++nan_inf;
+//                 continue;
+//             }
+//             if (seen[pix_id]) ++dup;
+//             seen[pix_id] = 1;
+//             pixel_probs[pix_id] = prob;
+//             ++loaded;
+//         }
 
-        const size_t seen_count = std::accumulate(seen.begin(), seen.end(), size_t{0});
-        const size_t missing = pixel_count > seen_count ? (pixel_count - seen_count) : 0;
-        const double finite_sum = std::accumulate(pixel_probs.begin(), pixel_probs.end(), 0.0);
-        std::cerr << "Loaded " << loaded << " entries "
-                  << "(unique=" << seen_count
-                  << ", duplicates=" << dup
-                  << ", missing=" << missing
-                  << ", out_of_bounds=" << oob
-                  << ", non-finite=" << nan_inf << ")\n";
-        std::cerr << "Sum(prob) over finite entries = " << finite_sum << "\n";
-        return true;
+//         const size_t seen_count = std::accumulate(seen.begin(), seen.end(), size_t{0});
+//         const size_t missing = pixel_count > seen_count ? (pixel_count - seen_count) : 0;
+//         const double finite_sum = std::accumulate(pixel_probs.begin(), pixel_probs.end(), 0.0);
+//         std::cerr << "Loaded " << loaded << " entries "
+//                   << "(unique=" << seen_count
+//                   << ", duplicates=" << dup
+//                   << ", missing=" << missing
+//                   << ", out_of_bounds=" << oob
+//                   << ", non-finite=" << nan_inf << ")\n";
+//         std::cerr << "Sum(prob) over finite entries = " << finite_sum << "\n";
+//         return true;
 
-    } catch (const HighFive::Exception& e) {
-        std::cerr << "HDF5 error reading file " << filename << ": " << e.what() << "\n";
-        return false;
-    }
-}
+//     } catch (const HighFive::Exception& e) {
+//         std::cerr << "HDF5 error reading file " << filename << ": " << e.what() << "\n";
+//         return false;
+//     }
+// }
 
 
 
-//Read Probability Map - HDF5 (using HighFive)
-bool readHEALPixelsHDF5(const std::string& filename,
-                        std::vector<double>& pixel_probs,
-                        int nside,
-                        const std::string& pix_id_dataset,
-                        const std::string& prob_dataset) {
-    int pixel_count = 12 * nside * nside;
-    pixel_probs.assign(pixel_count, 0.0);
+// //Read Probability Map - HDF5 (using HighFive)
+// bool readHEALPixelsHDF5(const std::string& filename,
+//                         std::vector<double>& pixel_probs,
+//                         int nside,
+//                         const std::string& pix_id_dataset,
+//                         const std::string& prob_dataset) {
+//     int pixel_count = 12 * nside * nside;
+//     pixel_probs.assign(pixel_count, 0.0);
 
-    try {
-        HighFive::File file(filename, HighFive::File::ReadOnly);
+//     try {
+//         HighFive::File file(filename, HighFive::File::ReadOnly);
 
-        // Read datasets
-        std::vector<int> pix_ids;
-        std::vector<double> probs;
+//         // Read datasets
+//         std::vector<int> pix_ids;
+//         std::vector<double> probs;
 
-        file.getDataSet(pix_id_dataset).read(pix_ids);
-        file.getDataSet(prob_dataset).read(probs);
+//         file.getDataSet(pix_id_dataset).read(pix_ids);
+//         file.getDataSet(prob_dataset).read(probs);
 
-        if (pix_ids.size() != probs.size()) {
-            std::cerr << "Error: pix_id and prob datasets have different sizes ("
-                      << pix_ids.size() << " vs " << probs.size() << ")\n";
-            return false;
-        }
+//         if (pix_ids.size() != probs.size()) {
+//             std::cerr << "Error: pix_id and prob datasets have different sizes ("
+//                       << pix_ids.size() << " vs " << probs.size() << ")\n";
+//             return false;
+//         }
 
-        std::vector<unsigned char> seen(pixel_count, 0);
-        size_t loaded = 0, dup = 0, oob = 0, nan_inf = 0;
+//         std::vector<unsigned char> seen(pixel_count, 0);
+//         size_t loaded = 0, dup = 0, oob = 0, nan_inf = 0;
 
-        for (size_t i = 0; i < pix_ids.size(); ++i) {
-            int pix_id = pix_ids[i];
-            double prob = probs[i];
+//         for (size_t i = 0; i < pix_ids.size(); ++i) {
+//             int pix_id = pix_ids[i];
+//             double prob = probs[i];
 
-            if (pix_id < 0 || pix_id >= pixel_count) {
-                std::cerr << "Out-of-bounds pix_id " << pix_id
-                          << " at index " << i << " (pixel_count=" << pixel_count << ")\n";
-                ++oob;
-                continue;
-            }
-            if (!std::isfinite(prob)) {
-                std::cerr << "Non-finite prob for pix_id " << pix_id
-                          << " at index " << i << " -> skipped\n";
-                ++nan_inf;
-                continue;
-            }
-            if (seen[pix_id]) ++dup; // keep last value
-            seen[pix_id] = 1;
-            pixel_probs[pix_id] = prob;
-            ++loaded;
-        }
+//             if (pix_id < 0 || pix_id >= pixel_count) {
+//                 std::cerr << "Out-of-bounds pix_id " << pix_id
+//                           << " at index " << i << " (pixel_count=" << pixel_count << ")\n";
+//                 ++oob;
+//                 continue;
+//             }
+//             if (!std::isfinite(prob)) {
+//                 std::cerr << "Non-finite prob for pix_id " << pix_id
+//                           << " at index " << i << " -> skipped\n";
+//                 ++nan_inf;
+//                 continue;
+//             }
+//             if (seen[pix_id]) ++dup; // keep last value
+//             seen[pix_id] = 1;
+//             pixel_probs[pix_id] = prob;
+//             ++loaded;
+//         }
 
-        const size_t seen_count = std::accumulate(seen.begin(), seen.end(), size_t{0});
-        const size_t missing = pixel_count > seen_count ? (pixel_count - seen_count) : 0;
-        const double finite_sum = std::accumulate(pixel_probs.begin(), pixel_probs.end(), 0.0);
+//         const size_t seen_count = std::accumulate(seen.begin(), seen.end(), size_t{0});
+//         const size_t missing = pixel_count > seen_count ? (pixel_count - seen_count) : 0;
+//         const double finite_sum = std::accumulate(pixel_probs.begin(), pixel_probs.end(), 0.0);
 
-        std::cerr << "Loaded " << loaded << " entries "
-                  << "(unique=" << seen_count
-                  << ", duplicates=" << dup
-                  << ", missing=" << missing
-                  << ", out_of_bounds=" << oob
-                  << ", non-finite=" << nan_inf << ")\n";
-        std::cerr << "Sum(prob) over finite entries = " << finite_sum << "\n";
+//         std::cerr << "Loaded " << loaded << " entries "
+//                   << "(unique=" << seen_count
+//                   << ", duplicates=" << dup
+//                   << ", missing=" << missing
+//                   << ", out_of_bounds=" << oob
+//                   << ", non-finite=" << nan_inf << ")\n";
+//         std::cerr << "Sum(prob) over finite entries = " << finite_sum << "\n";
 
-        return true;
+//         return true;
 
-    } catch (const HighFive::Exception& e) {
-        std::cerr << "HDF5 error reading file " << filename << ": " << e.what() << "\n";
-        return false;
-    }
-}
+//     } catch (const HighFive::Exception& e) {
+//         std::cerr << "HDF5 error reading file " << filename << ": " << e.what() << "\n";
+//         return false;
+//     }
+// }
 
 
 // Helper to extract and lowercase the file extension
@@ -433,9 +433,9 @@ bool readHEALPixels(const std::string& filename,
         return readHEALPixelsCSV(filename, pixel_probs, nside);
     } else if (ext == "txt" || ext == "dat") {
         return readHEALPixelsTXT(filename, pixel_probs, nside);
-    } else if (ext == "h5" || ext == "hdf5" || ext == "he5") {
-        return readHEALPixelsHDF5(filename, pixel_probs, nside);
-        // return readHEALPixelsHDF5_Compound(filename, pixel_probs,nside);
+    // } else if (ext == "h5" || ext == "hdf5" || ext == "he5") {
+    //     return readHEALPixelsHDF5(filename, pixel_probs, nside);
+    //     // return readHEALPixelsHDF5_Compound(filename, pixel_probs,nside);
     } else {
         std::cerr << "Unknown file extension '" << ext
                   << "' for file: " << filename << "\n"

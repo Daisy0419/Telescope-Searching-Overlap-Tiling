@@ -23,15 +23,13 @@
 
 static const double TOLERANCE = 1.0e-9;
 
-// Check the physical slew matrix and scalar time inputs. The caller has
-// already confirmed the triangle inequality, so this deliberately avoids an
-// expensive all-triples metric test.
+// Check the physical slew matrix and scalar time inputs. 
+// The caller has already ensured the triangle inequality
 static void validatePhysicalGraph(
     const std::vector<std::vector<double>>& slew_seconds,
     double physical_budget_seconds) {
 
-    if (!std::isfinite(physical_budget_seconds) ||
-        physical_budget_seconds < 0.0) {
+    if (!std::isfinite(physical_budget_seconds) || physical_budget_seconds < 0.0) {
         throw std::invalid_argument(
             "physical budget must be finite and nonnegative");
     }
@@ -67,8 +65,8 @@ static void validatePhysicalGraph(
     }
 }
 
-// Sort and deduplicate every footprint. Pixel bounds are checked later when
-// the pixel-probability vector is available.
+// Sort and deduplicate every footprint. 
+// Pixel bounds are checked later when the pixel-probability vector is available.
 static std::vector<std::vector<int>> normalizeFootprints(
     const std::vector<std::vector<int>>& member_pixels) {
 
@@ -81,12 +79,10 @@ static std::vector<std::vector<int>> normalizeFootprints(
 }
 
 // Shared half-dwell transformation used by both P1 and the P2 mode graph.
-// M4OPT does not specify a fixed initial pointing, so the first and last
-// physical pointings are free. Equal padding is placed at both dummy ends:
-//
+// M4OPT does not specify a fixed initial pointing, so the first and last physical pointings are free. 
+// Equal padding is placed at both dummy ends:
 //   transformed path cost = physical route duration + 2 * padding.
-//
-// This keeps the complete graph symmetric and metric.
+// to the complete graph symmetric and metric.
 static OrienteeringGraph addDummyEndpoints(
     const std::vector<std::vector<double>>& physical_slew_seconds,
     const std::vector<std::vector<int>>& mode_pixels,
@@ -244,8 +240,7 @@ OrienteeringGraph buildP2Graph(
         }
     }
 
-    const std::vector<std::vector<int>> footprints =
-        normalizeFootprints(member_pixels);
+    const std::vector<std::vector<int>> footprints = normalizeFootprints(member_pixels);
 
     std::vector<std::vector<int>> mode_pixels;
     std::vector<int> tile_of_mode;
