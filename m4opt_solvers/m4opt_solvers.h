@@ -5,7 +5,7 @@
 #include <vector>
 
 // Complete fixed-start/fixed-end graph passed to the existing solvers.
-// The last two nodes are zero-reward dummy start and end nodes.
+// Free start: append dummy s and t. Fixed start: reuse the supplied s, append t.
 struct OrienteeringGraph {
     std::vector<std::vector<double>> costs;
     std::vector<std::vector<int>> member_pixels;
@@ -17,10 +17,12 @@ struct OrienteeringGraph {
 
     int start_node = -1;
     int end_node = -1;
+    int initial_tile_index = -1; // Input slew-matrix index; -1 means free start.
+    // Input matrix size, including the optional initial-pointing row.
     int physical_tile_count = 0;
 
     double physical_budget = 0.0;
-    double padding = 0.0;
+    double padding = 0.0; // Total artificial padding: 2P for free start, P otherwise.
     double solver_budget = 0.0;
 };
 
@@ -42,14 +44,18 @@ struct M4OptResult {
 
 // Build the P1 graph from pure tile-to-tile slew times, tile footprints,
 // fixed per-tile exposure times, and the physical observing budget.
+// Optional start_node_index refers to a supplied zero-dwell, empty-footprint
+// source row in the input arrays. Omit it (or pass -1) for a free first pointing.
 OrienteeringGraph buildP1Graph(
     const std::vector<std::vector<double>>& slew_seconds,
     const std::vector<std::vector<int>>& member_pixels,
     const std::vector<double>& dwell_seconds,
-    double physical_budget_seconds);
+    double physical_budget_seconds,
+    int start_node_index = -1);
 
 // Reduce deterministic variable-exposure P2 to a P1 mode graph. One mode is
 // created for every useful exposure threshold of each tile.
+// The optional source has zero exposure and is exempt from exposure limits.
 OrienteeringGraph buildP2Graph(
     const std::vector<std::vector<double>>& slew_seconds,
     const std::vector<double>& pixel_probabilities,
@@ -57,7 +63,8 @@ OrienteeringGraph buildP2Graph(
     const std::vector<double>& required_exposure_seconds,
     double minimum_exposure_seconds,
     double maximum_exposure_seconds,
-    double physical_budget_seconds);
+    double physical_budget_seconds,
+    int start_node_index = -1);
 
 // Solve fixed-exposure, one-visit, no-window P1 with the named algorithm.
 M4OptResult solveP1(
@@ -72,7 +79,8 @@ M4OptResult solveP1(
     double time_quantum = 0.01,
     double time_limit_seconds = 0.0,
     int thread_count = 0,
-    double mip_gap = 0.001);
+    double mip_gap = 0.001,
+    int start_node_index = -1);
 
 // Solve deterministic variable-exposure, one-visit, no-window P2 using the
 // threshold-mode reduction followed by the named P1 algorithm.
@@ -90,7 +98,8 @@ M4OptResult solveP2(
     double time_quantum = 0.01,
     double time_limit_seconds = 0.0,
     int thread_count = 0,
-    double mip_gap = 0.001);
+    double mip_gap = 0.001,
+    int start_node_index = -1);
 
 // Return every accepted algorithm name.
 std::vector<std::string> availableAlgorithms();

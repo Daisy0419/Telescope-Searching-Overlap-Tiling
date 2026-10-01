@@ -38,7 +38,8 @@ PYBIND11_MODULE(m4opt_solvers, module) {
            double time_quantum,
            double time_limit_seconds,
            int thread_count,
-           double mip_gap) {
+           double mip_gap,
+           int start_node_index) {
             M4OptResult result;
             {
                 pybind11::gil_scoped_release release;
@@ -54,7 +55,8 @@ PYBIND11_MODULE(m4opt_solvers, module) {
                     time_quantum,
                     time_limit_seconds,
                     thread_count,
-                    mip_gap);
+                    mip_gap,
+                    start_node_index);
             }
             return toDictionary(result);
         },
@@ -69,7 +71,8 @@ PYBIND11_MODULE(m4opt_solvers, module) {
         pybind11::arg("time_quantum") = 0.01,
         pybind11::arg("time_limit_seconds") = 0.0,
         pybind11::arg("thread_count") = 0,
-        pybind11::arg("mip_gap") = 0.001);
+        pybind11::arg("mip_gap") = 0.001,
+        pybind11::arg("start_node_index") = -1);
 
     module.def(
         "solve_p2",
@@ -86,7 +89,8 @@ PYBIND11_MODULE(m4opt_solvers, module) {
            double time_quantum,
            double time_limit_seconds,
            int thread_count,
-           double mip_gap) {
+           double mip_gap,
+           int start_node_index) {
             M4OptResult result;
             {
                 pybind11::gil_scoped_release release;
@@ -104,7 +108,8 @@ PYBIND11_MODULE(m4opt_solvers, module) {
                     time_quantum,
                     time_limit_seconds,
                     thread_count,
-                    mip_gap);
+                    mip_gap,
+                    start_node_index);
             }
             return toDictionary(result);
         },
@@ -121,5 +126,6 @@ PYBIND11_MODULE(m4opt_solvers, module) {
         pybind11::arg("time_quantum") = 0.01,
         pybind11::arg("time_limit_seconds") = 0.0,
         pybind11::arg("thread_count") = 0,
-        pybind11::arg("mip_gap") = 0.001);
+        pybind11::arg("mip_gap") = 0.001,
+        pybind11::arg("start_node_index") = -1);
 }

@@ -5,4 +5,4 @@ build*/
 data*/
 results*/
 CMakeLists*.txt
-CMakeLists.txt
+*/*CMake*.*

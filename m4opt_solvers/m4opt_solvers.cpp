@@ -78,17 +78,30 @@ static std::vector<std::vector<int>> normalizeFootprints(
     return normalized;
 }
 
+static void validateInitialPointing(
+    int start_node_index,
+    const std::vector<std::vector<int>>& member_pixels) {
+
+    if (start_node_index < -1 ||
+        start_node_index >= static_cast<int>(member_pixels.size())) {
+        throw std::out_of_range("invalid start_node_index");
+    }
+    if (start_node_index >= 0 && !member_pixels[start_node_index].empty()) {
+        throw std::invalid_argument("initial pointing must have an empty footprint");
+    }
+}
+
 // Shared half-dwell transformation used by both P1 and the P2 mode graph.
-// M4OPT does not specify a fixed initial pointing, so the first and last physical pointings are free. 
-// Equal padding is placed at both dummy ends:
-//   transformed path cost = physical route duration + 2 * padding.
-// to the complete graph symmetric and metric.
+// Free start: append s and t, so graph cost = physical duration + 2P.
+// Fixed start: reuse the supplied zero-exposure source and append only t,
+// so graph cost = physical duration (including initial slew) + P.
 static OrienteeringGraph addDummyEndpoints(
     const std::vector<std::vector<double>>& physical_slew_seconds,
     const std::vector<std::vector<int>>& mode_pixels,
     const std::vector<int>& tile_of_mode,
     const std::vector<double>& exposure_of_mode,
-    double physical_budget_seconds) {
+    double physical_budget_seconds,
+    int start_node_index) {
 
     validatePhysicalGraph(physical_slew_seconds, physical_budget_seconds);
 
@@ -100,8 +113,21 @@ static OrienteeringGraph addDummyEndpoints(
     const int tile_count =
         static_cast<int>(physical_slew_seconds.size());
     const int mode_count = static_cast<int>(mode_pixels.size());
-    const int start_node = mode_count;
-    const int end_node = mode_count + 1;
+    int start_node = mode_count;
+    if (start_node_index >= 0) {
+        const auto source = std::find(
+            tile_of_mode.begin(), tile_of_mode.end(), start_node_index);
+        if (source == tile_of_mode.end() ||
+            std::count(tile_of_mode.begin(), tile_of_mode.end(), start_node_index) != 1) {
+            throw std::invalid_argument("initial pointing must have exactly one graph node");
+        }
+        start_node = static_cast<int>(source - tile_of_mode.begin());
+        if (!mode_pixels[start_node].empty() || exposure_of_mode[start_node] != 0.0) {
+            throw std::invalid_argument("initial pointing must have zero exposure and reward");
+        }
+    }
+    const int end_node = mode_count + (start_node_index < 0 ? 1 : 0);
+    const int node_count = end_node + 1;
 
     double maximum_slew = 0.0;
     for (const std::vector<double>& row : physical_slew_seconds) {
@@ -114,22 +140,23 @@ static OrienteeringGraph addDummyEndpoints(
     OrienteeringGraph graph;
     graph.start_node = start_node;
     graph.end_node = end_node;
+    graph.initial_tile_index = start_node_index;
     graph.physical_tile_count = tile_count;
     graph.physical_budget = physical_budget_seconds;
-    graph.padding = 2.0 * end_padding;
+    graph.padding = (start_node_index < 0 ? 2.0 : 1.0) * end_padding;
     graph.solver_budget = physical_budget_seconds + graph.padding;
 
     graph.member_pixels = normalizeFootprints(mode_pixels);
-    graph.member_pixels.resize(mode_count + 2);
+    graph.member_pixels.resize(node_count);
 
     graph.tile_of_node = tile_of_mode;
-    graph.tile_of_node.resize(mode_count + 2, -1);
+    graph.tile_of_node.resize(node_count, -1);
 
     graph.exposure_of_node = exposure_of_mode;
-    graph.exposure_of_node.resize(mode_count + 2, 0.0);
+    graph.exposure_of_node.resize(node_count, 0.0);
 
     graph.costs.assign(
-        mode_count + 2, std::vector<double>(mode_count + 2, 0.0));
+        node_count, std::vector<double>(node_count, 0.0));
 
     for (int first = 0; first < mode_count; ++first) {
         const int first_tile = graph.tile_of_node[first];
@@ -164,14 +191,17 @@ static OrienteeringGraph addDummyEndpoints(
 
     for (int node = 0; node < mode_count; ++node) {
         const double dummy_cost = end_padding + 0.5 * graph.exposure_of_node[node];
-        graph.costs[start_node][node] = dummy_cost;
-        graph.costs[node][start_node] = dummy_cost;
+        if (start_node_index < 0) {
+            graph.costs[start_node][node] = dummy_cost;
+            graph.costs[node][start_node] = dummy_cost;
+        }
         graph.costs[node][end_node] = dummy_cost;
         graph.costs[end_node][node] = dummy_cost;
     }
 
     graph.costs[start_node][end_node] = graph.padding;
     graph.costs[end_node][start_node] = graph.padding;
+    graph.tile_of_node[start_node] = -1; // Never emit the source as an observation.
     return graph;
 }
 
@@ -179,7 +209,8 @@ OrienteeringGraph buildP1Graph(
                     const std::vector<std::vector<double>>& slew_seconds,
                     const std::vector<std::vector<int>>& member_pixels,
                     const std::vector<double>& dwell_seconds,
-                    double physical_budget_seconds) {
+                    double physical_budget_seconds,
+                    int start_node_index) {
 
     const int tile_count = static_cast<int>(slew_seconds.size());
     if (static_cast<int>(member_pixels.size()) != tile_count ||
@@ -187,6 +218,8 @@ OrienteeringGraph buildP1Graph(
         throw std::invalid_argument(
             "P1 needs one footprint and one dwell time per tile");
     }
+
+    validateInitialPointing(start_node_index, member_pixels);
 
     std::vector<int> tile_of_node(tile_count);
     for (int tile = 0; tile < tile_count; ++tile) {
@@ -198,7 +231,8 @@ OrienteeringGraph buildP1Graph(
         member_pixels,
         tile_of_node,
         dwell_seconds,
-        physical_budget_seconds);
+        physical_budget_seconds,
+        start_node_index);
 }
 
 OrienteeringGraph buildP2Graph(
@@ -208,7 +242,8 @@ OrienteeringGraph buildP2Graph(
     const std::vector<double>& required_exposure_seconds,
     double minimum_exposure_seconds,
     double maximum_exposure_seconds,
-    double physical_budget_seconds) {
+    double physical_budget_seconds,
+    int start_node_index) {
 
     const int tile_count = static_cast<int>(slew_seconds.size());
     const int pixel_count = static_cast<int>(pixel_probabilities.size());
@@ -216,6 +251,7 @@ OrienteeringGraph buildP2Graph(
     if (static_cast<int>(member_pixels.size()) != tile_count) {
         throw std::invalid_argument("P2 needs one footprint per tile");
     }
+    validateInitialPointing(start_node_index, member_pixels);
     if (static_cast<int>(required_exposure_seconds.size()) != pixel_count) {
         throw std::invalid_argument(
             "P2 needs one exposure threshold per compact pixel");
@@ -247,6 +283,14 @@ OrienteeringGraph buildP2Graph(
     std::vector<double> exposure_of_mode;
 
     for (int tile = 0; tile < tile_count; ++tile) {
+        if (tile == start_node_index) {
+            // Preserve exactly one source, even when minimum exposure is positive
+            // or all reward-bearing modes are pruned.
+            mode_pixels.push_back({});
+            tile_of_mode.push_back(tile);
+            exposure_of_mode.push_back(0.0);
+            continue;
+        }
         std::vector<double> levels{minimum_exposure_seconds};
 
         for (int pixel : footprints[tile]) {
@@ -296,7 +340,8 @@ OrienteeringGraph buildP2Graph(
         mode_pixels,
         tile_of_mode,
         exposure_of_mode,
-        physical_budget_seconds);
+        physical_budget_seconds,
+        start_node_index);
 }
 
 // The mode-expanded P2 graph may contain several selected modes of one tile.
@@ -310,7 +355,9 @@ static std::vector<int> removeRepeatedP2Modes(
     std::vector<int> largest_mode(graph.physical_tile_count, -1);
     for (std::size_t position = 1; position + 1 < path.size(); ++position) {
         const int node = path[position];
-        if (node < 0 || node >= graph.start_node) {
+        if (node < 0 || node >= static_cast<int>(graph.tile_of_node.size()) ||
+            graph.tile_of_node[node] < 0 ||
+            graph.tile_of_node[node] >= graph.physical_tile_count) {
             throw std::runtime_error("solver returned an invalid mode node");
         }
         const int tile = graph.tile_of_node[node];
@@ -588,7 +635,7 @@ static SolverOutput runAlgorithm(
             graph.end_node);
     } else if (output.algorithm == "rg_qp") {
         const RecursiveGreedyParams parameters = makeParameters(
-            graph.physical_tile_count,
+            graph.physical_tile_count - (graph.initial_tile_index >= 0 ? 1 : 0),
             max_depth,
             reward_levels,
             time_quantum,
@@ -692,10 +739,13 @@ static M4OptResult makeM4OptResult(
     std::vector<char> covered(pixel_probabilities.size(), 0);
 
     double current_time = 0.0;
-    int previous_tile = -1;
+    int previous_tile = graph.initial_tile_index;
 
     for (std::size_t position = 1; position + 1 < path.size(); ++position) {
         const int node = path[position];
+        if (node < 0 || node >= static_cast<int>(graph.tile_of_node.size())) {
+            throw std::runtime_error("solver returned an invalid graph node");
+        }
         const int tile = graph.tile_of_node[node];
 
         if (tile < 0 || tile >= graph.physical_tile_count) {
@@ -790,13 +840,15 @@ M4OptResult solveP1(
     double time_quantum,
     double time_limit_seconds,
     int thread_count,
-    double mip_gap) {
+    double mip_gap,
+    int start_node_index) {
 
     const OrienteeringGraph graph = buildP1Graph(
         slew_seconds,
         member_pixels,
         dwell_seconds,
-        physical_budget_seconds);
+        physical_budget_seconds,
+        start_node_index);
 
     return solveGraph(
         graph,
@@ -826,7 +878,8 @@ M4OptResult solveP2(
     double time_quantum,
     double time_limit_seconds,
     int thread_count,
-    double mip_gap) {
+    double mip_gap,
+    int start_node_index) {
 
     const OrienteeringGraph graph = buildP2Graph(
         slew_seconds,
@@ -835,7 +888,8 @@ M4OptResult solveP2(
         required_exposure_seconds,
         minimum_exposure_seconds,
         maximum_exposure_seconds,
-        physical_budget_seconds);
+        physical_budget_seconds,
+        start_node_index);
 
     return solveGraph(
         graph,
