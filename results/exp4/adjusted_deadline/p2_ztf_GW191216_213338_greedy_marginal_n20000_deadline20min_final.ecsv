@@ -1,0 +1,221 @@
+# %ECSV 1.0
+# ---
+# datatype:
+# - {name: action, datatype: string, description: Action for the spacecraft}
+# - {name: start_time, datatype: string, description: Start time of segment}
+# - {name: duration, unit: s, datatype: float64, description: Duration of segment}
+# - name: observer_location.x
+#   unit: m
+#   datatype: float64
+#   description: Position of the spacecraft
+#   meta: !!omap
+#   - {source: IRAF Observatory Database}
+#   - {timezone: US/Pacific}
+# - name: observer_location.y
+#   unit: m
+#   datatype: float64
+#   description: Position of the spacecraft
+#   meta: !!omap
+#   - {source: IRAF Observatory Database}
+#   - {timezone: US/Pacific}
+# - name: observer_location.z
+#   unit: m
+#   datatype: float64
+#   description: Position of the spacecraft
+#   meta: !!omap
+#   - {source: IRAF Observatory Database}
+#   - {timezone: US/Pacific}
+# - {name: target_coord.ra, unit: deg, datatype: float64}
+# - {name: target_coord.dec, unit: deg, datatype: float64}
+# - {name: roll, unit: deg, datatype: float64, description: Position angle of the FOV}
+# - {name: field_id, datatype: int64, description: The mission's ID for the field observed}
+# - {name: bandpass, datatype: string, description: Detector bandpass}
+# meta: !!omap
+# - {command: /home/research/w.yanwang/miniforge3/envs/m4opt-fork/bin/m4opt schedule /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/data/exp2/GW191216_213338.fits
+#     /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp_4_planning_budget_adjusted/p2_ztf_GW191216_213338_greedy_marginal_n20000_deadline20min_final.ecsv
+#     --mission=ztf --bandpass=r --nside=64 --max-fields=20000 --visits=1 --no-time-windows --delay=0s --deadline=1118.961811114103s --time-step=1min
+#     --timelimit=3600s --jobs=36 --initial-ra=120.0 --initial-dec=-30.0 --initial-roll=0.0 --absmag-mean=-21.5 --no-appmag-dist --snr=3.0
+#     --exptime-min=1s --exptime-max=1hour --cpp-algorithm=greedy_marginal}
+# - {version: 0.1.dev930+gc957d9900}
+# - args:
+#     absmag_mean: -21.5
+#     absmag_stdev: 0.0
+#     appmag_dist: false
+#     bandpass: [r]
+#     cpp_algorithm: greedy_marginal
+#     cutoff: null
+#     deadline: !astropy.units.Quantity
+#       unit: &id001 !astropy.units.Unit {unit: s}
+#       value: 1118.961811114103
+#     delay: !astropy.units.Quantity
+#       unit: *id001
+#       value: 0.0
+#     event_time: '2019-12-16T21:33:38.488'
+#     exptime_max: !astropy.units.Quantity
+#       unit: !astropy.units.Unit {unit: h}
+#       value: 1.0
+#     exptime_min:
+#     - !astropy.units.Quantity
+#       unit: *id001
+#       value: 1.0
+#     initial_dec: -30.0
+#     initial_ra: 120.0
+#     initial_roll: 0.0
+#     max_fields: 20000
+#     mission: ztf
+#     nside: 64
+#     skygrid: null
+#     skymap: /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/data/exp2/GW191216_213338.fits
+#     snr: 3.0
+#     solution_time: !astropy.units.Quantity
+#       unit: *id001
+#       value: 0.032628707
+#     solver_call_time: !astropy.units.Quantity
+#       unit: *id001
+#       value: 0.46753975935280323
+#     start_node_index: 1778
+#     time_step: !astropy.units.Quantity
+#       unit: !astropy.units.Unit {unit: min}
+#       value: 1.0
+#     time_windows: false
+#     visits: 1
+# - {objective_value: 0.7392008812568239}
+# - {best_bound: .nan}
+# - {solution_status: feasible}
+# - solution_time: !astropy.units.Quantity
+#     unit: *id001
+#     value: 0.032628707
+# - total_time:
+#     observe: !astropy.units.Quantity
+#       unit: *id001
+#       value: 887.2692294635253
+#     slack: !astropy.units.Quantity
+#       unit: *id001
+#       value: 0.0457034427556664
+#     slew: !astropy.units.Quantity
+#       unit: *id001
+#       value: 231.646878207822
+# - planning_time: !astropy.units.Quantity
+#     unit: *id001
+#     value: 6.678569291718304
+# - {original_deadline_seconds: 1200.0}
+# - {original_observation_budget_seconds: 1200.0}
+# - {planning_time_reserve_seconds: 81.0381888858974}
+# - {adjusted_observation_budget_seconds: 1118.9618111141026}
+# - {adjusted_deadline_seconds: 1118.9618111141026}
+# - {route_duration_seconds: 1118.915999999997}
+# - {response_completion_seconds: 1125.5945692917153}
+# - {complete_schedule_meets_deadline: true}
+# - {observations_completed_by_deadline: 12}
+# - {probability_by_response_deadline: 0.7392008812568239}
+# - {stage: final}
+# - {problem: p2}
+# - {mission: ztf}
+# - {algorithm: greedy_marginal}
+# - {planner_executed: true}
+# - {calibration_metric: planning_time_seconds}
+# - {calibration_scope: maximum over configured maps and repeats at this deadline}
+# - {calibration_maps: 37}
+# - {calibration_runs: 370}
+# - {calibration_complete: true}
+# - {calibration_worst_file: /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp_4_planning_budget/p2_ztf_GW191113_071753_greedy_marginal_n20000_deadline20min_10.ecsv}
+# - {planning_time_overrun: false}
+# - __serialized_columns__:
+#     duration:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: duration}
+#     observer_location:
+#       __class__: astropy.coordinates.earth.EarthLocation
+#       __info__:
+#         description: Position of the spacecraft
+#         meta: {source: IRAF Observatory Database, timezone: US/Pacific}
+#       ellipsoid: WGS84
+#       x: !astropy.table.SerializedColumn
+#         __class__: astropy.units.quantity.Quantity
+#         __info__:
+#           description: Position of the spacecraft
+#           meta: {source: IRAF Observatory Database, timezone: US/Pacific}
+#         unit: &id002 !astropy.units.Unit {unit: m}
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: observer_location.x}
+#       y: !astropy.table.SerializedColumn
+#         __class__: astropy.units.quantity.Quantity
+#         __info__:
+#           description: Position of the spacecraft
+#           meta: {source: IRAF Observatory Database, timezone: US/Pacific}
+#         unit: *id002
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: observer_location.y}
+#       z: !astropy.table.SerializedColumn
+#         __class__: astropy.units.quantity.Quantity
+#         __info__:
+#           description: Position of the spacecraft
+#           meta: {source: IRAF Observatory Database, timezone: US/Pacific}
+#         unit: *id002
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: observer_location.z}
+#     roll:
+#       __class__: astropy.units.quantity.Quantity
+#       __info__: {description: Position angle of the FOV}
+#       unit: &id003 !astropy.units.Unit {unit: deg}
+#       value: !astropy.table.SerializedColumn
+#         __class__: astropy.utils.masked.core.MaskedNDArray
+#         data: !astropy.table.SerializedColumn {name: roll}
+#     start_time:
+#       __class__: astropy.time.core.Time
+#       format: iso
+#       in_subfmt: '*'
+#       out_subfmt: '*'
+#       precision: 3
+#       scale: utc
+#       value: !astropy.table.SerializedColumn {name: start_time}
+#     target_coord:
+#       __class__: astropy.coordinates.sky_coordinate.SkyCoord
+#       __info__: {description: Coordinates of the center of the FOV}
+#       dec: !astropy.table.SerializedColumn
+#         __class__: astropy.coordinates.angles.core.Latitude
+#         unit: *id003
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: target_coord.dec}
+#       frame: icrs
+#       ra: !astropy.table.SerializedColumn
+#         __class__: astropy.coordinates.angles.core.Longitude
+#         unit: *id003
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: target_coord.ra}
+#         wrap_angle: !astropy.coordinates.Angle
+#           unit: *id003
+#           value: 360.0
+#       representation_type: spherical
+# schema: astropy-2.0
+action start_time duration observer_location.x observer_location.y observer_location.z target_coord.ra target_coord.dec roll field_id bandpass
+slew "2019-12-16 21:33:38.488" 72.21348905004041 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:34:50.701" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 316.84214 22.55 0.0 1639 r
+slew "2019-12-16 21:34:51.701" 10.58295355772975 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:35:02.284" 2.668116085165898 -2410346.7821765793 -4758666.825040505 3487942.9750245656 313.87167 33.35 0.0 688 r
+slew "2019-12-16 21:35:04.952" 13.72226853714616 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:35:18.674" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 318.88913 15.35 0.0 1590 r
+slew "2019-12-16 21:35:19.674" 16.61344495010245 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:35:36.288" 600.3108525236918 -2410346.7821765793 -4758666.825040505 3487942.9750245656 312.82187 40.55 0.0 730 r
+slew "2019-12-16 21:45:36.599" 10.478340033356302 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:45:47.077" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 314.80237 29.75 0.0 1686 r
+slew "2019-12-16 21:45:48.077" 15.21351935186704 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:46:03.290" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 320.8042 8.15 0.0 1539 r
+slew "2019-12-16 21:46:04.290" 8.887242696120824 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:46:13.178" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 324.05338 0.95 0.0 1487 r
+slew "2019-12-16 21:46:14.178" 8.974283343190066 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:46:23.152" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 320.44222 -6.25 0.0 1435 r
+slew "2019-12-16 21:46:24.152" 20.671897804767152 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:46:44.824" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 322.46205 29.75 0.0 1687 r
+slew "2019-12-16 21:46:45.824" 14.520471618949518 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:47:00.344" 275.29026085466757 -2410346.7821765793 -4758666.825040505 3487942.9750245656 312.24615 47.75 0.0 768 r
+slew "2019-12-16 21:51:35.635" 31.11343084542085 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:52:06.748" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 323.6895 -13.45 0.0 1383 r
+slew "2019-12-16 21:52:07.748" 8.655536419131504 "" "" "" "" "" "" "" ""
+observe "2019-12-16 21:52:16.404" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 321.6175 -20.65 0.0 1331 r

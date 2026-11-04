@@ -1,8 +1,5 @@
 .vscode
-build*/
 .DS_Store
 *.log
-data*/
-results*/
 CMakeLists*.txt
 */*CMake*.*

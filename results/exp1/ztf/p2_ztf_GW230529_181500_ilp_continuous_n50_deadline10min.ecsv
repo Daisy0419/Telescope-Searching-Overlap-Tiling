@@ -1,0 +1,251 @@
+# %ECSV 1.0
+# ---
+# datatype:
+# - {name: action, datatype: string, description: Action for the spacecraft}
+# - {name: start_time, datatype: string, description: Start time of segment}
+# - {name: duration, unit: s, datatype: float64, description: Duration of segment}
+# - name: observer_location.x
+#   unit: m
+#   datatype: float64
+#   description: Position of the spacecraft
+#   meta: !!omap
+#   - {source: IRAF Observatory Database}
+#   - {timezone: US/Pacific}
+# - name: observer_location.y
+#   unit: m
+#   datatype: float64
+#   description: Position of the spacecraft
+#   meta: !!omap
+#   - {source: IRAF Observatory Database}
+#   - {timezone: US/Pacific}
+# - name: observer_location.z
+#   unit: m
+#   datatype: float64
+#   description: Position of the spacecraft
+#   meta: !!omap
+#   - {source: IRAF Observatory Database}
+#   - {timezone: US/Pacific}
+# - {name: target_coord.ra, unit: deg, datatype: float64}
+# - {name: target_coord.dec, unit: deg, datatype: float64}
+# - {name: roll, unit: deg, datatype: float64, description: Position angle of the FOV}
+# - {name: field_id, datatype: int64, description: The mission's ID for the field observed}
+# - {name: bandpass, datatype: string, description: Detector bandpass}
+# meta: !!omap
+# - {command: /home/research/w.yanwang/miniforge3/envs/m4opt-fork/bin/m4opt schedule /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/data/exp1/GW230529_181500.fits
+#     /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp_1_match_deadline/ztf/p2_ztf_GW230529_181500_ilp_continuous_n50_deadline10min.ecsv
+#     --mission=ztf --bandpass=r --nside=64 --max-fields=50 --visits=1 --no-time-windows --delay=0s --deadline=10min --time-step=1min
+#     --timelimit=600s --jobs=36 --initial-ra=120.0 --initial-dec=-30.0 --initial-roll=0.0 --absmag-mean=-21.5 --no-appmag-dist --snr=3.0
+#     --exptime-min=1s --exptime-max=1hour --cpp-algorithm=ilp_continuous}
+# - {version: 0.1.dev930+gc957d9900}
+# - args:
+#     absmag_mean: -21.5
+#     absmag_stdev: 0.0
+#     appmag_dist: false
+#     bandpass: [r]
+#     cpp_algorithm: ilp_continuous
+#     cutoff: null
+#     deadline: !astropy.units.Quantity
+#       unit: &id002 !astropy.units.Unit {unit: min}
+#       value: 10.0
+#     delay: !astropy.units.Quantity
+#       unit: &id001 !astropy.units.Unit {unit: s}
+#       value: 0.0
+#     event_time: '2023-05-29T18:15:00.747'
+#     exptime_max: !astropy.units.Quantity
+#       unit: !astropy.units.Unit {unit: h}
+#       value: 1.0
+#     exptime_min:
+#     - !astropy.units.Quantity
+#       unit: *id001
+#       value: 1.0
+#     initial_dec: -30.0
+#     initial_ra: 120.0
+#     initial_roll: 0.0
+#     max_fields: 50
+#     mission: ztf
+#     nside: 64
+#     skygrid: null
+#     skymap: /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/data/exp1/GW230529_181500.fits
+#     snr: 3.0
+#     solution_time: !astropy.units.Quantity
+#       unit: *id001
+#       value: 600.990895748
+#     solver_call_time: !astropy.units.Quantity
+#       unit: *id001
+#       value: 601.006661738269
+#     start_node_index: 50
+#     time_step: !astropy.units.Quantity
+#       unit: *id002
+#       value: 1.0
+#     time_windows: false
+#     visits: 1
+# - {objective_value: 0.0786698273144906}
+# - {best_bound: 0.0792716503930035}
+# - {solution_status: feasible}
+# - solution_time: !astropy.units.Quantity
+#     unit: *id001
+#     value: 600.990895748
+# - total_time:
+#     observe: !astropy.units.Quantity
+#       unit: *id001
+#       value: 212.07352634784203
+#     slack: !astropy.units.Quantity
+#       unit: *id001
+#       value: 8.64095281554853
+#     slew: !astropy.units.Quantity
+#       unit: *id001
+#       value: 379.2855208366094
+# - planning_time: !astropy.units.Quantity
+#     unit: *id001
+#     value: 606.5477334903553
+# - __serialized_columns__:
+#     duration:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: duration}
+#     observer_location:
+#       __class__: astropy.coordinates.earth.EarthLocation
+#       __info__:
+#         description: Position of the spacecraft
+#         meta: {source: IRAF Observatory Database, timezone: US/Pacific}
+#       ellipsoid: WGS84
+#       x: !astropy.table.SerializedColumn
+#         __class__: astropy.units.quantity.Quantity
+#         __info__:
+#           description: Position of the spacecraft
+#           meta: {source: IRAF Observatory Database, timezone: US/Pacific}
+#         unit: &id003 !astropy.units.Unit {unit: m}
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: observer_location.x}
+#       y: !astropy.table.SerializedColumn
+#         __class__: astropy.units.quantity.Quantity
+#         __info__:
+#           description: Position of the spacecraft
+#           meta: {source: IRAF Observatory Database, timezone: US/Pacific}
+#         unit: *id003
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: observer_location.y}
+#       z: !astropy.table.SerializedColumn
+#         __class__: astropy.units.quantity.Quantity
+#         __info__:
+#           description: Position of the spacecraft
+#           meta: {source: IRAF Observatory Database, timezone: US/Pacific}
+#         unit: *id003
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: observer_location.z}
+#     roll:
+#       __class__: astropy.units.quantity.Quantity
+#       __info__: {description: Position angle of the FOV}
+#       unit: &id004 !astropy.units.Unit {unit: deg}
+#       value: !astropy.table.SerializedColumn
+#         __class__: astropy.utils.masked.core.MaskedNDArray
+#         data: !astropy.table.SerializedColumn {name: roll}
+#     start_time:
+#       __class__: astropy.time.core.Time
+#       format: iso
+#       in_subfmt: '*'
+#       out_subfmt: '*'
+#       precision: 3
+#       scale: utc
+#       value: !astropy.table.SerializedColumn {name: start_time}
+#     target_coord:
+#       __class__: astropy.coordinates.sky_coordinate.SkyCoord
+#       __info__: {description: Coordinates of the center of the FOV}
+#       dec: !astropy.table.SerializedColumn
+#         __class__: astropy.coordinates.angles.core.Latitude
+#         unit: *id004
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: target_coord.dec}
+#       frame: icrs
+#       ra: !astropy.table.SerializedColumn
+#         __class__: astropy.coordinates.angles.core.Longitude
+#         unit: *id004
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: target_coord.ra}
+#         wrap_angle: !astropy.coordinates.Angle
+#           unit: *id004
+#           value: 360.0
+#       representation_type: spherical
+# schema: astropy-2.0
+action start_time duration observer_location.x observer_location.y observer_location.z target_coord.ra target_coord.dec roll field_id bandpass
+slew "2023-05-29 18:15:00.747" 30.274092640965403 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:15:31.021" 19.654460215982965 -2410346.7821765793 -4758666.825040505 3487942.9750245656 89.821 22.55 0.0 1608 r
+slew "2023-05-29 18:15:50.676" 8.595178881210042 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:15:59.271" 7.405596525008745 -2410346.7821765793 -4758666.825040505 3487942.9750245656 82.43329 22.55 0.0 1607 r
+slew "2023-05-29 18:16:06.677" 8.747607294858124 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:16:15.424" 6.542376701511763 -2410346.7821765793 -4758666.825040505 3487942.9750245656 79.84043 15.35 0.0 1556 r
+slew "2023-05-29 18:16:21.967" 17.92736011867903 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:16:39.894" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 54.37826 29.75 0.0 1652 r
+slew "2023-05-29 18:16:40.894" 8.57527888130021 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:16:49.469" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 52.88243 22.55 0.0 1603 r
+slew "2023-05-29 18:16:50.469" 8.595184698422676 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:16:59.064" 1.4390830946739328 -2410346.7821765793 -4758666.825040505 3487942.9750245656 45.49471 22.55 0.0 1602 r
+slew "2023-05-29 18:17:00.504" 60.59005458018587 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:18:01.094" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 275.39018 -31.45 0.0 234 r
+slew "2023-05-29 18:18:02.094" 6.236137662303695 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:18:08.330" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 273.91893 -27.85 0.0 1275 r
+slew "2023-05-29 18:18:09.330" 8.946942155826896 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:18:18.277" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 277.4193 -35.05 0.0 1229 r
+slew "2023-05-29 18:18:19.277" 9.080831459728753 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:18:28.358" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 269.17315 -35.05 0.0 1228 r
+slew "2023-05-29 18:18:29.358" 6.254779429030514 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:18:35.612" 3.8805554649441296 -2410346.7821765793 -4758666.825040505 3487942.9750245656 267.64139 -31.45 0.0 233 r
+slew "2023-05-29 18:18:39.493" 6.182927707519044 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:18:45.676" 15.686923106376119 -2410346.7821765793 -4758666.825040505 3487942.9750245656 266.355 -27.85 0.0 1274 r
+slew "2023-05-29 18:19:01.363" 8.409725925865768 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:19:09.772" 5.655783831901592 -2410346.7821765793 -4758666.825040505 3487942.9750245656 272.44354 -24.25 0.0 282 r
+slew "2023-05-29 18:19:15.428" 6.23229675958324 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:19:21.661" 20.496174266031712 -2410346.7821765793 -4758666.825040505 3487942.9750245656 270.985 -20.65 0.0 1324 r
+slew "2023-05-29 18:19:42.157" 13.269857857111509 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:19:55.427" 4.268126581644852 -2410346.7821765793 -4758666.825040505 3487942.9750245656 260.927 -35.05 0.0 1227 r
+slew "2023-05-29 18:19:59.695" 6.129078349524707 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:20:05.824" 34.93892344439889 -2410346.7821765793 -4758666.825040505 3487942.9750245656 262.00037 -38.65 0.0 187 r
+slew "2023-05-29 18:20:40.763" 8.67761502535913 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:20:49.440" 14.138480870343937 -2410346.7821765793 -4758666.825040505 3487942.9750245656 259.79383 -31.45 0.0 232 r
+slew "2023-05-29 18:21:03.579" 6.170329536015013 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:21:09.749" 2.4122064814459043 -2410346.7821765793 -4758666.825040505 3487942.9750245656 258.55447 -27.85 0.0 1273 r
+slew "2023-05-29 18:21:12.161" 6.061652480315291 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:21:18.223" 2.168046998931451 -2410346.7821765793 -4758666.825040505 3487942.9750245656 257.81886 -24.25 0.0 280 r
+slew "2023-05-29 18:21:20.391" 8.535473039029497 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:21:28.926" 1.3765271380881103 -2410346.7821765793 -4758666.825040505 3487942.9750245656 250.53343 -24.25 0.0 279 r
+slew "2023-05-29 18:21:30.303" 9.159874612171242 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:21:39.463" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 242.95342 -27.85 0.0 1271 r
+slew "2023-05-29 18:21:40.463" 8.499922597762483 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:21:48.963" 2.339653303000856 -2410346.7821765793 -4758666.825040505 3487942.9750245656 242.35409 -20.65 0.0 1320 r
+slew "2023-05-29 18:21:51.302" 8.564296678871925 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:21:59.867" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 235.96257 -24.25 0.0 277 r
+slew "2023-05-29 18:22:00.867" 6.066802511678429 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:22:06.934" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 235.19636 -20.65 0.0 1319 r
+slew "2023-05-29 18:22:07.934" 8.629150268601201 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:22:16.563" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 228.67714 -24.25 0.0 276 r
+slew "2023-05-29 18:22:17.563" 8.60709444496476 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:22:26.170" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 235.15289 -27.85 0.0 1270 r
+slew "2023-05-29 18:22:27.170" 6.0730638312728615 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:22:33.243" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 235.95483 -31.45 0.0 229 r
+slew "2023-05-29 18:22:34.243" 6.061260180951909 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:22:40.304" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 236.68806 -35.05 0.0 1224 r
+slew "2023-05-29 18:22:41.304" 6.066548902689769 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:22:47.371" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 235.92333 -38.65 0.0 184 r
+slew "2023-05-29 18:22:48.371" 10.566379866791909 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:22:58.937" 10.451026825074328 -2410346.7821765793 -4758666.825040505 3487942.9750245656 246.49359 -42.25 0.0 1183 r
+slew "2023-05-29 18:23:09.388" 6.356749880539036 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:23:15.745" 1.9609535849589725 -2410346.7821765793 -4758666.825040505 3487942.9750245656 244.658 -38.65 0.0 185 r
+slew "2023-05-29 18:23:17.706" 6.00300618992355 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:23:23.709" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 244.81925 -35.05 0.0 1225 r
+slew "2023-05-29 18:23:24.709" 6.095231079350103 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:23:30.804" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 243.90117 -31.45 0.0 230 r
+slew "2023-05-29 18:23:31.804" 8.9142189786879 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:23:40.718" 1.0 -2410346.7821765793 -4758666.825040505 3487942.9750245656 251.8475 -31.45 0.0 231 r
+slew "2023-05-29 18:23:41.718" 6.112466096735058 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:23:47.831" 1.5344028771653422 -2410346.7821765793 -4758666.825040505 3487942.9750245656 252.84735 -35.05 0.0 1226 r
+slew "2023-05-29 18:23:49.365" 6.034114890923204 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:23:55.399" 7.201988197540326 -2410346.7821765793 -4758666.825040505 3487942.9750245656 253.39267 -38.65 0.0 186 r
+slew "2023-05-29 18:24:02.601" 11.534904212615665 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:24:14.136" 25.280641585245988 -2410346.7821765793 -4758666.825040505 3487942.9750245656 245.60979 -49.45 0.0 1143 r
+slew "2023-05-29 18:24:39.417" 6.448031129243969 "" "" "" "" "" "" "" ""
+observe "2023-05-29 18:24:45.865" 6.241595253572106 -2410346.7821765793 -4758666.825040505 3487942.9750245656 243.52941 -53.05 0.0 108 r

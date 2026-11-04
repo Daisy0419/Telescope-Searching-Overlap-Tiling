@@ -1,0 +1,9 @@
+problem,mission,stage,algorithm,max_fields,deadline_seconds,metric,events_used,events_expected,runs_used,mean,ci95_low,ci95_high,ci_method,plotted,wcet_seconds,adjusted_deadline_seconds,calibration_runs_used,complete_calibration
+p1,ztf,final,gcp,20000,300.0,probability_percent,37,37,37,43.653041203255064,34.189681329235746,53.832777921998044,BCa bootstrap across paired event means,True,6.677180038765073,293.3228199612349,370,True
+p2,ztf,final,gcp,20000,300.0,probability_percent,37,37,37,46.57426303193383,36.650234706203484,57.10416897021881,BCa bootstrap across paired event means,True,18.974732980132103,281.0252670198679,370,True
+p1,ztf,final,gcp,20000,600.0,probability_percent,37,37,37,55.08869878785122,44.855763657812034,64.9497671076132,BCa bootstrap across paired event means,True,6.6048095356673,593.3951904643327,370,True
+p2,ztf,final,gcp,20000,600.0,probability_percent,37,37,37,58.878843481003244,48.0127179466986,68.9900967678734,BCa bootstrap across paired event means,True,23.38653582148254,576.6134641785175,370,True
+p1,ztf,final,gcp,20000,1200.0,probability_percent,37,37,37,64.6791284034035,54.10954928973136,73.75856741010688,BCa bootstrap across paired event means,True,6.627282500267029,1193.372717499733,370,True
+p2,ztf,final,gcp,20000,1200.0,probability_percent,37,37,37,68.32637301105831,57.39397366634577,77.41762884049854,BCa bootstrap across paired event means,True,28.986085334792733,1171.0139146652073,370,True
+p1,ztf,final,gcp,20000,1800.0,probability_percent,37,37,37,69.10499413810057,58.642052787146355,77.71513250372186,BCa bootstrap across paired event means,True,6.563581582158804,1793.4364184178412,370,True
+p2,ztf,final,gcp,20000,1800.0,probability_percent,37,37,37,72.83105000687357,62.08525301146252,81.26102339348859,BCa bootstrap across paired event means,True,38.75728004053235,1761.2427199594676,370,True

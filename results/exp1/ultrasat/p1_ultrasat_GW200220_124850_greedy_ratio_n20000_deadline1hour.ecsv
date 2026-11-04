@@ -1,0 +1,204 @@
+# %ECSV 1.0
+# ---
+# datatype:
+# - {name: action, datatype: string, description: Action for the spacecraft}
+# - {name: start_time, datatype: string, description: Start time of segment}
+# - {name: duration, unit: s, datatype: float64, description: Duration of segment}
+# - {name: observer_location.x, unit: km, datatype: float64, description: Position of the spacecraft}
+# - {name: observer_location.y, unit: km, datatype: float64, description: Position of the spacecraft}
+# - {name: observer_location.z, unit: km, datatype: float64, description: Position of the spacecraft}
+# - {name: target_coord.ra, unit: deg, datatype: float64}
+# - {name: target_coord.dec, unit: deg, datatype: float64}
+# - {name: roll, unit: deg, datatype: float64, description: Position angle of the FOV}
+# - {name: field_id, datatype: int64, description: The mission's ID for the field observed}
+# - {name: bandpass, datatype: string, description: Detector bandpass}
+# meta: !!omap
+# - {command: /home/research/w.yanwang/miniforge3/envs/m4opt-fork/bin/m4opt schedule /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/data/exp1/GW200220_124850.fits
+#     /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp_1/ultrasat/p1_ultrasat_GW200220_124850_greedy_ratio_n20000_deadline1hour.ecsv
+#     --mission=ultrasat --bandpass=NUV --nside=64 --max-fields=20000 --visits=1 --no-time-windows --delay=0s --deadline=1hour --time-step=1min
+#     --timelimit=3600s --jobs=36 --skygrid=allsky --initial-ra=120.0 --initial-dec=-30.0 --initial-roll=0.0 --exptime-min=45s --cpp-algorithm=greedy_ratio}
+# - {version: 0.1.dev930+gc957d9900}
+# - args:
+#     absmag_mean: null
+#     absmag_stdev: 0.0
+#     appmag_dist: true
+#     bandpass: [NUV]
+#     cpp_algorithm: greedy_ratio
+#     cutoff: null
+#     deadline: !astropy.units.Quantity
+#       unit: !astropy.units.Unit {unit: h}
+#       value: 1.0
+#     delay: !astropy.units.Quantity
+#       unit: &id001 !astropy.units.Unit {unit: s}
+#       value: 0.0
+#     event_time: '2020-02-20T12:48:50.152'
+#     exptime_max: !astropy.units.Quantity
+#       unit: *id001
+#       value: .inf
+#     exptime_min:
+#     - !astropy.units.Quantity
+#       unit: *id001
+#       value: 45.0
+#     initial_dec: -30.0
+#     initial_ra: 120.0
+#     initial_roll: 0.0
+#     max_fields: 20000
+#     mission: ultrasat
+#     nside: 64
+#     skygrid: allsky
+#     skymap: /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/data/exp1/GW200220_124850.fits
+#     snr: 5.0
+#     solution_time: !astropy.units.Quantity
+#       unit: *id001
+#       value: 0.002617017
+#     solver_call_time: !astropy.units.Quantity
+#       unit: *id001
+#       value: 0.011136281304061413
+#     start_node_index: 361
+#     time_step: !astropy.units.Quantity
+#       unit: !astropy.units.Unit {unit: min}
+#       value: 1.0
+#     time_windows: false
+#     visits: 1
+# - {objective_value: 0.8992964191427664}
+# - {best_bound: .nan}
+# - {solution_status: feasible}
+# - solution_time: !astropy.units.Quantity
+#     unit: *id001
+#     value: 0.002617017
+# - total_time:
+#     observe: !astropy.units.Quantity
+#       unit: *id001
+#       value: 1260.0
+#     slack: !astropy.units.Quantity
+#       unit: *id001
+#       value: 20.260438881470236
+#     slew: !astropy.units.Quantity
+#       unit: *id001
+#       value: 2319.7395611185298
+# - planning_time: !astropy.units.Quantity
+#     unit: *id001
+#     value: 0.7655884772539139
+# - __serialized_columns__:
+#     duration:
+#       __class__: astropy.units.quantity.Quantity
+#       unit: *id001
+#       value: !astropy.table.SerializedColumn {name: duration}
+#     observer_location:
+#       __class__: astropy.coordinates.earth.EarthLocation
+#       __info__: {description: Position of the spacecraft}
+#       ellipsoid: WGS84
+#       x: !astropy.table.SerializedColumn
+#         __class__: astropy.units.quantity.Quantity
+#         __info__: {description: Position of the spacecraft}
+#         unit: &id002 !astropy.units.Unit {unit: km}
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: observer_location.x}
+#       y: !astropy.table.SerializedColumn
+#         __class__: astropy.units.quantity.Quantity
+#         __info__: {description: Position of the spacecraft}
+#         unit: *id002
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: observer_location.y}
+#       z: !astropy.table.SerializedColumn
+#         __class__: astropy.units.quantity.Quantity
+#         __info__: {description: Position of the spacecraft}
+#         unit: *id002
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: observer_location.z}
+#     roll:
+#       __class__: astropy.units.quantity.Quantity
+#       __info__: {description: Position angle of the FOV}
+#       unit: &id003 !astropy.units.Unit {unit: deg}
+#       value: !astropy.table.SerializedColumn
+#         __class__: astropy.utils.masked.core.MaskedNDArray
+#         data: !astropy.table.SerializedColumn {name: roll}
+#     start_time:
+#       __class__: astropy.time.core.Time
+#       format: iso
+#       in_subfmt: '*'
+#       out_subfmt: '*'
+#       precision: 3
+#       scale: utc
+#       value: !astropy.table.SerializedColumn {name: start_time}
+#     target_coord:
+#       __class__: astropy.coordinates.sky_coordinate.SkyCoord
+#       __info__: {description: Coordinates of the center of the FOV}
+#       dec: !astropy.table.SerializedColumn
+#         __class__: astropy.coordinates.angles.core.Latitude
+#         unit: *id003
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: target_coord.dec}
+#       frame: icrs
+#       ra: !astropy.table.SerializedColumn
+#         __class__: astropy.coordinates.angles.core.Longitude
+#         unit: *id003
+#         value: !astropy.table.SerializedColumn
+#           __class__: astropy.utils.masked.core.MaskedNDArray
+#           data: !astropy.table.SerializedColumn {name: target_coord.ra}
+#         wrap_angle: !astropy.coordinates.Angle
+#           unit: *id003
+#           value: 360.0
+#       representation_type: spherical
+# schema: astropy-2.0
+action start_time duration observer_location.x observer_location.y observer_location.z target_coord.ra target_coord.dec roll field_id bandpass
+slew "2020-02-20 12:48:50.152" 180.43733938932712 "" "" "" "" "" "" "" ""
+observe "2020-02-20 12:51:50.589" 45.0 -10342.047114535293 -40860.2022696063 474.3051233067662 229.6469 33.0921 -87.8129190782664 80 NUV
+slew "2020-02-20 12:52:35.589" 46.251210406646344 "" "" "" "" "" "" "" ""
+observe "2020-02-20 12:53:21.840" 45.0 -10342.323311116072 -40860.341938044294 458.9319727582467 232.7542 45.71943 -89.52500936595462 50 NUV
+slew "2020-02-20 12:54:06.840" 58.04894224296052 "" "" "" "" "" "" "" ""
+observe "2020-02-20 12:55:04.889" 45.0 -10342.636905321742 -40860.49325034768 441.5468238109629 261.0982 57.58194 -68.97201132050972 26 NUV
+slew "2020-02-20 12:55:49.889" 93.03850924463441 "" "" "" "" "" "" "" ""
+observe "2020-02-20 12:57:22.928" 45.0 -10343.059614921249 -40860.68524623112 418.2197218210998 219.0499 16.1454 -85.30407326698369 124 NUV
+slew "2020-02-20 12:58:07.928" 45.87245785723135 "" "" "" "" "" "" "" ""
+observe "2020-02-20 12:58:53.800" 45.0 -10343.339431677863 -40860.80493631911 402.8398950091615 218.0972 27.88195 -91.54251007612906 92 NUV
+slew "2020-02-20 12:59:38.800" 94.30961680042878 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:01:13.110" 45.0 -10343.77059154415 -40860.97806171327 379.22810303232734 281.5507 64.01338 -50.5544119604032 17 NUV
+slew "2020-02-20 13:01:58.110" 43.6278304797583 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:02:41.738" 45.0 -10344.0461753045 -40861.08166058337 364.1858926351695 309.3725 66.43082 -23.711640522785764 14 NUV
+slew "2020-02-20 13:03:26.738" 167.77038598071837 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:06:14.508" 45.0 -10344.711407781304 -40861.309551165206 328.0128202616753 53.47844 -29.86498 84.97726201918253 261 NUV
+slew "2020-02-20 13:06:59.508" 55.289943930829466 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:07:54.798" 45.0 -10345.026550081391 -40861.40675483384 310.934586883499 65.19219 -46.35673 80.81906983276215 301 NUV
+slew "2020-02-20 13:08:39.798" 43.175878403294575 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:09:22.974" 45.0 -10345.3043604148 -40861.486803133164 295.90545414038655 79.45838 -53.57766 70.33944997803842 315 NUV
+slew "2020-02-20 13:10:07.974" 42.71800746363845 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:10:50.692" 45.0 -10345.58134349433 -40861.56140503839 280.9422075589151 97.73054 -58.82472 54.4739456754996 323 NUV
+slew "2020-02-20 13:11:35.692" 43.40557110469886 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:12:19.097" 45.0 -10345.861054575429 -40861.631511935106 265.8500299245953 120.6442 -61.38735 32.747758504557915 329 NUV
+slew "2020-02-20 13:13:04.097" 114.36296164701592 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:14:58.460" 45.0 -10346.366477216363 -40861.74500108506 238.61682331135017 46.10244 -9.503687 81.37267177205439 206 NUV
+slew "2020-02-20 13:15:43.460" 43.88596140354466 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:16:27.346" 45.0 -10346.648938698145 -40861.80109675389 223.41303161445805 43.51282 -20.5915 86.02065771802035 238 NUV
+slew "2020-02-20 13:17:12.346" 62.63281599179808 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:18:14.979" 45.0 -10346.991391630048 -40861.86211855076 204.9901014777211 65.28223 -35.42911 79.6960428730504 275 NUV
+slew "2020-02-20 13:18:59.979" 83.100840568475 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:20:23.080" 45.0 -10347.399410965725 -40861.92489021687 183.04738275097228 37.04496 -2.742977 78.98524734995894 183 NUV
+slew "2020-02-20 13:21:08.080" 165.29038407695532 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:23:53.370" 45.0 -10348.069767442163 -40862.00473647957 146.9924170482684 240.4711 56.16324 -85.94287314565968 29 NUV
+slew "2020-02-20 13:24:38.370" 106.22976649415887 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:26:24.600" 45.0 -10348.551860878579 -40862.04436149273 121.04169559501437 211.2631 -0.9068702 -76.46596814371944 178 NUV
+slew "2020-02-20 13:27:09.600" 46.74306155455526 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:27:56.343" 45.0 -10348.84416821939 -40862.06115822062 105.29138550695374 209.2396 10.5682 -83.77343584781043 142 NUV
+slew "2020-02-20 13:28:41.343" 138.00536962729782 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:30:59.349" 45.0 -10349.426574848958 -40862.0783674875 73.85990132458286 338.6353 63.8405 5.590345612207592 18 NUV
+slew "2020-02-20 13:31:44.349" 45.25484701959877 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:32:29.603" 45.0 -10349.71333646168 -40862.07888028715 58.35327690780974 357.9498 56.10199 25.94706882463718 30 NUV
+slew "2020-02-20 13:33:14.603" 90.70519566643667 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:34:45.309" 45.0 -10350.143727345467 -40862.06976663698 35.03330429485101 32.93923 17.43378 68.65953673483553 121 NUV
+slew "2020-02-20 13:35:30.309" 159.4120674912109 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:38:09.721" 45.0 -10350.789802108393 -40862.033710337775 -0.09921979228205602 147.7586 -49.23935 6.035726370640774 306 NUV
+slew "2020-02-20 13:38:54.721" 47.71009595578549 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:39:42.431" 45.0 -10351.081764599025 -40862.008547152174 -16.033870527045895 162.8994 -42.58863 -11.834622249922969 295 NUV
+slew "2020-02-20 13:40:27.431" 89.87569047680162 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:41:57.307" 45.0 -10351.505130759013 -40861.962167528814 -39.214276707892395 197.6383 -16.44534 -60.921407169199405 223 NUV
+slew "2020-02-20 13:42:42.307" 47.17412971550987 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:43:29.481" 45.0 -10351.79341481368 -40861.923834204106 -55.053735458022416 201.9512 -6.37399 -70.40530371126995 193 NUV
+slew "2020-02-20 13:44:14.481" 76.87222050184654 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:45:31.353" 45.0 -10352.17314384 -40861.86491297971 -75.99265992004068 180.3499 -24.73307 -39.75712541598027 247 NUV
+slew "2020-02-20 13:46:16.353" 88.53845962337276 "" "" "" "" "" "" "" ""
+observe "2020-02-20 13:47:44.891" 45.0 -10352.587164064402 -40861.78963242143 -98.92901227877806 144.6547 -60.20567 8.743635101977555 327 NUV

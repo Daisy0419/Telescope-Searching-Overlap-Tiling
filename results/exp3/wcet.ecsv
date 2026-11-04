@@ -1,0 +1,31 @@
+# %ECSV 1.0
+# ---
+# datatype:
+# - {name: problem, datatype: string}
+# - {name: mission, datatype: string}
+# - {name: algorithm, datatype: string}
+# - {name: max_fields, datatype: int64}
+# - {name: original_deadline_seconds, datatype: float64}
+# - {name: metric, datatype: string}
+# - {name: observed_wcet_seconds, datatype: float64}
+# - {name: time_column, datatype: string}
+# - {name: wcet_seconds, datatype: float64}
+# - {name: adjusted_deadline_seconds, datatype: float64}
+# - {name: maps_used, datatype: int64}
+# - {name: maps_expected, datatype: int64}
+# - {name: runs_used, datatype: int64}
+# - {name: runs_expected, datatype: int64}
+# - {name: complete, datatype: bool}
+# - {name: map_at_max, datatype: string}
+# - {name: repeat_at_max, datatype: int64}
+# - {name: result_file_at_max, datatype: string}
+# schema: astropy-2.0
+problem mission algorithm max_fields original_deadline_seconds metric observed_wcet_seconds time_column wcet_seconds adjusted_deadline_seconds maps_used maps_expected runs_used runs_expected complete map_at_max repeat_at_max result_file_at_max
+p2 ztf gcp 20000 600.0 planning_time_seconds 23.38653582148254 planning_time_seconds 23.38653582148254 576.6134641785175 37 37 370 370 True GW200302_015811 1 /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp3_repeats/original_deadline/p2_ztf_GW200302_015811_gcp_n20000_deadline10min_1.ecsv
+p2 ztf gcp 20000 300.0 planning_time_seconds 18.974732980132103 planning_time_seconds 18.974732980132103 281.0252670198679 37 37 370 370 True GW200302_015811 2 /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp3_repeats/original_deadline/p2_ztf_GW200302_015811_gcp_n20000_deadline5min_2.ecsv
+p2 ztf gcp 20000 1200.0 planning_time_seconds 28.986085334792733 planning_time_seconds 28.986085334792733 1171.0139146652073 37 37 370 370 True GW200322_091133 5 /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp3_repeats/original_deadline/p2_ztf_GW200322_091133_gcp_n20000_deadline20min_5.ecsv
+p2 ztf gcp 20000 1800.0 planning_time_seconds 38.75728004053235 planning_time_seconds 38.75728004053235 1761.2427199594676 37 37 370 370 True GW200322_091133 9 /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp3_repeats/original_deadline/p2_ztf_GW200322_091133_gcp_n20000_deadline30min_9.ecsv
+p1 ztf gcp 20000 600.0 planning_time_seconds 6.6048095356673 planning_time_seconds 6.6048095356673 593.3951904643327 37 37 370 370 True GW200208_222617 10 /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp3_repeats/original_deadline/p1_ztf_GW200208_222617_gcp_n20000_deadline10min_10.ecsv
+p1 ztf gcp 20000 300.0 planning_time_seconds 6.677180038765073 planning_time_seconds 6.677180038765073 293.3228199612349 37 37 370 370 True GW200129_065458 10 /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp3_repeats/original_deadline/p1_ztf_GW200129_065458_gcp_n20000_deadline5min_10.ecsv
+p1 ztf gcp 20000 1200.0 planning_time_seconds 6.627282500267029 planning_time_seconds 6.627282500267029 1193.372717499733 37 37 370 370 True GW200115_042309 2 /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp3_repeats/original_deadline/p1_ztf_GW200115_042309_gcp_n20000_deadline20min_2.ecsv
+p1 ztf gcp 20000 1800.0 planning_time_seconds 6.563581582158804 planning_time_seconds 6.563581582158804 1793.4364184178412 37 37 370 370 True GW200210_092254 6 /home/compute/w.yanwang/Telescope-Searching-Overlap-Tiling/results/exp3_repeats/original_deadline/p1_ztf_GW200210_092254_gcp_n20000_deadline30min_6.ecsv

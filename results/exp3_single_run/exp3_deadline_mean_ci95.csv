@@ -1,0 +1,17 @@
+problem,mission,stage,algorithm,max_fields,deadline_seconds,metric,events_used,events_expected,runs_used,runs_without_schedule,mean,ci95_low,ci95_high,ci_method,bootstrap_samples,random_seed,ci_available,complete_event_set,plotted
+p1,ztf,original,gcp,20000,300.0,probability_percent,37,37,37,2,44.03508736356348,34.52849676425333,54.19505243823798,BCa bootstrap across map means,10000,0,True,True,True
+p1,ztf,original,gcp,20000,600.0,probability_percent,37,37,37,1,55.258009197418964,44.999486396408095,65.11791751596738,BCa bootstrap across map means,10000,0,True,True,True
+p1,ztf,original,gcp,20000,1200.0,probability_percent,37,37,37,1,64.7462584361138,54.185061082853274,73.82154216048829,BCa bootstrap across map means,10000,0,True,True,True
+p1,ztf,original,gcp,20000,1800.0,probability_percent,37,37,37,1,69.13637443197706,58.662596341822756,77.74452161432515,BCa bootstrap across map means,10000,0,True,True,True
+p2,ztf,original,gcp,20000,300.0,probability_percent,37,37,37,2,47.6732133310542,37.614025241928594,58.114924382991006,BCa bootstrap across map means,10000,0,True,True,True
+p2,ztf,original,gcp,20000,600.0,probability_percent,37,37,37,1,59.407560980326586,48.52116362478306,69.50822961113253,BCa bootstrap across map means,10000,0,True,True,True
+p2,ztf,original,gcp,20000,1200.0,probability_percent,37,37,37,0,68.59639025053944,57.66377941802596,77.62892142472214,BCa bootstrap across map means,10000,0,True,True,True
+p2,ztf,original,gcp,20000,1800.0,probability_percent,37,37,37,0,73.02238648667881,62.24927178910225,81.43169998575092,BCa bootstrap across map means,10000,0,True,True,True
+p1,ztf,original,gcp,20000,300.0,planning_time_seconds,37,37,37,2,6.269329285072918,6.233781542821089,6.29496848227588,BCa bootstrap across map means,10000,0,True,True,True
+p1,ztf,original,gcp,20000,600.0,planning_time_seconds,37,37,37,1,6.267575568494362,6.227361195759276,6.296797635635223,BCa bootstrap across map means,10000,0,True,True,True
+p1,ztf,original,gcp,20000,1200.0,planning_time_seconds,37,37,37,1,6.281399299919203,6.237068118059728,6.31410312367626,BCa bootstrap across map means,10000,0,True,True,True
+p1,ztf,original,gcp,20000,1800.0,planning_time_seconds,37,37,37,1,6.297709378187318,6.2589337497909,6.333952205285515,BCa bootstrap across map means,10000,0,True,True,True
+p2,ztf,original,gcp,20000,300.0,planning_time_seconds,37,37,37,2,7.994077298236457,7.4691263659423015,9.069418799376098,BCa bootstrap across map means,10000,0,True,True,True
+p2,ztf,original,gcp,20000,600.0,planning_time_seconds,37,37,37,1,8.18992029910756,7.629479442702305,9.271260233067517,BCa bootstrap across map means,10000,0,True,True,True
+p2,ztf,original,gcp,20000,1200.0,planning_time_seconds,37,37,37,0,9.432763542929614,8.361566799326186,11.552846503490107,BCa bootstrap across map means,10000,0,True,True,True
+p2,ztf,original,gcp,20000,1800.0,planning_time_seconds,37,37,37,0,10.584263114762065,8.964507218136447,13.83183285562383,BCa bootstrap across map means,10000,0,True,True,True

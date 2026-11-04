@@ -1,0 +1,9 @@
+problem,mission,algorithm,max_fields,original_deadline_seconds,time_column,wcet_seconds,adjusted_deadline_seconds,events_expected,runs_used,complete_calibration
+p1,ztf,gcp,20000,300.0,planning_time_seconds,6.677180038765073,293.3228199612349,37,370,True
+p2,ztf,gcp,20000,300.0,planning_time_seconds,18.974732980132103,281.0252670198679,37,370,True
+p1,ztf,gcp,20000,600.0,planning_time_seconds,6.6048095356673,593.3951904643327,37,370,True
+p2,ztf,gcp,20000,600.0,planning_time_seconds,23.38653582148254,576.6134641785175,37,370,True
+p1,ztf,gcp,20000,1200.0,planning_time_seconds,6.627282500267029,1193.372717499733,37,370,True
+p2,ztf,gcp,20000,1200.0,planning_time_seconds,28.986085334792733,1171.0139146652073,37,370,True
+p1,ztf,gcp,20000,1800.0,planning_time_seconds,6.563581582158804,1793.4364184178412,37,370,True
+p2,ztf,gcp,20000,1800.0,planning_time_seconds,38.75728004053235,1761.2427199594676,37,370,True

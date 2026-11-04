@@ -1,0 +1,9 @@
+problem,mission,stage,algorithm,max_fields,deadline_seconds,metric,events_used,events_expected,runs_used,mean,ci95_low,ci95_high,ci_method,plotted
+p1,ztf,original,gcp,20000,300.0,planning_time_seconds,37,37,370,6.2240954984331855,6.189366266523888,6.24739696585263,BCa bootstrap across paired event means,True
+p2,ztf,original,gcp,20000,300.0,planning_time_seconds,37,37,370,7.968850247617308,7.429240614212591,9.056158513282714,BCa bootstrap across paired event means,True
+p1,ztf,original,gcp,20000,600.0,planning_time_seconds,37,37,370,6.239580461528857,6.20274763270547,6.264772255547917,BCa bootstrap across paired event means,True
+p2,ztf,original,gcp,20000,600.0,planning_time_seconds,37,37,370,8.223506167103109,7.63674389205579,9.368299661447873,BCa bootstrap across paired event means,True
+p1,ztf,original,gcp,20000,1200.0,planning_time_seconds,37,37,370,6.248285079551105,6.208743719210503,6.2776250580973745,BCa bootstrap across paired event means,True
+p2,ztf,original,gcp,20000,1200.0,planning_time_seconds,37,37,370,9.462913591626124,8.369529040386816,11.629708024061348,BCa bootstrap across paired event means,True
+p1,ztf,original,gcp,20000,1800.0,planning_time_seconds,37,37,370,6.26272734139316,6.221225628615927,6.2942459121613386,BCa bootstrap across paired event means,True
+p2,ztf,original,gcp,20000,1800.0,planning_time_seconds,37,37,370,10.63746325579044,8.986739935281665,13.955299673720367,BCa bootstrap across paired event means,True
