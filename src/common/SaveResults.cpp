@@ -3,7 +3,9 @@
 #include "Genetic.h"
 #include "Greedy.h"
 #include "ReadData.h"
+#if TS_HAS_GUROBI
 #include "ILP_gurobi_top.h"
+#endif
 #include "GCP.h"
 
 
@@ -222,5 +224,4 @@
 //     outfile.close();
 
 // }
-
 

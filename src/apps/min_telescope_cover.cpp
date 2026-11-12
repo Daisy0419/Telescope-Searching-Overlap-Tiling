@@ -1,6 +1,8 @@
 
 #include "greedy_mink.h"
+#if TS_HAS_GUROBI
 #include "ILP_gurobi_mink.h"
+#endif
 #include "ReadData.h"
 #include "helplers.h"
 #include "BuildGraph.h"
@@ -126,6 +128,7 @@ void run_mink_unrooted(const std::string& tilefile,
                                   tiling_elapsed.count(), elapsed.count(), paths_in_rank, isValid);
     }
 
+#if TS_HAS_GUROBI
     // --- ILP ---
     {
         auto wall_start = std::chrono::high_resolution_clock::now();
@@ -150,6 +153,7 @@ void run_mink_unrooted(const std::string& tilefile,
                                   ilp_paths.size(), best_k,
                                   tiling_elapsed.count(), elapsed.count(), ilp_paths_in_rank, isValid);
     }
+#endif
 }
 
 
@@ -238,6 +242,7 @@ std::vector<std::pair<double, double>> run_mink_rooted(const std::string& tilefi
                                   tiling_elapsed.count(), elapsed.count(), paths_in_rank, isValid);
     }
 
+#if TS_HAS_GUROBI
     // --- ILP ---
     {
         auto wall_start = std::chrono::high_resolution_clock::now();
@@ -263,6 +268,7 @@ std::vector<std::pair<double, double>> run_mink_rooted(const std::string& tilefi
                                   ilp_paths.size(), best_k,
                                   tiling_elapsed.count(), elapsed.count(), ilp_paths_in_rank, isValid);
     }
+#endif
 
     std::vector<std::pair<double, double>> init_poses(start_indices.size());
     for (std::size_t i = 0; i < start_indices.size(); ++i) {
@@ -894,5 +900,3 @@ void mink_annealing_unrooted(const std::string& tilefile,
                             tiling_elapsed.count(), elapsed.count(), all_paths,
                             covered_tiles == num_tiles);
 }
-
-

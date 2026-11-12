@@ -1,6 +1,4 @@
 #include "BuildGraph.h"
-#include "ILP_gurobi_path_cover_op.h"
-
 #include "AntColonyPixelOverlap.h"
 #include "GeneticPixelOverlap.h"
 #include "GreedyPixelOverlap.h"

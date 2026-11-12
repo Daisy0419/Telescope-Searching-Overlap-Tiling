@@ -3,9 +3,11 @@
 #include "Genetic.h"
 #include "Greedy.h"
 #include "ReadData.h"
+#if TS_HAS_GUROBI
 #include "ILP_gurobi_top.h"
+#include "ILP_gurobi_op.h"
+#endif
 #include "GCP.h"
-#include "ILP_cplex_top.h"
 #include "PathSplitter.h"
 #include "ParticleSwarm.h"
 #include "ParticleSwarmInspired.h"
@@ -17,7 +19,6 @@
 #include "PathCover.h"
 #include "AnnealingMulti.h"
 #include "BuildGraph.h"
-#include "ILP_gurobi_op.h"
 
 #include <chrono>
 #include <fstream>
@@ -97,6 +98,7 @@ void run_top(const std::string& tilefile,
     // save_result_with_paths(out_file, "top_PathCover", mapfile, paths_pc, ranks, budget, w_max, w_acc, m, num_tiles, prize_pc, prize_pc, tiling_elapsed.count(), elapsed_seconds.count(), is_valid);
 
 
+#if TS_HAS_GUROBI
     std::cout << "*********running gurobi*********" << std::endl;
     start = std::chrono::high_resolution_clock::now();
     auto [routes_gurobi, total_prize_gurobi, prize_bound] = gurobiSolveTeamSTBound(costs, probability, start_indices, end_idx, 
@@ -108,6 +110,7 @@ void run_top(const std::string& tilefile,
     std::cout << "gurobi best total prize = " << total_prize_gurobi << "\n";
     std::cout << "running time (wallclock): " << elapsed_seconds.count() << "seconds" << std::endl;
     save_result_with_paths(out_file, "top_ILP", mapfile, routes_gurobi, ranks, budget, w_max, w_acc, m, num_tiles, total_prize_gurobi, prize_bound, tiling_elapsed.count(), elapsed_seconds.count(), is_valid);
+#endif
 
 
     // // path relinking
@@ -387,6 +390,7 @@ void run_greedy_multistarts_ilp(const std::string& tilefile,
         std::vector<std::vector<int>> candidate_paths;
         candidate_paths.reserve(start_indices.size());
  
+#if TS_HAS_GUROBI
         for (int start_idx : start_indices) {
             std::vector<int> path = gurobiSolveST_time(costs, probability,
                                         start_idx, end_idx, 
@@ -394,6 +398,10 @@ void run_greedy_multistarts_ilp(const std::string& tilefile,
                                         mipGap, timeLimit);
             candidate_paths.push_back(std::move(path));
         }
+#else
+        throw std::runtime_error(
+            "run_greedy_multistarts_ilp requires Gurobi support");
+#endif
  
         // Pick the best path by total prize
         int best_idx = -1;

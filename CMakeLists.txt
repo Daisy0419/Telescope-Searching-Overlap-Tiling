@@ -4,6 +4,9 @@ project(ts LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+option(TS_ENABLE_GUROBI "Build Gurobi-backed solvers" OFF)
+option(TS_ENABLE_CPLEX "Build CPLEX-backed solvers" OFF)
+
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE "Release" CACHE STRING
         "Choose the build type" FORCE)
@@ -31,13 +34,14 @@ add_subdirectory(
     "${CMAKE_BINARY_DIR}/pybind11"
 )
 
+if(TS_ENABLE_GUROBI)
 # ---------- Gurobi ----------
 if(DEFINED ENV{GUROBI_HOME}
    AND NOT "$ENV{GUROBI_HOME}" STREQUAL "")
     set(GUROBI_DEFAULT_HOME "$ENV{GUROBI_HOME}")
 else()
     set(GUROBI_DEFAULT_HOME
-        "${SOFTWARE_ROOT}/gurobi1200/linux64")
+        "${SOFTWARE_ROOT}/gurobi1303/linux64")
 endif()
 
 set(GUROBI_HOME "${GUROBI_DEFAULT_HOME}" CACHE PATH
@@ -45,7 +49,7 @@ set(GUROBI_HOME "${GUROBI_DEFAULT_HOME}" CACHE PATH
 
 set(GUROBI_INCLUDE_DIR "${GUROBI_HOME}/include")
 set(GUROBI_LIBRARY_DIR "${GUROBI_HOME}/lib")
-set(GUROBI_LIB "${GUROBI_LIBRARY_DIR}/libgurobi120.so")
+set(GUROBI_LIB "${GUROBI_LIBRARY_DIR}/libgurobi130.so")
 
 # Retain the C++ library filename from your original configuration.
 # Some Gurobi installations call it libgurobi_c++.a instead.
@@ -69,7 +73,11 @@ endif()
 message(STATUS "Gurobi home: ${GUROBI_HOME}")
 message(STATUS "Gurobi library: ${GUROBI_LIB}")
 message(STATUS "Gurobi C++ library: ${GUROBI_CXX_LIB}")
+else()
+    message(STATUS "Gurobi support: disabled")
+endif()
 
+if(TS_ENABLE_CPLEX)
 # ---------- CPLEX ----------
 set(CPLEX_STUDIO_ROOT
     "${SOFTWARE_ROOT}/ibm/ILOG/CPLEX_Studio2212"
@@ -104,6 +112,9 @@ endforeach()
 message(STATUS "CPLEX Studio: ${CPLEX_STUDIO_ROOT}")
 message(STATUS "CPLEX library: ${CPLEX_LIB}")
 message(STATUS "Concert library: ${CONCERT_LIB}")
+else()
+    message(STATUS "CPLEX support: disabled")
+endif()
 
 # ---------- LEMON ----------
 set(LEMON_SOURCE_DIR
@@ -137,6 +148,14 @@ file(GLOB_RECURSE TS_CORE_SOURCES CONFIGURE_DEPENDS
 
 # main.cpp belongs only to the executable, not to the reusable core library.
 list(REMOVE_ITEM TS_CORE_SOURCES "${TS_MAIN_SOURCE}")
+if(NOT TS_ENABLE_GUROBI)
+    list(FILTER TS_CORE_SOURCES EXCLUDE REGEX
+        ".*/(ILP_gurobi|gurobi).*\\.cpp$")
+endif()
+if(NOT TS_ENABLE_CPLEX)
+    list(FILTER TS_CORE_SOURCES EXCLUDE REGEX
+        ".*/(ILP_cplex|cplex).*\\.cpp$")
+endif()
 
 set(TS_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/include
@@ -146,9 +165,6 @@ set(TS_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/multi_telescope/min_telescopes
     ${CMAKE_CURRENT_SOURCE_DIR}/include/multi_telescope/max_probabilities
     ${CMAKE_CURRENT_SOURCE_DIR}/include/apps
-    ${GUROBI_INCLUDE_DIR}
-    ${CPLEX_INCLUDE_DIR}
-    ${CPLEX_CONCERT_INCLUDE_DIR}
     ${LEMON_SOURCE_DIR}
     ${LEMON_BUILD_DIR}
     ${HIGHFIVE_INCLUDE_DIR}
@@ -157,17 +173,22 @@ set(TS_INCLUDE_DIRS
 
 set(TS_LINK_LIBRARIES
     OpenMP::OpenMP_CXX
-    ${GUROBI_CXX_LIB}
-    ${GUROBI_LIB}
-    ${ILOCLEX_LIB}
-    ${CONCERT_LIB}
-    ${CPLEX_LIB}
     ${HDF5_LIBRARIES}
     pthread
     m
     dl
     stdc++fs
 )
+if(TS_ENABLE_GUROBI)
+    list(APPEND TS_INCLUDE_DIRS "${GUROBI_INCLUDE_DIR}")
+    list(APPEND TS_LINK_LIBRARIES "${GUROBI_CXX_LIB}" "${GUROBI_LIB}")
+endif()
+if(TS_ENABLE_CPLEX)
+    list(APPEND TS_INCLUDE_DIRS
+        "${CPLEX_INCLUDE_DIR}" "${CPLEX_CONCERT_INCLUDE_DIR}")
+    list(APPEND TS_LINK_LIBRARIES
+        "${ILOCLEX_LIB}" "${CONCERT_LIB}" "${CPLEX_LIB}")
+endif()
 
 add_library(ts_core STATIC ${TS_CORE_SOURCES})
 set_target_properties(ts_core PROPERTIES
@@ -176,6 +197,10 @@ set_target_properties(ts_core PROPERTIES
 
 target_include_directories(ts_core PUBLIC ${TS_INCLUDE_DIRS})
 target_link_libraries(ts_core PUBLIC ${TS_LINK_LIBRARIES})
+target_compile_definitions(ts_core PUBLIC
+    TS_HAS_GUROBI=$<BOOL:${TS_ENABLE_GUROBI}>
+    TS_HAS_CPLEX=$<BOOL:${TS_ENABLE_CPLEX}>
+)
 
 # # Command-line executable.
 # add_executable(ts "${CMAKE_CURRENT_SOURCE_DIR}/main.cpp")
@@ -201,11 +226,9 @@ target_link_libraries(m4opt_solvers PRIVATE ts_core)
 
 set_target_properties(m4opt_solvers PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/python"
-    BUILD_RPATH "${GUROBI_LIBRARY_DIR}"
-    INSTALL_RPATH "${GUROBI_LIBRARY_DIR}"
 )
-
-set_target_properties(ts PROPERTIES
-    BUILD_RPATH "${GUROBI_LIBRARY_DIR}"
-    INSTALL_RPATH "${GUROBI_LIBRARY_DIR}"
-)
+if(TS_ENABLE_GUROBI)
+    set_target_properties(m4opt_solvers ts PROPERTIES
+        BUILD_RPATH "${GUROBI_LIBRARY_DIR}"
+        INSTALL_RPATH "${GUROBI_LIBRARY_DIR}")
+endif()

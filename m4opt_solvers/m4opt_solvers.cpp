@@ -4,7 +4,9 @@
 #include "GCP_overlap.h"
 #include "GeneticPixelOverlap.h"
 #include "GreedyPixelOverlap.h"
+#if TS_HAS_GUROBI
 #include "ILP_gurobi_path_cover_op.h"
+#endif
 #include "SimulatedAnnealingPixelOverlap.h"
 #include "recursive_greedy_op.h"
 
@@ -419,7 +421,7 @@ static std::string normalizeAlgorithmName(std::string name) {
 }
 
 std::vector<std::string> availableAlgorithms() {
-    return {
+    std::vector<std::string> algorithms = {
         "greedy_marginal",
         "greedy_ratio",
         "gcp",
@@ -427,9 +429,12 @@ std::vector<std::string> availableAlgorithms() {
         "genetic",
         "ant_colony",
         "rg_qp",
-        "ilp_mtz",
-        "ilp_continuous",
     };
+#if TS_HAS_GUROBI
+    algorithms.push_back("ilp_mtz");
+    algorithms.push_back("ilp_continuous");
+#endif
+    return algorithms;
 }
 
 static double graphPathCost(
@@ -652,7 +657,9 @@ static SolverOutput runAlgorithm(
         output.path = result.path;
         output.completed_depth = result.completed_depth;
         output.timed_out = result.timed_out;
-    } else if (output.algorithm == "ilp_mtz" ||
+    }
+#if TS_HAS_GUROBI
+    else if (output.algorithm == "ilp_mtz" ||
                output.algorithm == "ilp_continuous") {
         const std::vector<std::vector<int>> seeds = makeGreedySeeds(
             graph, pixel_probabilities);
@@ -673,7 +680,8 @@ static SolverOutput runAlgorithm(
                 mip_gap,
                 ilp_time_limit,
                 warm_start);
-        } else {
+        }
+        else {
             result = gurobiPathCoverPixelOverlapContinuousTime(
                 graph.costs,
                 pixel_probabilities,
@@ -694,7 +702,9 @@ static SolverOutput runAlgorithm(
             output.path = result.first.front();
         }
         output.best_bound = result.second;
-    } else {
+    }
+#endif
+    else {
         throw std::invalid_argument(
             "unknown algorithm: " + requested_algorithm);
     }
